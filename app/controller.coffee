@@ -1,4 +1,5 @@
-define ['jquery', 'lib/anything'], ($, anything) ->
+define ['jquery', 'models/playground'], ($, playground) ->
   setup: ->
     $('document').ready ->
-      anything.saySomething()
+      playground.init(document.getElementById("canvas"))
+      #playground.init()

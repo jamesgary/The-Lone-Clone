@@ -1,6 +1,10 @@
 @import 'compass/css3';
 
 body {
+  #canvas {
+    background-color: #333333;
+  }
+
   .compass_test {
     @include box-shadow(2px 2px 15px black);
     @include border-radius(30px);

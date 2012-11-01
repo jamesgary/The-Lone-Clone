@@ -5,6 +5,4 @@
     %script{'data-main' => 'js/bootstrap.js', 'src' => 'js/vendor/require.js'}
     %link{:rel => 'stylesheet', :type => 'text/css', :media => 'screen', :href => 'css/style.css'}/
   %body
-    .compass_test
-      %p This text should be looking fancy!
-      %p Check your console. If it says 'Success!', you're good to go!
+    %canvas#canvas{:width => 600, :height => 400}/
