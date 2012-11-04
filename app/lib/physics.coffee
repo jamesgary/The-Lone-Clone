@@ -23,10 +23,10 @@ define ['vendor/Box2dWeb-2.1.a.3', 'lib/gameLoop'], (Box2D, gameLoop) ->
 
       #create ground
       @bodyDef.type = b2Body.b2_staticBody
-      @bodyDef.position.x = 9
+      @bodyDef.position.x = 10
       @bodyDef.position.y = 13
       @fixDef.shape = new b2PolygonShape
-      @fixDef.shape.SetAsBox 10, 0.5
+      @fixDef.shape.SetAsBox 8, 0.5
       @world.CreateBody(@bodyDef).CreateFixture @fixDef
 
     generateObjects: ->
@@ -37,8 +37,25 @@ define ['vendor/Box2dWeb-2.1.a.3', 'lib/gameLoop'], (Box2D, gameLoop) ->
         @bodyDef.position.x = Math.random() * 20
         @bodyDef.position.y = Math.random() * 10
         @world.CreateBody(@bodyDef).CreateFixture @fixDef
+    createPlayer: ->
+      @bodyDef.type = b2Body.b2_dynamicBody
+
+      @fixDef.shape = new b2CircleShape((Math.random() * .5) + .5) #radius
+      @bodyDef.position.x = 5 + Math.random() * 10
+      @bodyDef.position.y = Math.random() * 10
+      @player = @world.CreateBody(@bodyDef)
+      @player.CreateFixture @fixDef
+      @player
     go: ->
       gameLoop.loopThis(this, 'update')
+    cloneRight: ->
+      @bodyDef.type = b2Body.b2_dynamicBody
+      @fixDef.shape = new b2CircleShape((Math.random() * .5) + .5) #radius
+      window.p = @player
+      @bodyDef.position.x = @player.GetPosition().x - .10
+      @bodyDef.position.y = @player.GetPosition().y
+      clone = @world.CreateBody(@bodyDef)
+      clone.CreateFixture @fixDef
 
     ###########
     # private #
@@ -48,11 +65,11 @@ define ['vendor/Box2dWeb-2.1.a.3', 'lib/gameLoop'], (Box2D, gameLoop) ->
       @world.Step(1 / 60, 10, 10)
       @world.DrawDebugData()
       @world.ClearForces()
-      if Math.random() > .95
-        @fixDef.shape = new b2CircleShape((Math.random() * .5) + .2) #radius
-        @bodyDef.position.x = 10
-        @bodyDef.position.y = 0
-        @world.CreateBody(@bodyDef).CreateFixture @fixDef
+      #if Math.random() > .95
+      #  @fixDef.shape = new b2CircleShape((Math.random() * .5) + .2) #radius
+      #  @bodyDef.position.x = 10
+      #  @bodyDef.position.y = 0
+      #  @world.CreateBody(@bodyDef).CreateFixture @fixDef
     setupDebugDraw: (canvas) ->
       debugDraw = new b2DebugDraw()
       debugDraw.SetSprite(canvas.getContext("2d"))

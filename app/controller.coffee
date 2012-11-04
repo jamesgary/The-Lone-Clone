@@ -2,4 +2,9 @@ define ['jquery', 'models/playground'], ($, playground) ->
   setup: ->
     $('document').ready ->
       playground.init(document.getElementById("canvas"))
-      #playground.init()
+      $('body').keypress((e) ->
+        key = String.fromCharCode(e.which)
+        switch key
+          when 'd' then playground.cloneRight()
+        e.stopPropagation()
+      )
