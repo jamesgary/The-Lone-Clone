@@ -1,5 +1,6 @@
 # Wrap around your external dependencies!
-define ['vendor/Box2dWeb-2.1.a.3', 'lib/gameLoop'], (Box2D, gameLoop) ->
+define ['box2d'], (Box2D) ->
+  debugDrawing = true
   b2Vec2         = Box2D.Common.Math.b2Vec2
   b2BodyDef      = Box2D.Dynamics.b2BodyDef
   b2Body         = Box2D.Dynamics.b2Body
@@ -11,65 +12,47 @@ define ['vendor/Box2dWeb-2.1.a.3', 'lib/gameLoop'], (Box2D, gameLoop) ->
   b2CircleShape  = Box2D.Collision.Shapes.b2CircleShape
   b2DebugDraw    = Box2D.Dynamics.b2DebugDraw
   {
-    setupCanvas: (canvas) ->
-      @world = new b2World(new b2Vec2(0, 10), true) #allow sleep
-      @setupDebugDraw(canvas)
-    createGround: ->
+    createWorld: ->
+      gravity = new b2Vec2(0, 10)
+      @world = new b2World(gravity, true) #allow sleep
+      @setupDebugDraw(document.getElementById('canvas')) if debugDrawing
       @fixDef = new b2FixtureDef
       @fixDef.density = 1.0
       @fixDef.friction = 0.5
       @fixDef.restitution = 0.2
       @bodyDef = new b2BodyDef
 
-      #create ground
+    addStatic: (rect) ->
       @bodyDef.type = b2Body.b2_staticBody
-      @bodyDef.position.x = 10
-      @bodyDef.position.y = 13
+      @bodyDef.position.x = rect.x + (.5 * rect.w)
+      @bodyDef.position.y = rect.y + (.5 * rect.h)
       @fixDef.shape = new b2PolygonShape
-      @fixDef.shape.SetAsBox 8, 0.5
-      @world.CreateBody(@bodyDef).CreateFixture @fixDef
+      @fixDef.shape.SetAsBox(.5 * rect.w, .5 * rect.h)
+      @world.CreateBody(@bodyDef).CreateFixture(@fixDef)
 
-    generateObjects: ->
-      @bodyDef.type = b2Body.b2_dynamicBody
-      objectCount = 50
-      while objectCount--
-        @fixDef.shape = new b2CircleShape((Math.random() * .5) + .5) #radius
-        @bodyDef.position.x = Math.random() * 20
-        @bodyDef.position.y = Math.random() * 10
-        @world.CreateBody(@bodyDef).CreateFixture @fixDef
-    createPlayer: ->
+    addCircle: (circle) ->
       @bodyDef.type = b2Body.b2_dynamicBody
 
-      @fixDef.shape = new b2CircleShape((Math.random() * .5) + .5) #radius
-      @bodyDef.position.x = 5 + Math.random() * 10
-      @bodyDef.position.y = Math.random() * 10
-      @player = @world.CreateBody(@bodyDef)
-      @player.CreateFixture @fixDef
-      @player
-    go: ->
-      gameLoop.loopThis(this, 'update')
-    cloneRight: ->
-      @bodyDef.type = b2Body.b2_dynamicBody
-      @fixDef.shape = new b2CircleShape((Math.random() * .5) + .5) #radius
-      window.p = @player
-      @bodyDef.position.x = @player.GetPosition().x - .10
-      @bodyDef.position.y = @player.GetPosition().y
-      clone = @world.CreateBody(@bodyDef)
-      clone.CreateFixture @fixDef
+      @fixDef.shape = new b2CircleShape(circle.r)
+      @bodyDef.position.x = circle.x
+      @bodyDef.position.y = circle.y
+      c = @world.CreateBody(@bodyDef)
+      c.CreateFixture(@fixDef)
+      c
+
+    update: ->
+      @world.Step(
+        1 / 60 # framerate
+        10 # velocity iterations
+        10 # position iterations
+      )
+      @world.DrawDebugData() if debugDrawing
+      @world.ClearForces()
 
     ###########
     # private #
     ###########
 
-    update: ->
-      @world.Step(1 / 60, 10, 10)
-      @world.DrawDebugData()
-      @world.ClearForces()
-      #if Math.random() > .95
-      #  @fixDef.shape = new b2CircleShape((Math.random() * .5) + .2) #radius
-      #  @bodyDef.position.x = 10
-      #  @bodyDef.position.y = 0
-      #  @world.CreateBody(@bodyDef).CreateFixture @fixDef
     setupDebugDraw: (canvas) ->
       debugDraw = new b2DebugDraw()
       debugDraw.SetSprite(canvas.getContext("2d"))

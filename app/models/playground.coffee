@@ -1,9 +1,55 @@
-define ['lib/physics'], (Physics) ->
+define ['lib/physics', 'models/clone', 'models/static'], (Physics, Clone, Static) ->
   init: (canvas) ->
-    Physics.setupCanvas(canvas)
-    Physics.createGround() # pass in some json data
-    Physics.createPlayer()
-    #Physics.generateObjects()
-    Physics.go()
-  cloneRight: ->
-    Physics.cloneRight()
+    Physics.createWorld()
+    @ground = Static.new({ x: 1, y: 12, w: 18, h: 1 })
+    @player = Clone.new({ x: 10, y: 5, r: 1 })
+    Physics.addStatic(@ground)
+    @physicalPlayer = Physics.addCircle(@player)
+    @physicalClones = []
+
+  update: ->
+    Physics.update()
+  cloneUp:    -> @makeClone('u')
+  cloneDown:  -> @makeClone('d')
+  cloneLeft:  -> @makeClone('l')
+  cloneRight: -> @makeClone('r')
+
+  getStatics: ->
+    [@ground]
+  getPlayer: ->
+    @simplify(@physicalPlayer)
+  getClones: ->
+    @simplify(clone) for clone in @physicalClones
+
+  ###########
+  # private #
+  ###########
+
+  makeClone: (dir) ->
+    p = @getPlayer()
+    x = p.x
+    y = p.y
+    switch dir
+      when 'u' then y -= p.r
+      when 'd' then y += p.r
+      when 'l' then x -= p.r
+      when 'r' then x += p.r
+    @physicalClones.push(
+      Physics.addCircle(
+        Clone.new(
+          x: x
+          y: y
+          r: p.r
+        )
+      )
+    )
+  simplify: (circle) ->
+    window.ccc = circle
+    # hey, this is the wrong place to do it, fyi FIXME
+    pos = circle.GetPosition()
+    Clone.new({
+      x: pos.x
+      y: pos.y
+      r: circle.GetFixtureList().GetShape().GetRadius()
+      a: circle.GetAngle()
+    })
