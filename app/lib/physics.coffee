@@ -22,13 +22,16 @@ define ['box2d'], (Box2D) ->
       @fixDef.restitution = 0.2
       @bodyDef = new b2BodyDef
 
+    # returns something that responds to not only everything in rect, but also #refresh
     addStatic: (rect) ->
       @bodyDef.type = b2Body.b2_staticBody
       @bodyDef.position.x = rect.x + (.5 * rect.w)
       @bodyDef.position.y = rect.y + (.5 * rect.h)
       @fixDef.shape = new b2PolygonShape
       @fixDef.shape.SetAsBox(.5 * rect.w, .5 * rect.h)
-      @world.CreateBody(@bodyDef).CreateFixture(@fixDef)
+      r = @world.CreateBody(@bodyDef)
+      r.CreateFixture(@fixDef)
+      rect # never have to refresh a static
 
     addCircle: (circle) ->
       @bodyDef.type = b2Body.b2_dynamicBody
@@ -38,7 +41,7 @@ define ['box2d'], (Box2D) ->
       @bodyDef.position.y = circle.y
       c = @world.CreateBody(@bodyDef)
       c.CreateFixture(@fixDef)
-      c
+      @refreshable(c)
 
     update: ->
       @world.Step(
@@ -52,6 +55,18 @@ define ['box2d'], (Box2D) ->
     ###########
     # private #
     ###########
+
+    # for now, only circles are refreshable
+    refreshable: (shape) ->
+      shape.refresh = ->
+        pos = @GetPosition()
+        {
+          x: pos.x
+          y: pos.y
+          r: @GetFixtureList().GetShape().GetRadius()
+          a: @GetAngle()
+        }
+      shape
 
     setupDebugDraw: (canvas) ->
       debugDraw = new b2DebugDraw()

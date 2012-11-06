@@ -1,11 +1,10 @@
-define ['lib/physics', 'models/clone', 'models/static'], (Physics, Clone, Static) ->
+define ['lib/physics'], (Physics) ->
   init: (canvas) ->
     Physics.createWorld()
-    @ground = Static.new({ x: 1, y: 12, w: 18, h: 1 })
-    @player = Clone.new({ x: 10, y: 5, r: 1 })
-    Physics.addStatic(@ground)
-    @physicalPlayer = Physics.addCircle(@player)
+    @ground = Physics.addStatic({ x: 1, y: 12, w: 18, h: 1 })
+    @player = Physics.addCircle({ x: 10, y: 5, r: 1 })
     @physicalClones = []
+    @clones = []
 
   update: ->
     Physics.update()
@@ -17,9 +16,9 @@ define ['lib/physics', 'models/clone', 'models/static'], (Physics, Clone, Static
   getStatics: ->
     [@ground]
   getPlayer: ->
-    @simplify(@physicalPlayer)
+    @player.refresh()
   getClones: ->
-    @simplify(clone) for clone in @physicalClones
+    clone.refresh() for clone in @clones
 
   ###########
   # private #
@@ -34,22 +33,14 @@ define ['lib/physics', 'models/clone', 'models/static'], (Physics, Clone, Static
       when 'd' then y += p.r
       when 'l' then x -= p.r
       when 'r' then x += p.r
-    @physicalClones.push(
-      Physics.addCircle(
-        Clone.new(
-          x: x
-          y: y
-          r: p.r
-        )
-      )
-    )
-  simplify: (circle) ->
-    window.ccc = circle
-    # hey, this is the wrong place to do it, fyi FIXME
-    pos = circle.GetPosition()
-    Clone.new({
-      x: pos.x
-      y: pos.y
-      r: circle.GetFixtureList().GetShape().GetRadius()
-      a: circle.GetAngle()
-    })
+    @clones.push(Physics.addCircle({ x: x, y: y, r: p.r }))
+  #simplify: (circle) ->
+  #  window.ccc = circle
+  #  # hey, this is the wrong place to do it, fyi FIXME
+  #  pos = circle.GetPosition()
+  #  Clone.new({
+  #    x: pos.x
+  #    y: pos.y
+  #    r: circle.GetFixtureList().GetShape().GetRadius()
+  #    a: circle.GetAngle()
+  #  })
