@@ -1,4 +1,4 @@
-define ['lib/physics'], (Physics) ->
+define ['lib/physics/physics'], (Physics) ->
   init: (canvas) ->
     Physics.createWorld()
     @ground = Physics.addStatic({ x: 1, y: 12, w: 18, h: 1 })
@@ -16,31 +16,21 @@ define ['lib/physics'], (Physics) ->
   getStatics: ->
     [@ground]
   getPlayer: ->
-    @player.refresh()
+    @player
   getClones: ->
-    clone.refresh() for clone in @clones
+    @clones
 
   ###########
   # private #
   ###########
 
   makeClone: (dir) ->
-    p = @getPlayer()
-    x = p.x
-    y = p.y
+    x = @player.x()
+    y = @player.y()
+    r = @player.r()
     switch dir
-      when 'u' then y -= p.r
-      when 'd' then y += p.r
-      when 'l' then x -= p.r
-      when 'r' then x += p.r
-    @clones.push(Physics.addCircle({ x: x, y: y, r: p.r }))
-  #simplify: (circle) ->
-  #  window.ccc = circle
-  #  # hey, this is the wrong place to do it, fyi FIXME
-  #  pos = circle.GetPosition()
-  #  Clone.new({
-  #    x: pos.x
-  #    y: pos.y
-  #    r: circle.GetFixtureList().GetShape().GetRadius()
-  #    a: circle.GetAngle()
-  #  })
+      when 'u' then y -= r
+      when 'd' then y += r
+      when 'l' then x -= r
+      when 'r' then x += r
+    @clones.push(Physics.addCircle({ x: x, y: y, r: r }))

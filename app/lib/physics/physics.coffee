@@ -1,5 +1,5 @@
 # Wrap around your external dependencies!
-define ['box2d'], (Box2D) ->
+define ['box2d', 'lib/physics/circle'], (Box2D, Circle) ->
   debugDrawing = true
   b2Vec2         = Box2D.Common.Math.b2Vec2
   b2BodyDef      = Box2D.Dynamics.b2BodyDef
@@ -22,7 +22,6 @@ define ['box2d'], (Box2D) ->
       @fixDef.restitution = 0.2
       @bodyDef = new b2BodyDef
 
-    # returns something that responds to not only everything in rect, but also #refresh
     addStatic: (rect) ->
       @bodyDef.type = b2Body.b2_staticBody
       @bodyDef.position.x = rect.x + (.5 * rect.w)
@@ -31,17 +30,17 @@ define ['box2d'], (Box2D) ->
       @fixDef.shape.SetAsBox(.5 * rect.w, .5 * rect.h)
       r = @world.CreateBody(@bodyDef)
       r.CreateFixture(@fixDef)
-      rect # never have to refresh a static
+      rect
 
     addCircle: (circle) ->
       @bodyDef.type = b2Body.b2_dynamicBody
-
       @fixDef.shape = new b2CircleShape(circle.r)
       @bodyDef.position.x = circle.x
       @bodyDef.position.y = circle.y
       c = @world.CreateBody(@bodyDef)
       c.CreateFixture(@fixDef)
-      @refreshable(c)
+      window.ccc = c
+      new Circle(c)
 
     update: ->
       @world.Step(
@@ -55,18 +54,6 @@ define ['box2d'], (Box2D) ->
     ###########
     # private #
     ###########
-
-    # for now, only circles are refreshable
-    refreshable: (shape) ->
-      shape.refresh = ->
-        pos = @GetPosition()
-        {
-          x: pos.x
-          y: pos.y
-          r: @GetFixtureList().GetShape().GetRadius()
-          a: @GetAngle()
-        }
-      shape
 
     setupDebugDraw: (canvas) ->
       debugDraw = new b2DebugDraw()

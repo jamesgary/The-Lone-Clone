@@ -25,18 +25,18 @@ define ->
     @paintCircle(player)
 
   paintCircle: (circle) ->
-    x = @scale(circle.x)
-    y = @scale(circle.y)
-    r = @scale(circle.r)
-    a = circle.a
+    x = @scale(circle.x())
+    y = @scale(circle.y())
+    r = circle.r()
+    a = circle.a()
     @ctx.beginPath()
-    @ctx.arc(x, y, r, 0, Math.PI*2, true)
+    @ctx.arc(x, y, @scale(r), 0, Math.PI*2, true)
     @ctx.closePath()
     @ctx.fill()
 
     @ctx.beginPath()
     @ctx.moveTo(x, y)
-    @ctx.lineTo(x + @scale(Math.cos(a * circle.r)), y + @scale(Math.sin(a * circle.r)))
+    @ctx.lineTo(x + @scale(Math.cos(a * r)), y + @scale(Math.sin(a * r)))
     @ctx.stroke()
   scale: (num) ->
     num * scale
