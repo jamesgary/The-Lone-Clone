@@ -2,11 +2,15 @@ define ->
   scale = 30
   init: (@canvas) ->
     @ctx = @canvas.getContext('2d')
+    @playerImg = new Image()
+    @playerImg.src= 'assets/images/player.png'
+    @cloneImg = new Image()
+    @cloneImg.src= 'assets/images/clone.png'
   represent: (@pg) ->
   paint: ->
     @ctx.clearRect(0, 0, @canvas.width, @canvas.height)
     @ctx.fillStyle = "rgb(10, 200, 10)"
-    @paintStatic(s) for s in @pg.getStatics()
+    @paintStaticRects(s) for s in @pg.getStatics()
     @paintClones(@pg.getClones())
     @paintPlayer(@pg.getPlayer())
 
@@ -14,29 +18,31 @@ define ->
   # private #
   ###########
 
-  paintStatic: (sta) ->
-    @ctx.fillRect(@scale(sta.x), @scale(sta.y), @scale(sta.w), @scale(sta.h))
-  paintClones: (clones) ->
-    @ctx.fillStyle = "rgb(150, 150, 100)"
-    @paintCircle(clone) for clone in clones
-
-  paintPlayer: (player) ->
-    @ctx.fillStyle = "rgb(200, 200, 10)"
-    @paintCircle(player)
-
-  paintCircle: (circle) ->
-    x = @scale(circle.x())
-    y = @scale(circle.y())
-    r = circle.r()
-    a = circle.a()
+  paintStaticRects: (rect) ->
+    @ctx.fillRect(@scale(rect.x), @scale(rect.y), @scale(rect.w), @scale(rect.h))
+  paintStatic: (points) ->
+    console.log points
     @ctx.beginPath()
-    @ctx.arc(x, y, @scale(r), 0, Math.PI*2, true)
+    @ctx.moveTo(@scale(points[0].x), @scale(12 - points[0].y))
+    for point in points
+      @ctx.lineTo(@scale(point.x), @scale(13 - point.y))
+    @ctx.lineTo(@scale(points[0].x), @scale(13 - points[0].y))
     @ctx.closePath()
     @ctx.fill()
+    #@ctx.stroke()
 
-    @ctx.beginPath()
-    @ctx.moveTo(x, y)
-    @ctx.lineTo(x + @scale(Math.cos(a * r)), y + @scale(Math.sin(a * r)))
-    @ctx.stroke()
+  paintClones: (clones) ->
+    @paintObject(clone, @cloneImg) for clone in clones
+
+  paintPlayer: (player) ->
+    @paintObject(player, @playerImg)
+
+  paintObject: (object, image) ->
+    @ctx.save()
+    @ctx.translate(@scale(object.x()), @scale(object.y()))
+    @ctx.rotate(object.a())
+    r = @scale(object.r())
+    @ctx.drawImage(image, -r, -r, 2*r, 2*r)
+    @ctx.restore()
   scale: (num) ->
     num * scale

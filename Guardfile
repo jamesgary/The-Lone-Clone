@@ -56,6 +56,9 @@ guard 'shell', {
 } do
   ditto(%r{^app/(.*\.js)$},      'js',         'js')
   ditto(%r{^app/(.*\.glsl)$},    'js',         'glsl')
+  ditto(%r{^app/(.*\.json)$},    'js',         'json')
+  ditto(%r{^app/(.*\.svg)$},     'js',         'svg')
+  ditto(%r{^assets/(.*)$},       'assets',     'asset')
   ditto(%r{^images/(.*)$},       'css/images', 'image')
   ditto(%r{^markup/(.*\.html)$}, '',           'html')
   ditto(%r{^style/(.*\.css)$},   'css',        'css')

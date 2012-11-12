@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg id="svg2" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
+ <defs id="defs4">
+  <radialGradient id="radialGradient3782" gradientUnits="userSpaceOnUse" cy="49.813" cx="50.187" r="50.687">
+   <stop id="stop3776" stop-color="#d6d654" offset="0"/>
+   <stop id="stop3784" stop-color="#a6a61c" offset="1"/>
+  </radialGradient>
+ </defs>
+ <metadata id="metadata7">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g id="layer1" stroke-linejoin="miter" transform="translate(0,-952.36218)" stroke="#424100" stroke-linecap="butt">
+  <path id="path2985" d="M100.37,49.813c0,27.717-22.465,50.187-50.183,50.187-27.717,0-50.187-22.47-50.187-50.187,0-27.718,22.47-50.188,50.187-50.188,27.718,0,50.187,22.47,50.187,50.187z" fill-rule="evenodd" transform="matrix(0.98644021,0,0,0.98644021,0.4932201,953.22502)" stroke-miterlimit="4" stroke-dasharray="none" stroke-width="1.01374619" fill="url(#radialGradient3782)"/>
+  <path id="path3813" d="m8.8566,993.32c5.8946,3.3557,11.838,6.4488,19.555,0" stroke-width="1.14066887000000006px" fill="none"/>
+  <path id="path3815" d="m70.853,993.32c5.8946,3.3557,11.838,6.4488,19.555,0" stroke-width="1.14066887000000006px" fill="none"/>
+  <path id="path3817" d="m13.687,71.283c23.484-2.8156,47.192-3.605,71.389,0" transform="translate(0,952.36218)" stroke-width="1px" fill="none"/>
+ </g>
+ <g id="layer2" stroke="#424100" stroke-miterlimit="4" stroke-dasharray="none" stroke-width="1" fill="#1d1f21">
+  <path id="path3787" d="m35.158,31.965a6.5753,6.5753,0,1,1,-13.151,0,6.5753,6.5753,0,1,1,13.151,0z" transform="translate(-9.5072684,0.95932341)"/>
+  <path id="path3811" d="m35.158,31.965a6.5753,6.5753,0,1,1,-13.151,0,6.5753,6.5753,0,1,1,13.151,0z" transform="translate(52.492732,0.95932341)"/>
+ </g>
+</svg>

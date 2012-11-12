@@ -22,7 +22,20 @@ define ['box2d', 'lib/physics/circle'], (Box2D, Circle) ->
       @fixDef.restitution = 0.2
       @bodyDef = new b2BodyDef
 
-    addStatic: (rect) ->
+    addStatic: (vertices) ->
+      @bodyDef.type = b2Body.b2_staticBody
+      @fixDef.shape = new b2PolygonShape
+      vecs = for vertice in vertices
+        vec = new b2Vec2
+        vec.Set(vertice.x, -vertice.y + 13)
+        vec
+      @fixDef.shape.SetAsArray(vecs, vecs.length)
+      @bodyDef.position.x = 0
+      @bodyDef.position.y = 0
+      @world.CreateBody(@bodyDef).CreateFixture(@fixDef)
+      vertices
+
+    addStaticRect: (rect) ->
       @bodyDef.type = b2Body.b2_staticBody
       @bodyDef.position.x = rect.x + (.5 * rect.w)
       @bodyDef.position.y = rect.y + (.5 * rect.h)
