@@ -16,16 +16,16 @@ html, body {
   margin: 0;
   padding: 0;
   background: #549E39;
-  .container {
-    border: 2px solid black;
-    margin: 20px auto;
-    width: 600px;
-    height: 400px;
-    & > div {
-      display: inline-block;
-      height: 100%;
-      width: 100%;
-    }
+}
+.container {
+  border: 2px solid black;
+  margin: 20px auto;
+  width: 600px;
+  height: 400px;
+  & > div {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
   }
   .main-menu {
     background: #003B06;
@@ -38,7 +38,7 @@ html, body {
       margin: 64px 0;
       text-align: center;
     }
-    a {
+    a.start {
       @include box-shadow(2px 2px 15px black);
       @include border-radius(30px);
       @include background-image(linear-gradient(top left, #7af 15px, #59e 40px));
@@ -54,26 +54,38 @@ html, body {
     }
   }
   .level-select {
+    display: none;
+    .level {
+      background: #00ff00;
+      border: 1px solid #004400;
+      margin: 0.5%;
+      float: left;
+      height: 7%;
+      text-align: center;
+      width: 7%;
+      &:nth-child(10n + 1) {
+        clear: both;
+      }
+    }
   }
   .playground {
+    display: none;
     canvas {
-      display: none;
       background-color: #333333;
     }
   }
-
-  .compass_test {
-    @include box-shadow(2px 2px 15px black);
-    @include border-radius(30px);
-    @include background-image(linear-gradient(top left, #7af 15px, #59e 40px));
-    margin: 40px;
-    padding: 20px;
-    p {
-      @include text-shadow(1px 1px 3px black);
-      color: white;
-      font-family: monospace;
-      font-size: 24px;
-      text-align: center;
-    }
+}
+.compass_test {
+  @include box-shadow(2px 2px 15px black);
+  @include border-radius(30px);
+  @include background-image(linear-gradient(top left, #7af 15px, #59e 40px));
+  margin: 40px;
+  padding: 20px;
+  p {
+    @include text-shadow(1px 1px 3px black);
+    color: white;
+    font-family: monospace;
+    font-size: 24px;
+    text-align: center;
   }
 }

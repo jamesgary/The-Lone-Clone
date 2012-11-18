@@ -8,8 +8,11 @@
     .container
       .main-menu
         %h1 The Lone Clone
-        %a.commence Commence!
+        %a.start Commence!
       .level-select
+        - (1..100).each do |i|
+          .level{:data => {:level => i}}
+            = i
       .playground
         %canvas#canvas{:width => 600, :height => 400}
         %canvas#my-canvas{:width => 600, :height => 400}
