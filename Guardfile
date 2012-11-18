@@ -1,4 +1,5 @@
 @dev_dir = 'public/dev'
+@prod_dir = 'public/build'
 @quiet = true
 
 notification :growl
@@ -22,7 +23,7 @@ end
 guard 'haml', {
   :run_at_start => true,
   :input => 'markup',
-  :output => @dev_dir,
+  :output => [@dev_dir, @prod_dir],
   :notifications => !@quiet,
 } do
   watch(%r{^.+(\.haml)$})

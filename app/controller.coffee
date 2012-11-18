@@ -1,26 +1,6 @@
 define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop'], ($, Playground, CanvasPainter, GameLoop) ->
   cloneUp = cloneLeft = cloneRight = cloneDown = false
   setup: ->
-    setMovement = ->
-      if cloneUp
-        if cloneLeft
-          Playground.cloneUpLeft()
-        else if cloneRight
-          Playground.cloneUpRight()
-        else
-          Playground.cloneUp()
-      else if cloneDown
-        if cloneLeft
-          Playground.cloneDownLeft()
-        else if cloneRight
-          Playground.cloneDownRight()
-        else
-          Playground.cloneDown()
-      else if cloneRight
-        Playground.cloneRight()
-      else if cloneLeft
-        Playground.cloneLeft()
-
     $('document').ready ->
       Playground.init()
       CanvasPainter.init(document.getElementById("my-canvas"))

@@ -1,8 +1,65 @@
 @import 'compass/css3';
 
-body {
-  canvas {
-    background-color: #333333;
+@mixin outline($thickness, $color) {
+  $pt: $thickness;
+  $nt: (-1 * $thickness);
+  @include text-shadow(
+    $pt $pt $pt $color,
+    $pt $nt $pt $color,
+    $nt $pt $pt $color,
+    $nt $nt $pt $color
+  );
+}
+
+html, body {
+  font: normal 12px/1.5em "Lucida Grande", "Verdana", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #549E39;
+  .container {
+    border: 2px solid black;
+    margin: 20px auto;
+    width: 600px;
+    height: 400px;
+    & > div {
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .main-menu {
+    background: #003B06;
+    text-align: center;
+    h1 {
+      $orange: #ff8a00;
+      @include outline(4px, rgba(200, 100, 100, 0.3));
+      color: $orange;
+      font-size: 48px;
+      margin: 64px 0;
+      text-align: center;
+    }
+    a {
+      @include box-shadow(2px 2px 15px black);
+      @include border-radius(30px);
+      @include background-image(linear-gradient(top left, #7af 15px, #59e 40px));
+      @include text-shadow(1px 1px 3px black);
+      color: white;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 24px;
+      margin: 32px;
+      padding: 36px 48px;
+      position: relative;
+      text-align: center;
+    }
+  }
+  .level-select {
+  }
+  .playground {
+    canvas {
+      display: none;
+      background-color: #333333;
+    }
   }
 
   .compass_test {
