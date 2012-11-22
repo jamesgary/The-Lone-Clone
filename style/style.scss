@@ -55,21 +55,50 @@ html, body {
   }
   .level-select {
     display: none;
-    .level {
-      background: #00ff00;
-      border: 1px solid #004400;
-      margin: 0.5%;
-      float: left;
-      height: 7%;
-      text-align: center;
-      width: 7%;
-      &:nth-child(10n + 1) {
-        clear: both;
+    text-align: center;
+    table.levels {
+      border: 0;
+      border-collapse: collapse;
+      height: 100%;
+      width: 100%;
+      td {
+        background: #00ff00;
+        border: 1px solid #004400;
+        cursor: pointer;
+        display: table-cell;
+        padding: 0;
+        vertical-align: middle;
+        width: 10%;
+        &:hover {
+          background: #00bb00;
+        }
       }
     }
   }
   .playground {
     display: none;
+    position: relative;
+    .level-complete {
+      .message {
+        @include box-shadow(
+          0 0 15px black,
+          0 0 15px black
+        );
+        @include border-radius(15px);
+        background: rgba(255, 255, 255, 0.9);
+        border: 5px solid rgba(20, 120, 20, 0.9);
+        height: 60%;
+        margin: 12% 20%; // why height-margin is doubling, I'll never know why...
+        text-align: center;
+        width: 60%;
+      }
+      background: rgba(50, 50, 50, 0.5);
+      height: 100%;
+      margin: 0;
+      position: absolute;
+      width: 100%;
+      z-index: 5;
+    }
     canvas {
       background-color: #333333;
     }

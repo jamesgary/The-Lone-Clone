@@ -3,6 +3,7 @@ define ['lib/physics/physics', 'lib/levelUtil'], (Physics, levelUtil) ->
   CLONE_START_RAD = .2 * PLAYER_RAD
   CLONE_GROW_RATE = .05
   COOLDOWN = 10
+  GOAL_RAD = .1
 
   # to be overwritten by controller
   cloneUp:    false
@@ -11,13 +12,24 @@ define ['lib/physics/physics', 'lib/levelUtil'], (Physics, levelUtil) ->
   cloneRight: false
   currentCooldown: 0
 
-  init: (canvas) ->
+  init: ->
+    @levelWinCallbacks = []
+    @startLevel(1)
+  startLevel: (@levelNumber) ->
     Physics.createWorld()
-    levelData = levelUtil.load(1) # load level 1
+    levelData = levelUtil.load(@levelNumber)
     @statics = for rect in levelData.rects
       Physics.addStaticRect(rect)
-    @player = Physics.addCircle({ x: 10, y: 5, r: PLAYER_RAD })
+    @player = Physics.addCircle({ x: levelData.start.x, y: levelData.start.y, r: PLAYER_RAD })
+    @player.name = 'player'
+    @goal = Physics.addStaticCircle({ x: levelData.goal.x, y: levelData.goal.y, r: GOAL_RAD })
+    @goal.name = 'goal'
+    @addGoalListener()
     @clones = []
+  restart: ->
+    @init()
+  startNextLevel: ->
+    @startLevel(@levelNumber + 1)
 
   update: ->
     @currentCooldown--
@@ -36,10 +48,26 @@ define ['lib/physics/physics', 'lib/levelUtil'], (Physics, levelUtil) ->
     @player
   getClones: ->
     @clones
+  getGoal: ->
+    @goal
+  onLevelWin: (f) ->
+    @levelWinCallbacks.push(f)
+  winLevel: -> # to be set in the controller
+    callback() for callback in @levelWinCallbacks
 
   ###########
   # private #
   ###########
+
+  addGoalListener: ->
+    self = this
+    Physics.addListener((objA, objB) ->
+      if objA && objB
+        if objA.name == 'player' || objB.name == 'player'
+          if objA.name == 'goal' || objB.name == 'goal'
+            console.log "winnnnnnn"
+            self.winLevel()
+    )
 
   makeClone: ->
     @currentCooldown = COOLDOWN

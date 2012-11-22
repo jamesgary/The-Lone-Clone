@@ -10,9 +10,19 @@
         %h1 The Lone Clone
         %a.start Commence!
       .level-select
-        - (1..100).each do |i|
-          .level{:data => {:level => i}}
-            = i
+        %table.levels
+          - (0..9).each do |i|
+            %tr
+              - (1..10).each do |ii|
+                - level_count = (10 * i) + ii
+                %td.level{:data => {:level => level_count}}
+                  = level_count
       .playground
-        %canvas#canvas{:width => 600, :height => 400}
+        .level-complete
+          .message
+            %h2 Huzzah!
+            %h3 You are one step closer to enlightenment.
+            %h4 Advance to a new level...
+            Some text to say 'hit D to advance' or something
         %canvas#my-canvas{:width => 600, :height => 400}
+        //%canvas#canvas{:width => 600, :height => 400}

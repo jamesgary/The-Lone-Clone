@@ -1,16 +1,16 @@
-define ['text!data/levels/1.svg'], (level1) ->
-  levels = [
-    null # to skip level 0
-    level1
-  ]
-  # return {rects: [...], polygons: [...], circles: [...]}
+HIGHEST_LEVEL = 2
+files = for i in [1..HIGHEST_LEVEL]
+  "text!data/levels/#{i}.svg"
+
+define files, (levels...) ->
+  # return {rects: [...], polygons: [...], circles: [...], start, goal}
   load: (levelNum) ->
     level = {
       rects: []
       polygons: []
       circles: []
     }
-    svg = levels[levelNum]
+    svg = levels[levelNum - 1]
     svg = (new DOMParser()).parseFromString(svg, "text/xml")
     for rect in svg.getElementsByTagName('rect')
       level.rects.push(
@@ -19,42 +19,35 @@ define ['text!data/levels/1.svg'], (level1) ->
         w: @scale(rect.width.baseVal.value)
         h: @scale(rect.height.baseVal.value)
       )
-    window.level = level
+    for circle in svg.getElementsByTagName('circle')
+      console.log(circle)
+      if circle.style.fill == '#00ff00' # green is player
+        # gotta transform *grumble grumble*
+        attr = circle.getAttribute('transform') # <circle transform="translate(123,456)"/>
+        regexForX = new RegExp("\\((.*),")
+        regexForY = new RegExp(",(.*)\\)")
+        x = regexForX.exec(attr)[1]
+        y = regexForY.exec(attr)[1]
+        level.start = {
+          x: @scale(circle.cx.baseVal.value + x)
+          y: @scale(circle.cy.baseVal.value + y)
+        }
+      if circle.style.fill == '#00ffff' # light blue is goal
+        # gotta transform *grumble grumble*
+        attr = circle.getAttribute('transform') # <circle transform="translate(123,456)"/>
+        regexForX = new RegExp("\\((.*),")
+        regexForY = new RegExp(",(.*)\\)")
+        x = regexForX.exec(attr)[1]
+        y = regexForY.exec(attr)[1]
+        level.goal = {
+          x: @scale(circle.cx.baseVal.value + x)
+          y: @scale(circle.cy.baseVal.value + y)
+        }
     level
+
+  ###########
+  # private #
+  ###########
 
   scale: (val) ->
     val / 30.0
-
-  # POOP BELOW
-
-  # return {rects: [...], polygons: [...], circles: [...]}
-  loadFromSomeOtherEditor: (levelNum) ->
-    level = {
-      rects: []
-      polygons: []
-      circles: []
-    }
-    levelData = levels[levelNum]
-    regex = /^,?(\[.*\])/gm
-    while shape = regex.exec(levelData)
-      #order: x , y , height, width, rotation, isDynamic, shape, & vertices
-      shape = JSON.parse(shape[1].replace(/'/g, '"'))
-      x      = shape[0]
-      y      = shape[1]
-      height = shape[2]
-      width  = shape[3]
-      if shape[6] == 'SQUARE'
-        rect = {
-          x: 20 + x
-          y: 20 - y
-          h: height
-          w: width
-        }
-        level.rects.push(rect)
-    level
-
-  # for physics body editor tool
-  leadPBE: ->
-    levelData = JSON.parse(levelData)
-    @statics = for polygon in levelData.rigidBodies[0].polygons
-      Physics.addStatic(polygon.reverse())

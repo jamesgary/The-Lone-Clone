@@ -46,14 +46,18 @@ define ['box2d', 'lib/physics/circle'], (Box2D, Circle) ->
       rect
 
     addCircle: (circle) ->
-      @bodyDef.type = b2Body.b2_dynamicBody
-      @fixDef.shape = new b2CircleShape(circle.r)
-      @bodyDef.position.x = circle.x
-      @bodyDef.position.y = circle.y
-      c = @world.CreateBody(@bodyDef)
-      c.CreateFixture(@fixDef)
-      window.ccc = c
-      new Circle(c)
+      @createCircle(circle, b2Body.b2_dynamicBody)
+
+    addStaticCircle: (circle) ->
+      @createCircle(circle, b2Body.b2_staticBody)
+
+    addListener: (func) ->
+      listener = new Box2D.Dynamics.b2ContactListener
+      listener.BeginContact = (contact) ->
+        a = contact.GetFixtureA().GetBody().userData
+        b = contact.GetFixtureB().GetBody().userData
+        func(a, b)
+      @world.SetContactListener(listener)
 
     update: ->
       @world.Step(
@@ -68,12 +72,24 @@ define ['box2d', 'lib/physics/circle'], (Box2D, Circle) ->
     # private #
     ###########
 
+    createCircle: (circle, bodyDefType) ->
+      @bodyDef.type = bodyDefType
+      @fixDef.shape = new b2CircleShape(circle.r)
+      @bodyDef.position.x = circle.x
+      @bodyDef.position.y = circle.y
+      c = @world.CreateBody(@bodyDef)
+      c.CreateFixture(@fixDef)
+      userObject = new Circle(c)
+      c.userData = userObject
+      userObject
+
     setupDebugDraw: (canvas) ->
-      debugDraw = new b2DebugDraw()
-      debugDraw.SetSprite(canvas.getContext("2d"))
-      debugDraw.SetDrawScale 30.0
-      debugDraw.SetFillAlpha 0.3
-      debugDraw.SetLineThickness 1.0
-      debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit)
-      @world.SetDebugDraw debugDraw
+      if canvas
+        debugDraw = new b2DebugDraw()
+        debugDraw.SetSprite(canvas.getContext("2d"))
+        debugDraw.SetDrawScale 30.0
+        debugDraw.SetFillAlpha 0.3
+        debugDraw.SetLineThickness 1.0
+        debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit)
+        @world.SetDebugDraw debugDraw
   }
