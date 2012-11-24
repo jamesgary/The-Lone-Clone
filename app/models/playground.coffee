@@ -1,4 +1,4 @@
-define ['lib/physics/physics', 'lib/levelUtil'], (Physics, levelUtil) ->
+define ['models/world'], (World) ->
   PLAYER_RAD = .5
   CLONE_START_RAD = .2 * PLAYER_RAD
   CLONE_GROW_RATE = .05
@@ -10,34 +10,20 @@ define ['lib/physics/physics', 'lib/levelUtil'], (Physics, levelUtil) ->
   cloneDown:  false
   cloneLeft:  false
   cloneRight: false
-  currentCooldown: 0
+  #currentCooldown: 0
 
   init: ->
-    @levelWinCallbacks = []
     @startLevel(1)
   startLevel: (@levelNumber) ->
-    Physics.createWorld()
-    levelData = levelUtil.load(@levelNumber)
-    @static = {}
-    @static.rects = for rect in levelData.rects
-      Physics.addStaticRect(rect)
-    @static.polygons = for polygon in levelData.polygons
-      Physics.addStatic(polygon)
-    @spikes = for lines in levelData.spikes
-      Physics.addStatic(lines)
-    @player = Physics.addCircle({ x: levelData.start.x, y: levelData.start.y, r: PLAYER_RAD })
-    @player.name = 'player'
-    @goal = Physics.addStaticCircle({ x: levelData.goal.x, y: levelData.goal.y, r: GOAL_RAD })
-    @goal.name = 'goal'
-    @addGoalListener()
-    @clones = []
+    @clones = 0
+    World.startLevel(@levelNumber)
   restart: ->
-    @init()
+    @startLevel(@levelNumber)
   startNextLevel: ->
     @startLevel(@levelNumber + 1)
 
   update: ->
-    @currentCooldown--
+    #@currentCooldown--
     @makeClone() if (@currentCooldown <= 0) && (@cloneRight || @cloneLeft || @cloneDown || @cloneUp)
     for clone in @clones
       r = clone.r()
@@ -45,36 +31,28 @@ define ['lib/physics/physics', 'lib/levelUtil'], (Physics, levelUtil) ->
         newRad = r + CLONE_GROW_RATE
         newRad = PLAYER_RAD if newRad > PLAYER_RAD
         clone.r(newRad)
-    Physics.update()
+    World.update()
 
-  getStatic: ->
-    @static
-  getPlayer: ->
-    @player
-  getClones: ->
-    @clones
-  getGoal: ->
-    @goal
-  getSpikes: ->
-    @spikes
-  onLevelWin: (f) ->
-    @levelWinCallbacks.push(f)
-  winLevel: -> # to be set in the controller
+  onLevelWin: (f) -> # to be set in the controller
+    World.onLevelWin(f)
+  winLevel: ->
     callback() for callback in @levelWinCallbacks
+  drawables: ->
+    World.drawables()
 
   ###########
   # private #
   ###########
 
-  addGoalListener: ->
-    self = this
-    Physics.addListener((objA, objB) ->
-      if objA && objB
-        if objA.name == 'player' || objB.name == 'player'
-          if objA.name == 'goal' || objB.name == 'goal'
-            console.log "winnnnnnn"
-            self.winLevel()
-    )
+  #addGoalListener: ->
+  #  self = this
+  #  Physics.addListener((objA, objB) ->
+  #    if objA && objB
+  #      if objA.name == 'player' || objB.name == 'player'
+  #        if objA.name == 'goal' || objB.name == 'goal'
+  #          console.log "winnnnnnn"
+  #          self.winLevel()
+  #  )
 
   makeClone: ->
     @currentCooldown = COOLDOWN

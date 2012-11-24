@@ -4,7 +4,7 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop'], (
   setUpGame = ->
     Playground.init()
     CanvasPainter.init(document.getElementById("my-canvas"))
-    CanvasPainter.represent(Playground)
+    CanvasPainter.represent(Playground.drawables())
     playing = true
     Playground.onLevelWin(->
       $(".level-complete").show()

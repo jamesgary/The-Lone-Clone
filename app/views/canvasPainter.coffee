@@ -7,17 +7,17 @@ define ->
     @cloneImg = new Image()
     @cloneImg.src= 'assets/images/clone.png'
     @time = 0
-  represent: (@pg) ->
+  represent: (@drawables) ->
   paint: ->
     @time++
     @ctx.clearRect(0, 0, @canvas.width, @canvas.height)
     @ctx.fillStyle = "rgb(10, 200, 10)"
-    @paintSpikes(s) for s in @pg.getSpikes()
-    @paintStaticRects(r) for r in @pg.getStatic().rects
-    @paintStatic(s) for s in @pg.getStatic().polygons
-    @paintClones(@pg.getClones())
-    @paintPlayer(@pg.getPlayer())
-    @paintGoal(@pg.getGoal())
+    @paintSpikes(s) for s in @drawables.spikes
+    @paintStaticRects(r) for r in @drawables.staticRects
+    @paintStatic(s) for s in @drawables.staticPolygons
+    @paintClones(@drawables.clones)
+    @paintPlayer(@drawables.player)
+    @paintGoal(@drawables.goal)
 
   ###########
   # private #
