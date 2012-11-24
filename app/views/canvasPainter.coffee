@@ -12,7 +12,8 @@ define ->
     @time++
     @ctx.clearRect(0, 0, @canvas.width, @canvas.height)
     @ctx.fillStyle = "rgb(10, 200, 10)"
-    @paintStaticRects(s) for s in @pg.getStatics()
+    @paintStaticRects(r) for r in @pg.getStatic().rects
+    @paintStatic(s) for s in @pg.getStatic().polygons
     @paintClones(@pg.getClones())
     @paintPlayer(@pg.getPlayer())
     @paintGoal(@pg.getGoal())
@@ -23,15 +24,15 @@ define ->
 
   paintStaticRects: (rect) ->
     @ctx.fillRect(@scale(rect.x), @scale(rect.y), @scale(rect.w), @scale(rect.h))
-  paintStatic: (points) ->
+  paintStatic: (polygon) ->
+    first = polygon[0]
     @ctx.beginPath()
-    @ctx.moveTo(@scale(points[0].x), @scale(12 - points[0].y))
-    for point in points
-      @ctx.lineTo(@scale(point.x), @scale(13 - point.y))
-    @ctx.lineTo(@scale(points[0].x), @scale(13 - points[0].y))
+    @ctx.moveTo(@scale(first.x), @scale(first.y))
+    for point in polygon
+      @ctx.lineTo(@scale(point.x), @scale(point.y))
+    @ctx.lineTo(@scale(first.x), @scale(first.y))
     @ctx.closePath()
     @ctx.fill()
-    #@ctx.stroke()
 
   paintClones: (clones) ->
     @paintObject(clone, @cloneImg) for clone in clones

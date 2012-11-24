@@ -18,8 +18,11 @@ define ['lib/physics/physics', 'lib/levelUtil'], (Physics, levelUtil) ->
   startLevel: (@levelNumber) ->
     Physics.createWorld()
     levelData = levelUtil.load(@levelNumber)
-    @statics = for rect in levelData.rects
+    @static = {}
+    @static.rects = for rect in levelData.rects
       Physics.addStaticRect(rect)
+    @static.polygons = for polygon in levelData.polygons
+      Physics.addStatic(polygon)
     @player = Physics.addCircle({ x: levelData.start.x, y: levelData.start.y, r: PLAYER_RAD })
     @player.name = 'player'
     @goal = Physics.addStaticCircle({ x: levelData.goal.x, y: levelData.goal.y, r: GOAL_RAD })
@@ -42,8 +45,8 @@ define ['lib/physics/physics', 'lib/levelUtil'], (Physics, levelUtil) ->
         clone.r(newRad)
     Physics.update()
 
-  getStatics: ->
-    @statics
+  getStatic: ->
+    @static
   getPlayer: ->
     @player
   getClones: ->

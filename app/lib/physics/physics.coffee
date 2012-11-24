@@ -27,7 +27,7 @@ define ['box2d', 'lib/physics/circle'], (Box2D, Circle) ->
       @fixDef.shape = new b2PolygonShape
       vecs = for vertice in vertices
         vec = new b2Vec2
-        vec.Set(vertice.x, -vertice.y + 13)
+        vec.Set(vertice.x, vertice.y)
         vec
       @fixDef.shape.SetAsArray(vecs, vecs.length)
       @bodyDef.position.x = 0
