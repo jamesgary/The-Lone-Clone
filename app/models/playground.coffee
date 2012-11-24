@@ -23,6 +23,8 @@ define ['lib/physics/physics', 'lib/levelUtil'], (Physics, levelUtil) ->
       Physics.addStaticRect(rect)
     @static.polygons = for polygon in levelData.polygons
       Physics.addStatic(polygon)
+    @spikes = for lines in levelData.spikes
+      Physics.addStatic(lines)
     @player = Physics.addCircle({ x: levelData.start.x, y: levelData.start.y, r: PLAYER_RAD })
     @player.name = 'player'
     @goal = Physics.addStaticCircle({ x: levelData.goal.x, y: levelData.goal.y, r: GOAL_RAD })
@@ -53,6 +55,8 @@ define ['lib/physics/physics', 'lib/levelUtil'], (Physics, levelUtil) ->
     @clones
   getGoal: ->
     @goal
+  getSpikes: ->
+    @spikes
   onLevelWin: (f) ->
     @levelWinCallbacks.push(f)
   winLevel: -> # to be set in the controller

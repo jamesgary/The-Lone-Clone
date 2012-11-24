@@ -12,6 +12,7 @@ define ->
     @time++
     @ctx.clearRect(0, 0, @canvas.width, @canvas.height)
     @ctx.fillStyle = "rgb(10, 200, 10)"
+    @paintSpikes(s) for s in @pg.getSpikes()
     @paintStaticRects(r) for r in @pg.getStatic().rects
     @paintStatic(s) for s in @pg.getStatic().polygons
     @paintClones(@pg.getClones())
@@ -33,6 +34,34 @@ define ->
     @ctx.lineTo(@scale(first.x), @scale(first.y))
     @ctx.closePath()
     @ctx.fill()
+
+  paintSpikes: (linePoints) ->
+    @ctx.lineWidth = 1
+    @ctx.strokeStyle = 'white'
+    spikeLength = 4
+    space = 5
+
+    x = @scale(linePoints[0].x)
+    y = @scale(linePoints[0].y)
+    endX = @scale(linePoints[1].x)
+    endY = @scale(linePoints[1].y)
+
+    dx = endX - x
+    dy = endY - y
+
+    @ctx.beginPath()
+    # assuming it's left to right
+    while(x <= endX && y <= endY)
+      @ctx.moveTo(x - spikeLength, y + spikeLength)
+      @ctx.lineTo(x + spikeLength, y - spikeLength)
+      @ctx.moveTo(x - spikeLength, y - spikeLength)
+      @ctx.lineTo(x + spikeLength, y + spikeLength)
+      x += space
+    @ctx.closePath()
+    @ctx.stroke()
+
+    #@ctx.closePath()
+    #@ctx.stroke()
 
   paintClones: (clones) ->
     @paintObject(clone, @cloneImg) for clone in clones

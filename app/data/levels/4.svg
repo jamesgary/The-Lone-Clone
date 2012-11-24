@@ -14,7 +14,7 @@
    id="svg2989"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="base.svg">
+   sodipodi:docname="4.svg">
   <defs
      id="defs2991" />
   <sodipodi:namedview
@@ -25,8 +25,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="302.98002"
-     inkscape:cy="206.09968"
+     inkscape:cx="269.44719"
+     inkscape:cy="231.03784"
      inkscape:current-layer="layer3"
      inkscape:document-units="px"
      showgrid="false"
@@ -36,7 +36,7 @@
      inkscape:window-y="20"
      inkscape:window-maximized="0"
      inkscape:snap-global="true"
-     inkscape:snap-bbox="true"
+     inkscape:snap-bbox="false"
      inkscape:snap-bbox-midpoints="true"
      inkscape:bbox-paths="true"
      inkscape:bbox-nodes="true"
@@ -45,7 +45,13 @@
      inkscape:snap-center="true"
      inkscape:snap-object-midpoints="true"
      showguides="true"
-     inkscape:guide-bbox="true" />
+     inkscape:guide-bbox="true"
+     inkscape:snap-nodes="false">
+    <sodipodi:guide
+       orientation="0,1"
+       position="186,187"
+       id="guide3947" />
+  </sodipodi:namedview>
   <metadata
      id="metadata2994">
     <rdf:RDF>
@@ -117,7 +123,7 @@
        style="fill:#00ff00"
        mask="none"
        clip-path="none"
-       transform="translate(65.22374,65.5)" />
+       transform="translate(57.22374,91.5)" />
     <circle
        transform="translate(534.22374,76.5)"
        clip-path="none"
@@ -132,5 +138,31 @@
        cx="0"
        x="30"
        id="circle3095" />
+    <rect
+       style="opacity:0.98999999;fill:#666666;fill-opacity:1;stroke:none"
+       id="rect3175"
+       width="103"
+       height="198"
+       x="5"
+       y="214" />
+    <rect
+       style="opacity:0.98999999;fill:#666666;fill-opacity:1;stroke:none"
+       id="rect3945"
+       width="142"
+       height="196"
+       x="504"
+       y="214" />
+    <path
+       style="fill:#ff00ff;stroke:#ff00ff;stroke-width:1.05216634px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 100.05194,221 416.25231,0"
+       id="path3953"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="opacity:0.98999999;fill:#666666;fill-opacity:1;stroke:none"
+       id="rect3955"
+       width="435"
+       height="168"
+       x="88"
+       y="225" />
   </g>
 </svg>
