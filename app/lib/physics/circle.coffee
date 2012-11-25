@@ -1,6 +1,12 @@
-define ->
+define ['lib/physics/physics'], (Physics) ->
   class Circle
-    constructor: (@physicalCircle) ->
+    constructor: (circleData) ->
+      trimmedData =
+        x: circleData.x
+        y: circleData.y
+        r: circleData.r
+      func = if circleData.isStatic then 'addStaticCircle' else 'addCircle'
+      @physicalCircle = Physics[func](trimmedData)
     x: (newX) ->
       if newX
         @physicalCircle.SetPosition({ x: newX })

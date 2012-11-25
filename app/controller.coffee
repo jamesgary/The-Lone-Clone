@@ -1,5 +1,5 @@
 define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop'], ($, Playground, CanvasPainter, GameLoop) ->
-  playing = cloneUp = cloneLeft = cloneRight = cloneDown = false
+  playing = false
 
   setUpGame = ->
     Playground.init()
@@ -8,10 +8,6 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop'], (
     playing = true
     Playground.onLevelWin(->
       $(".level-complete").show()
-      Playground.cloneUp    = false
-      Playground.cloneLeft  = false
-      Playground.cloneDown  = false
-      Playground.cloneRight = false
       playing = false
     )
 
@@ -19,20 +15,20 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop'], (
     $('body').keyup((e) ->
       key = String.fromCharCode(e.which).toLowerCase()
       switch key
-        when 'w' then Playground.cloneUp    = false
-        when 'a' then Playground.cloneLeft  = false
-        when 's' then Playground.cloneDown  = false
-        when 'd' then Playground.cloneRight = false
+        when 'w' then Playground.stopCloningUp()
+        when 'a' then Playground.stopCloningLeft()
+        when 's' then Playground.stopCloningDown()
+        when 'd' then Playground.stopCloningRight()
       e.stopPropagation()
     )
     $('body').keydown((e) ->
       key = String.fromCharCode(e.which).toLowerCase()
       if playing
         switch key
-          when 'w' then Playground.cloneUp    = true
-          when 'a' then Playground.cloneLeft  = true
-          when 's' then Playground.cloneDown  = true
-          when 'd' then Playground.cloneRight = true
+          when 'w' then Playground.cloningUp()
+          when 'a' then Playground.cloningLeft()
+          when 's' then Playground.cloningDown()
+          when 'd' then Playground.cloningRight()
       else
         if key == ' '
           Playground.startNextLevel()

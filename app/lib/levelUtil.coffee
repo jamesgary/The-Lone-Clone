@@ -14,6 +14,7 @@ define files, (levels...) ->
     svgString = levels[4 - 1] # FIXME TESTING
     @svg = (new DOMParser()).parseFromString(svgString, "text/xml")
 
+    # these methods give back plain objects
     level.start    = @findStart()
     level.goal     = @findGoal()
     level.rects    = @findRects()

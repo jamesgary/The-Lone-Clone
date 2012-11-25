@@ -1,5 +1,5 @@
 # Wrap around your external dependencies!
-define ['box2d', 'lib/physics/circle'], (Box2D, Circle) ->
+define ['box2d'], (Box2D) ->
   debugDrawing = true
   b2Vec2         = Box2D.Common.Math.b2Vec2
   b2BodyDef      = Box2D.Dynamics.b2BodyDef
@@ -22,7 +22,7 @@ define ['box2d', 'lib/physics/circle'], (Box2D, Circle) ->
       @fixDef.restitution = 0.2
       @bodyDef = new b2BodyDef
 
-    addStatic: (vertices) ->
+    addStaticPolygon: (vertices) ->
       @bodyDef.type = b2Body.b2_staticBody
       @fixDef.shape = new b2PolygonShape
       vecs = for vertice in vertices
@@ -77,11 +77,12 @@ define ['box2d', 'lib/physics/circle'], (Box2D, Circle) ->
       @fixDef.shape = new b2CircleShape(circle.r)
       @bodyDef.position.x = circle.x
       @bodyDef.position.y = circle.y
-      c = @world.CreateBody(@bodyDef)
-      c.CreateFixture(@fixDef)
-      userObject = new Circle(c)
-      c.userData = userObject
-      userObject
+      body = @world.CreateBody(@bodyDef)
+      body.CreateFixture(@fixDef)
+      body
+      #userObject = new Circle(c)
+      #c.userData = userObject
+      #userObject
 
     setupDebugDraw: (canvas) ->
       if canvas
