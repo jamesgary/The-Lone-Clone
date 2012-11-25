@@ -1,4 +1,4 @@
-HIGHEST_LEVEL = 4
+HIGHEST_LEVEL = 5
 files = for i in [1..HIGHEST_LEVEL]
   "text!data/levels/#{i}.svg"
 
@@ -19,6 +19,7 @@ define files, (levels...) ->
     level.rects    = @findRects()
     level.spikes   = @findSpikes()
     level.polygons = @findRectifiedPaths()
+    level.ghosts   = @findGhosts()
     level
 
   ###########
@@ -33,6 +34,12 @@ define files, (levels...) ->
     for circle in @svg.getElementsByTagName('circle')
       if circle.style.fill == '#00ffff' # light blue is goal
         return @locateCircle(circle)
+  findGhosts: ->
+    ghosts = []
+    for circle in @svg.getElementsByTagName('circle')
+      if circle.style.fill == '#ff0000' # red is ghost
+        ghosts.push(@locateCircle(circle))
+    ghosts
   findRects: ->
     for rect in @svg.getElementsByTagName('rect')
       {

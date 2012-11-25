@@ -15,6 +15,9 @@ define ->
     self.playerTouchesSpikes(objA, objB)
     self.cloneTouchesSpikes(objA, objB)
 
+    isSolid = !(self.isGhost(objA, objB))
+    return isSolid
+
   playerTouchesGoal: (objA, objB) ->
     [player, goal] = self.checkContact(objA, objB, 'Goal', 'Player')
     if player && goal
@@ -30,6 +33,12 @@ define ->
     [clone, spikes] = self.checkContact(objA, objB, 'Clone', 'Spikes')
     if clone && spikes
       clone.spike()
+
+  isGhost: (objA, objB) ->
+    (
+      (objA && objA.constructor.name == 'Ghost') ||
+      (objB && objB.constructor.name == 'Ghost')
+    )
 
   checkContact: (objA, objB, nameA, nameB) ->
     if objA && objB

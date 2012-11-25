@@ -52,12 +52,16 @@ define ['box2d'], (Box2D) ->
     addStaticCircle: (circle) ->
       @createCircle(circle, b2Body.b2_staticBody)
 
+    addStaticCircle: (circle) ->
+      @createCircle(circle, b2Body.b2_staticBody)
+
     addListener: (func) ->
       listener = new Box2D.Dynamics.b2ContactListener
-      listener.BeginContact = (contact) ->
+      listener.PreSolve = (contact) ->
         a = contact.GetFixtureA().GetBody().userdata
         b = contact.GetFixtureB().GetBody().userdata
-        func(a, b)
+        unless func(a, b)
+          contact.SetEnabled(false)
       @world.SetContactListener(listener)
 
     freeze: (body) ->

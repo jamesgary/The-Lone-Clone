@@ -20,6 +20,7 @@ define ->
     @paintClones(@drawables.clones)
     @paintPlayer(@drawables.player)
     @paintGoal(@drawables.goal)
+    @paintGhosts(@drawables.ghosts)
 
   ###########
   # private #
@@ -88,6 +89,16 @@ define ->
     @ctx.arc(x, y, r + (r * glow), 0, 2 * Math.PI, false)
     @ctx.fillStyle = grd
     @ctx.fill()
+  paintGhosts: (ghosts) ->
+    for ghost in ghosts
+      x = @scale(ghost.x())
+      y = @scale(ghost.y())
+      r = @scale(ghost.r())
+      @ctx.beginPath()
+      @ctx.arc(x, y, r, 0, 2 * Math.PI, false)
+      @ctx.fillStyle = "rgba(255, 50, 50, 0.5)"
+      @ctx.fill()
+
 
   paintObject: (object, image) ->
     @ctx.save()

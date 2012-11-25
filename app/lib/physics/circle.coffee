@@ -10,12 +10,12 @@ define ['lib/physics/physics'], (Physics) ->
       @physicalCircle.userdata = this
     x: (newX) ->
       if newX
-        @physicalCircle.SetPosition({ x: newX })
+        @physicalCircle.SetPosition({ x: newX, y: @y()})
       else
         @physicalCircle.GetPosition().x
     y: (newY) ->
       if newY
-        @physicalCircle.SetPosition({ y: newY })
+        @physicalCircle.SetPosition({ y: newY, x: @x() })
       else
         @physicalCircle.GetPosition().y
     a: (newA) ->

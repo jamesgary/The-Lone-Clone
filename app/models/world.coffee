@@ -1,10 +1,4 @@
-define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 'lib/levelUtil'], (Physics, Player, Goal, Spikes, LevelUtil) ->
-  PLAYER_RAD = .5
-  CLONE_START_RAD = .2 * PLAYER_RAD
-  CLONE_GROW_RATE = .05
-  COOLDOWN = 10
-  GOAL_RAD = .1
-
+define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 'models/ghost', 'lib/levelUtil'], (Physics, Player, Goal, Spikes, Ghost, LevelUtil) ->
   startLevel: (@levelNumber) ->
     Physics.createWorld()
     @levelWinCallbacks = []
@@ -13,6 +7,7 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 
     Physics.update()
     @player.update()
     clone.update() for clone in @player.clones
+    ghost.update() for ghost in @ghosts
   drawables: ->
     {
       staticRects: @static.rects
@@ -21,6 +16,7 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 
       clones: @player.clones
       player: @player
       goal: @goal
+      ghosts: @ghosts
     }
   addListener: (f) ->
     Physics.addListener(f)
@@ -37,8 +33,11 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 
       Physics.addStaticRect(rect)
     @static.polygons = for polygon in levelData.polygons
       Physics.addStaticPolygon(polygon)
+      polygon
     @static.spikes = for spikeLine in levelData.spikes
       new Spikes(spikeLine)
     @player = new Player({ x: levelData.start.x, y: levelData.start.y })
     @goal   = new Goal(  { x: levelData.goal.x,  y: levelData.goal.y })
+    @ghosts = for ghost in levelData.ghosts
+      new Ghost({ x: ghost.x,  y: ghost.y }, @player)
     @clones = []
