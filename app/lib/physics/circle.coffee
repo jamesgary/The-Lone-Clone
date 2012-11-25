@@ -7,6 +7,7 @@ define ['lib/physics/physics'], (Physics) ->
         r: circleData.r
       func = if circleData.isStatic then 'addStaticCircle' else 'addCircle'
       @physicalCircle = Physics[func](trimmedData)
+      @physicalCircle.userdata = this
     x: (newX) ->
       if newX
         @physicalCircle.SetPosition({ x: newX })

@@ -11,7 +11,7 @@ define files, (levels...) ->
       circles: []
     }
     #svgString = levels[levelNum - 1]
-    svgString = levels[4 - 1] # FIXME TESTING
+    svgString = levels[3 - 1] # FIXME TESTING
     @svg = (new DOMParser()).parseFromString(svgString, "text/xml")
 
     # these methods give back plain objects
@@ -76,7 +76,7 @@ define files, (levels...) ->
   findSpikes: ->
     spikes = []
     for path in @svg.getElementsByTagName('path')
-      if path.style.color = '#ff00ff'
+      if path.style.color == '#ff00ff'
         # expecting one line: d="m 117,221 376,0"
         d = path.getAttribute('d')
         d = d.substr(2) # remove initial 'm '

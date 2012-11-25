@@ -1,9 +1,4 @@
 define ['models/world'], (World) ->
-  PLAYER_RAD = .5
-  CLONE_START_RAD = .2 * PLAYER_RAD
-  CLONE_GROW_RATE = .05
-  COOLDOWN = 10
-
   init: ->
     @startLevel(1)
   startLevel: (@levelNumber) ->
@@ -26,17 +21,3 @@ define ['models/world'], (World) ->
   stopCloningLeft : -> World.player.cloningLeft  = false
   stopCloningDown : -> World.player.cloningDown  = false
   stopCloningRight: -> World.player.cloningRight = false
-
-  ###########
-  # private #
-  ###########
-
-  #addGoalListener: ->
-  #  self = this
-  #  Physics.addListener((objA, objB) ->
-  #    if objA && objB
-  #      if objA.name == 'player' || objB.name == 'player'
-  #        if objA.name == 'goal' || objB.name == 'goal'
-  #          console.log "winnnnnnn"
-  #          self.winLevel()
-  #  )

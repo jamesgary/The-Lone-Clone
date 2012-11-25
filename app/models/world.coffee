@@ -1,4 +1,4 @@
-define ['lib/physics/physics', 'models/player', 'models/goal', 'lib/levelUtil'], (Physics, Player, Goal, levelUtil) ->
+define ['lib/physics/physics', 'models/player', 'models/goal', 'lib/levelUtil'], (Physics, Player, Goal, LevelUtil) ->
   PLAYER_RAD = .5
   CLONE_START_RAD = .2 * PLAYER_RAD
   CLONE_GROW_RATE = .05
@@ -8,11 +8,8 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'lib/levelUtil'],
   startLevel: (@levelNumber) ->
     Physics.createWorld()
     @levelWinCallbacks = []
-    @loadAssets()
-  restart: ->
-    @init()
-  startNextLevel: ->
-    @startLevel(@levelNumber + 1)
+    @loadLevel()
+    @addGoalListener()
   update: ->
     Physics.update()
     @player.update()
@@ -35,9 +32,9 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'lib/levelUtil'],
   # private #
   ###########
 
-  loadAssets: ->
+  loadLevel: ->
     # levelData is a plain object
-    levelData = levelUtil.load(@levelNumber)
+    levelData = LevelUtil.load(@levelNumber)
     @static = {}
     @static.rects = for rect in levelData.rects
       Physics.addStaticRect(rect)
@@ -47,15 +44,15 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'lib/levelUtil'],
       Physics.addStaticPolygon(lines)
     @player = new Player({ x: levelData.start.x, y: levelData.start.y })
     @goal   = new Goal(  { x: levelData.goal.x,  y: levelData.goal.y })
-    @addGoalListener()
     @clones = []
 
   addGoalListener: ->
     self = this
     Physics.addListener((objA, objB) ->
       if objA && objB
-        if objA.name == 'player' || objB.name == 'player'
-          if objA.name == 'goal' || objB.name == 'goal'
-            console.log "winnnnnnn"
+        classA = objA.constructor.name
+        classB = objB.constructor.name
+        if classA == 'Player' || classB == 'Player'
+          if classA == 'Goal' || classB == 'Goal'
             self.winLevel()
     )

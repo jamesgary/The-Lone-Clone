@@ -54,8 +54,8 @@ define ['box2d'], (Box2D) ->
     addListener: (func) ->
       listener = new Box2D.Dynamics.b2ContactListener
       listener.BeginContact = (contact) ->
-        a = contact.GetFixtureA().GetBody().userData
-        b = contact.GetFixtureB().GetBody().userData
+        a = contact.GetFixtureA().GetBody().userdata
+        b = contact.GetFixtureB().GetBody().userdata
         func(a, b)
       @world.SetContactListener(listener)
 

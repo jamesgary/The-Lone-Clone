@@ -1,9 +1,11 @@
 define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop'], ($, Playground, CanvasPainter, GameLoop) ->
   playing = false
 
-  setUpGame = ->
+  setUpGame = -> # do this once
     Playground.init()
     CanvasPainter.init(document.getElementById("my-canvas"))
+    setUpLevel()
+  setUpLevel = -> # do this for each level
     CanvasPainter.represent(Playground.drawables())
     playing = true
     Playground.onLevelWin(->
@@ -32,6 +34,7 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop'], (
       else
         if key == ' '
           Playground.startNextLevel()
+          setUpLevel()
           $(".level-complete").hide()
           playing = true
       e.stopPropagation()
