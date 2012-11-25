@@ -2,7 +2,8 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop'], (
   playing = false
 
   setUpGame = -> # do this once
-    Playground.init()
+    level = location.href.split('level=')[1] || 1
+    Playground.startLevel(level)
     CanvasPainter.init(document.getElementById("my-canvas"))
     setUpLevel()
   setUpLevel = -> # do this for each level

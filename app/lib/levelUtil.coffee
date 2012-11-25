@@ -10,8 +10,7 @@ define files, (levels...) ->
       polygons: []
       circles: []
     }
-    #svgString = levels[levelNum - 1]
-    svgString = levels[1 - 1] # FIXME TESTING
+    svgString = levels[levelNum - 1]
     @svg = (new DOMParser()).parseFromString(svgString, "text/xml")
 
     # these methods give back plain objects

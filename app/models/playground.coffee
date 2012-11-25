@@ -1,6 +1,4 @@
 define ['models/world', 'models/interactions'], (World, Interactions) ->
-  init: ->
-    @startLevel(1)
   startLevel: (@levelNumber) ->
     @levelWinCallbacks = []
     World.startLevel(@levelNumber)
