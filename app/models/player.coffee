@@ -8,18 +8,22 @@ define ['lib/physics/circle', 'models/clone'], (Circle, Clone) ->
       super(circleData)
       @stamina = 0
       @clones = []
+    spike: ->
+      @spiked = @dead = true
+      @freeze()
 
     update: ->
-      @stamina++
-      if (
-        @stamina >= COOLDOWN_REQUIRED
-      ) && (
-        @cloningRight ||
-        @cloningLeft  ||
-        @cloningDown  ||
-        @cloningUp
-      )
-        @makeClone()
+      unless @dead
+        @stamina++
+        if (
+          @stamina >= COOLDOWN_REQUIRED
+        ) && (
+          @cloningRight ||
+          @cloningLeft  ||
+          @cloningDown  ||
+          @cloningUp
+        )
+          @makeClone()
 
     ###########
     # private #

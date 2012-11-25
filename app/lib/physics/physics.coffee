@@ -32,8 +32,9 @@ define ['box2d'], (Box2D) ->
       @fixDef.shape.SetAsArray(vecs, vecs.length)
       @bodyDef.position.x = 0
       @bodyDef.position.y = 0
-      @world.CreateBody(@bodyDef).CreateFixture(@fixDef)
-      vertices
+      b = @world.CreateBody(@bodyDef)
+      b.CreateFixture(@fixDef)
+      b
 
     addStaticRect: (rect) ->
       @bodyDef.type = b2Body.b2_staticBody
@@ -58,6 +59,9 @@ define ['box2d'], (Box2D) ->
         b = contact.GetFixtureB().GetBody().userdata
         func(a, b)
       @world.SetContactListener(listener)
+
+    freeze: (body) ->
+      body.SetType(b2Body.b2_staticBody)
 
     update: ->
       @world.Step(

@@ -8,8 +8,13 @@ define ['lib/physics/circle'], (Circle) ->
       circleData.r = CLONE_START_RAD * @parentRad
       super(circleData)
 
+    spike: ->
+      @spiked = @dead = true
+      @freeze()
+
     update: ->
-      @grow()
+      unless @dead
+        @grow()
 
     ###########
     # private #

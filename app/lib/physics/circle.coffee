@@ -28,3 +28,6 @@ define ['lib/physics/physics'], (Physics) ->
         @physicalCircle.GetFixtureList().GetShape().SetRadius(newR)
       else
         @physicalCircle.GetFixtureList().GetShape().GetRadius()
+    freeze: ->
+      Physics.freeze(@physicalCircle)
+

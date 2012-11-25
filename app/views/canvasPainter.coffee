@@ -4,6 +4,8 @@ define ->
     @ctx = @canvas.getContext('2d')
     @playerImg = new Image()
     @playerImg.src= 'assets/images/player.png'
+    @spikedPlayerImg = new Image()
+    @spikedPlayerImg.src= 'assets/images/spiked_player.png'
     @cloneImg = new Image()
     @cloneImg.src= 'assets/images/clone.png'
     @time = 0
@@ -35,16 +37,16 @@ define ->
     @ctx.closePath()
     @ctx.fill()
 
-  paintSpikes: (linePoints) ->
+  paintSpikes: (spikes) ->
     @ctx.lineWidth = 1
     @ctx.strokeStyle = 'white'
     spikeLength = 4
     space = 5
 
-    x = @scale(linePoints[0].x)
-    y = @scale(linePoints[0].y)
-    endX = @scale(linePoints[1].x)
-    endY = @scale(linePoints[1].y)
+    x = @scale(spikes.x1)
+    y = @scale(spikes.y1)
+    endX = @scale(spikes.x2)
+    endY = @scale(spikes.y2)
 
     dx = endX - x
     dy = endY - y
@@ -64,7 +66,10 @@ define ->
     @paintObject(clone, @cloneImg) for clone in clones
 
   paintPlayer: (player) ->
-    @paintObject(player, @playerImg)
+    if player.dead
+      @paintObject(player, @spikedPlayerImg)
+    else
+      @paintObject(player, @playerImg)
 
   paintGoal: (goal) ->
     @ctx.beginPath()
