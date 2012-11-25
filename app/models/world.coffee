@@ -16,7 +16,7 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'lib/levelUtil'],
   update: ->
     Physics.update()
     @player.update()
-    #clone.update() for clone in @clones
+    clone.update() for clone in @player.clones
   onLevelWin: (f) ->
     @levelWinCallbacks.push(f)
   winLevel: -> # to be set in the controller
@@ -26,7 +26,7 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'lib/levelUtil'],
       staticRects: @static.rects
       staticPolygons: @static.polygons
       spikes: @static.spikes
-      clones: @clones
+      clones: @player.clones
       player: @player
       goal: @goal
     }

@@ -3,7 +3,6 @@ define ['models/world'], (World) ->
   CLONE_START_RAD = .2 * PLAYER_RAD
   CLONE_GROW_RATE = .05
   COOLDOWN = 10
-  GOAL_RAD = .1
 
   init: ->
     @startLevel(1)

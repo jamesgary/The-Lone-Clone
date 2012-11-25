@@ -1,28 +1,36 @@
-define ['lib/physics/circle'], (Circle) ->
+define ['lib/physics/circle', 'models/clone'], (Circle, Clone) ->
   PLAYER_RAD = .5
-  COOLDOWN = 10
+  COOLDOWN_REQUIRED = 10
 
   class Player extends Circle
     constructor: (circleData) ->
       circleData.r = PLAYER_RAD
       super(circleData)
+      @stamina = 0
+      @clones = []
 
     update: ->
-      #@currentCooldown--
-      #@makeClone() if (@currentCooldown <= 0) && (@cloneRight || @cloneLeft || @cloneDown || @cloneUp)
-      #@makeClone()
+      @stamina++
+      if (
+        @stamina >= COOLDOWN_REQUIRED
+      ) && (
+        @cloningRight ||
+        @cloningLeft  ||
+        @cloningDown  ||
+        @cloningUp
+      )
+        @makeClone()
 
     ###########
     # private #
     ###########
 
     makeClone: ->
-      @currentCooldown = COOLDOWN
-      x = @player.x()
-      y = @player.y()
-      r = CLONE_START_RAD
-      x += PLAYER_RAD if @cloneRight
-      x -= PLAYER_RAD if @cloneLeft
-      y += PLAYER_RAD if @cloneDown
-      y -= PLAYER_RAD if @cloneUp
-      @clones.push(Physics.addCircle({ x: x, y: y, r: r }))
+      @stamina = 0
+      x = @x()
+      y = @y()
+      x += PLAYER_RAD if @cloningRight
+      x -= PLAYER_RAD if @cloningLeft
+      y += PLAYER_RAD if @cloningDown
+      y -= PLAYER_RAD if @cloningUp
+      @clones.push(new Clone({ x: x, y: y }, this))
