@@ -11,7 +11,7 @@ define files, (levels...) ->
       circles: []
     }
     #svgString = levels[levelNum - 1]
-    svgString = levels[3 - 1] # FIXME TESTING
+    svgString = levels[4 - 1] # FIXME TESTING
     @svg = (new DOMParser()).parseFromString(svgString, "text/xml")
 
     # these methods give back plain objects
@@ -43,40 +43,44 @@ define files, (levels...) ->
         h: @scale(rect.height.baseVal.value)
       }
   findRectifiedPaths: ->
-    thickness = .2
+    thickness = .1
     polygons = []
     for path in @svg.getElementsByTagName('path')
-      d = path.getAttribute('d')
-      d = d.substr(1) # remove initial 'M'
-      coordinates = d.split('L')
-      coordinates = for string in coordinates
-        s = string.split(' ')
-        {
-          x: @scale(s[0])
-          y: @scale(s[1])
-        }
-      polygons = for i in [0...coordinates.length - 1]
-        c1 = coordinates[i]
-        c2 = coordinates[i + 1]
-        # The dimensions of the line are:
-        width = c2.x - c1.x
-        height = c2.y - c1.y
-        # To find the length of the line, use Pythagoras's theorem:
-        length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2))
-        # Now the shifts:
-        xS = (thickness * height / length) / 2
-        yS = (thickness * width / length) / 2
-        [
-          { x: c1.x - xS, y: c1.y + yS }
-          { x: c1.x + xS, y: c1.y - yS }
-          { x: c2.x + xS, y: c2.y - yS }
-          { x: c2.x - xS, y: c2.y + yS }
-        ]
+      if path.style.color != '#ff00ff'
+        d = path.getAttribute('d')
+        d = d.substr(1) # remove initial 'M'
+        coordinates = d.split('L')
+        coordinates = for string in coordinates
+          s = string.split(' ')
+          {
+            x: @scale(s[0])
+            y: @scale(s[1])
+          }
+        polygons = for i in [0...coordinates.length - 1]
+          c1 = coordinates[i]
+          c2 = coordinates[i + 1]
+          # The dimensions of the line are:
+          width = c2.x - c1.x
+          height = c2.y - c1.y
+          # To find the length of the line, use Pythagoras's theorem:
+          length = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2))
+          # Now the shifts:
+          xS = (thickness * height / length)
+          yS = (thickness * width / length)
+          [
+            { x: c1.x - xS, y: c1.y + yS }
+            { x: c1.x + xS, y: c1.y - yS }
+            { x: c2.x + xS, y: c2.y - yS }
+            { x: c2.x - xS, y: c2.y + yS }
+          ]
     polygons
   findSpikes: ->
     spikes = []
     for path in @svg.getElementsByTagName('path')
-      if path.style.color == '#ff00ff'
+      if (
+        path.style.color  == '#ff00ff' ||
+        path.style.stroke == '#ff00ff'
+      )
         # expecting one line: d="m 117,221 376,0"
         d = path.getAttribute('d')
         d = d.substr(2) # remove initial 'm '

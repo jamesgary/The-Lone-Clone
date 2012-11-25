@@ -80,9 +80,6 @@ define ['box2d'], (Box2D) ->
       body = @world.CreateBody(@bodyDef)
       body.CreateFixture(@fixDef)
       body
-      #userObject = new Circle(c)
-      #c.userData = userObject
-      #userObject
 
     setupDebugDraw: (canvas) ->
       if canvas
