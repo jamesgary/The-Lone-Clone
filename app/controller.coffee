@@ -1,17 +1,24 @@
 define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop'], ($, Playground, CanvasPainter, GameLoop) ->
-  playing = false
+  playing = won = lost = false
 
   setUpGame = -> # do this once
-    level = location.href.split('level=')[1] || 1
+    level = parseInt(location.href.split('level=')[1]) || 1
     Playground.startLevel(level)
     CanvasPainter.init(document.getElementById("my-canvas"))
     setUpLevel()
   setUpLevel = -> # do this for each level
     CanvasPainter.represent(Playground.drawables())
     playing = true
+    won = lost = false
     Playground.onLevelWin(->
       $(".level-complete").show()
       playing = false
+      won = true
+    )
+    Playground.onLevelLose(->
+      $(".level-fail").show()
+      playing = false
+      lost = true
     )
 
   setUpInput = ->
@@ -34,10 +41,16 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop'], (
           when 'd' then Playground.cloningRight()
       else
         if key == ' '
-          Playground.startNextLevel()
-          setUpLevel()
-          $(".level-complete").hide()
-          playing = true
+          if won
+            Playground.startNextLevel()
+            setUpLevel()
+            $(".level-complete").hide()
+            playing = true
+          else if lost
+            Playground.restart()
+            setUpLevel()
+            $(".level-fail").hide()
+            playing = true
       e.stopPropagation()
     )
     $('a.start').click ->
@@ -64,5 +77,6 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop'], (
       #showDiv('level-select') # for testing
       showDiv('playground') # for testing
       $(".level-complete").hide()
+      $(".level-fail").hide()
       #showDiv('level-complete') # for testing
 

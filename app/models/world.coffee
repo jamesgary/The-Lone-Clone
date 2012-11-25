@@ -13,10 +13,6 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 
     Physics.update()
     @player.update()
     clone.update() for clone in @player.clones
-  #onLevelWin: (f) ->
-  #  @levelWinCallbacks.push(f)
-  #winLevel: -> # to be set in the controller
-  #  callback() for callback in @levelWinCallbacks
   drawables: ->
     {
       staticRects: @static.rects

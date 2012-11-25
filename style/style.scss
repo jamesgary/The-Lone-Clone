@@ -78,7 +78,13 @@ html, body {
   .playground {
     display: none;
     position: relative;
-    .level-complete {
+    .level-complete, .level-fail {
+      background: rgba(50, 50, 50, 0.5);
+      height: 100%;
+      margin: 0;
+      position: absolute;
+      width: 100%;
+      z-index: 5;
       .message {
         @include box-shadow(
           0 0 15px black,
@@ -92,12 +98,6 @@ html, body {
         text-align: center;
         width: 60%;
       }
-      background: rgba(50, 50, 50, 0.5);
-      height: 100%;
-      margin: 0;
-      position: absolute;
-      width: 100%;
-      z-index: 5;
     }
     canvas {
       background-color: #333333;

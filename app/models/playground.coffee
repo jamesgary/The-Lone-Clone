@@ -1,6 +1,7 @@
 define ['models/world', 'models/interactions'], (World, Interactions) ->
   startLevel: (@levelNumber) ->
     @levelWinCallbacks = []
+    @levelLoseCallbacks = []
     World.startLevel(@levelNumber)
     World.addListener(Interactions.contactInteractions(this))
   restart: ->
@@ -11,8 +12,12 @@ define ['models/world', 'models/interactions'], (World, Interactions) ->
     World.update()
   onLevelWin: (f) -> # to be set in the controller
     @levelWinCallbacks.push(f)
+  onLevelLose: (f) -> # to be set in the controller
+    @levelLoseCallbacks.push(f)
   winLevel: ->
     f() for f in @levelWinCallbacks
+  loseLevel: ->
+    f() for f in @levelLoseCallbacks
   drawables: ->
     World.drawables()
 

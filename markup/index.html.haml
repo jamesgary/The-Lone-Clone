@@ -18,11 +18,16 @@
                 %td.level{:data => {:level => level_count}}
                   = level_count
       .playground
+        .level-fail
+          .message
+            %h2 Bejabbers!
+            %h3 You became dead.
+            Some text to say 'hit any key to restart' or something
         .level-complete
           .message
             %h2 Huzzah!
             %h3 You are one step closer to enlightenment.
             %h4 Advance to a new level...
-            Some text to say 'hit D to advance' or something
+            Some text to say 'hit any key to advance' or something
         %canvas#my-canvas{:width => 600, :height => 400}
         //%canvas#canvas{:width => 600, :height => 400}

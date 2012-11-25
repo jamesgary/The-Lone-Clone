@@ -24,6 +24,7 @@ define ->
     [player, spikes] = self.checkContact(objA, objB, 'Player', 'Spikes')
     if player && spikes
       player.spike()
+      listener.loseLevel()
 
   cloneTouchesSpikes: (objA, objB) ->
     [clone, spikes] = self.checkContact(objA, objB, 'Clone', 'Spikes')
