@@ -1,0 +1,19 @@
+Level select
+Levels
+  - At least 15, but ideally 100
+Level entities
+  - Moving platforms
+  - Lava
+  - Vertical spikes
+Twists
+  - Limited clones
+  - Freezing clones (slow / fast)
+  - Vanishing clones (slow / fast)
+  - Squares?
+Juice
+  - WebGL background
+  - Textured statics
+  - Music
+  - Prettier spikes
+  - Prettier splash
+  - Prettier level select
