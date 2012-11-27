@@ -14,9 +14,9 @@ define ->
     @time++
     @ctx.clearRect(0, 0, @canvas.width, @canvas.height)
     @ctx.fillStyle = "rgb(10, 200, 10)"
-    @paintSpikes(s) for s in @drawables.spikes
-    @paintStaticRects(r) for r in @drawables.staticRects
-    @paintStatic(s) for s in @drawables.staticPolygons
+    @paintSpikes(@drawables.spikes)
+    @paintPlatforms(@drawables.platforms)
+    @paintMovers(@drawables.movers)
     @paintClones(@drawables.clones)
     @paintPlayer(@drawables.player)
     @paintGoal(@drawables.goal)
@@ -26,42 +26,52 @@ define ->
   # private #
   ###########
 
-  paintStaticRects: (rect) ->
-    @ctx.fillRect(@scale(rect.x), @scale(rect.y), @scale(rect.w), @scale(rect.h))
-  paintStatic: (polygon) ->
-    first = polygon[0]
-    @ctx.beginPath()
-    @ctx.moveTo(@scale(first.x), @scale(first.y))
-    for point in polygon
-      @ctx.lineTo(@scale(point.x), @scale(point.y))
-    @ctx.lineTo(@scale(first.x), @scale(first.y))
-    @ctx.closePath()
-    @ctx.fill()
+  paintPlatforms: (platforms) ->
+    for platform in platforms
+      firstVertex = platform.vertices()[0]
+      @ctx.beginPath()
+      @ctx.moveTo(@scale(firstVertex.x), @scale(firstVertex.y))
+      for vertex in platform.vertices()
+        @ctx.lineTo(@scale(vertex.x), @scale(vertex.y))
+      @ctx.closePath()
+      @ctx.fill()
 
-  paintSpikes: (spikes) ->
+  paintMovers: (movers) ->
+    @ctx.fillStyle = "rgb(200, 200, 200)"
+    for mover in movers
+      firstVertex = mover.vertices()[0]
+      @ctx.beginPath()
+      @ctx.moveTo(@scale(firstVertex.x), @scale(firstVertex.y))
+      for vertex in mover.vertices()
+        @ctx.lineTo(@scale(vertex.x), @scale(vertex.y))
+      @ctx.closePath()
+      @ctx.fill()
+
+  paintSpikes: (allSpikes) ->
     @ctx.lineWidth = 1
     @ctx.strokeStyle = 'white'
     spikeLength = 4
     space = 5
+    for spikes in allSpikes
 
-    x = @scale(spikes.x1)
-    y = @scale(spikes.y1)
-    endX = @scale(spikes.x2)
-    endY = @scale(spikes.y2)
+      x = @scale(spikes.x1)
+      y = @scale(spikes.y1)
+      endX = @scale(spikes.x2)
+      endY = @scale(spikes.y2)
 
-    dx = endX - x
-    dy = endY - y
+      dx = endX - x
+      dy = endY - y
 
-    @ctx.beginPath()
-    # assuming it's left to right
-    while(x <= endX && y <= endY)
-      @ctx.moveTo(x - spikeLength, y + spikeLength)
-      @ctx.lineTo(x + spikeLength, y - spikeLength)
-      @ctx.moveTo(x - spikeLength, y - spikeLength)
-      @ctx.lineTo(x + spikeLength, y + spikeLength)
-      x += space
-    @ctx.closePath()
-    @ctx.stroke()
+      @ctx.beginPath()
+      # assuming it's left to right
+      while(x <= endX && y <= endY)
+        @ctx.moveTo(x - spikeLength, y + spikeLength)
+        @ctx.lineTo(x + spikeLength, y - spikeLength)
+        @ctx.moveTo(x - spikeLength, y - spikeLength)
+        @ctx.lineTo(x + spikeLength, y + spikeLength)
+        x += space
+      @ctx.closePath()
+      @ctx.stroke()
 
   paintClones: (clones) ->
     @paintObject(clone, @cloneImg) for clone in clones
@@ -90,13 +100,13 @@ define ->
     @ctx.fillStyle = grd
     @ctx.fill()
   paintGhosts: (ghosts) ->
+    @ctx.fillStyle = "rgba(255, 50, 50, 0.5)"
     for ghost in ghosts
       x = @scale(ghost.x())
       y = @scale(ghost.y())
       r = @scale(ghost.r())
       @ctx.beginPath()
       @ctx.arc(x, y, r, 0, 2 * Math.PI, false)
-      @ctx.fillStyle = "rgba(255, 50, 50, 0.5)"
       @ctx.fill()
 
 

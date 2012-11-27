@@ -36,16 +36,6 @@ define ['box2d'], (Box2D) ->
       b.CreateFixture(@fixDef)
       b
 
-    addStaticRect: (rect) ->
-      @bodyDef.type = b2Body.b2_staticBody
-      @bodyDef.position.x = rect.x + (.5 * rect.w)
-      @bodyDef.position.y = rect.y + (.5 * rect.h)
-      @fixDef.shape = new b2PolygonShape
-      @fixDef.shape.SetAsBox(.5 * rect.w, .5 * rect.h)
-      r = @world.CreateBody(@bodyDef)
-      r.CreateFixture(@fixDef)
-      rect
-
     addCircle: (circle) ->
       @createCircle(circle, b2Body.b2_dynamicBody)
 

@@ -1,4 +1,4 @@
-define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 'models/ghost', 'lib/levelUtil'], (Physics, Player, Goal, Spikes, Ghost, LevelUtil) ->
+define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 'models/ghost', 'models/mover', 'models/platform', 'lib/levelUtil'], (Physics, Player, Goal, Spikes, Ghost, Mover, Platform, LevelUtil) ->
   startLevel: (@levelNumber) ->
     Physics.createWorld()
     @levelWinCallbacks = []
@@ -10,9 +10,9 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 
     ghost.update() for ghost in @ghosts
   drawables: ->
     {
-      staticRects: @static.rects
-      staticPolygons: @static.polygons
-      spikes: @static.spikes
+      platforms: @platforms
+      movers: @movers
+      spikes: @spikes
       clones: @player.clones
       player: @player
       goal: @goal
@@ -28,16 +28,13 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 
   loadLevel: ->
     # levelData is a plain object
     levelData = LevelUtil.load(@levelNumber)
-    @static = {}
-    @static.rects = for rect in levelData.rects
-      Physics.addStaticRect(rect)
-    @static.polygons = for polygon in levelData.polygons
-      Physics.addStaticPolygon(polygon)
-      polygon
-    @static.spikes = for spikeLine in levelData.spikes
-      new Spikes(spikeLine)
     @player = new Player({ x: levelData.start.x, y: levelData.start.y })
     @goal   = new Goal(  { x: levelData.goal.x,  y: levelData.goal.y })
+    @platforms = for platform in levelData.platforms
+      new Platform(platform)
+    @spikes = for spikeLine in levelData.spikes
+      new Spikes(spikeLine)
     @ghosts = for ghost in levelData.ghosts
       new Ghost({ x: ghost.x,  y: ghost.y }, @player)
-    @clones = []
+    @movers = for mover in levelData.movers
+      new Mover(mover)

@@ -1,4 +1,4 @@
-HIGHEST_LEVEL = 5
+HIGHEST_LEVEL = 6
 files = for i in [1..HIGHEST_LEVEL]
   "text!data/levels/#{i}.svg"
 
@@ -14,12 +14,12 @@ define files, (levels...) ->
     @svg = (new DOMParser()).parseFromString(svgString, "text/xml")
 
     # these methods give back plain objects
-    level.start    = @findStart()
-    level.goal     = @findGoal()
-    level.rects    = @findRects()
-    level.spikes   = @findSpikes()
-    level.polygons = @findRectifiedPaths()
-    level.ghosts   = @findGhosts()
+    level.start     = @findStart()
+    level.goal      = @findGoal()
+    level.spikes    = @findSpikes()
+    level.ghosts    = @findGhosts()
+    level.movers    = @findMovers()
+    level.platforms = @findPlatforms().concat(@findRectifiedPaths())
     level
 
   ###########
@@ -40,14 +40,18 @@ define files, (levels...) ->
       if circle.style.fill == '#ff0000' # red is ghost
         ghosts.push(@locateCircle(circle))
     ghosts
-  findRects: ->
+  findPlatforms: ->
+    polygons = []
     for rect in @svg.getElementsByTagName('rect')
-      {
-        x: @scale(rect.x.baseVal.value)
-        y: @scale(rect.y.baseVal.value)
-        w: @scale(rect.width.baseVal.value)
-        h: @scale(rect.height.baseVal.value)
-      }
+      unless rect.id.indexOf('mover') == 0
+        polygons.push(@verticesFromRect(rect))
+    polygons
+  findMovers: ->
+    polygons = []
+    for rect in @svg.getElementsByTagName('rect')
+      if rect.id.indexOf('mover') == 0
+        polygons.push(@verticesFromRect(rect))
+    polygons
   findRectifiedPaths: ->
     thickness = .1
     polygons = []
@@ -120,6 +124,17 @@ define files, (levels...) ->
       x: @scale(circle.cx.baseVal.value + x)
       y: @scale(circle.cy.baseVal.value + y)
     }
+  verticesFromRect: (rect) ->
+    x = @scale(rect.x.baseVal.value)
+    y = @scale(rect.y.baseVal.value)
+    w = @scale(rect.width.baseVal.value)
+    h = @scale(rect.height.baseVal.value)
+    vertices = []
+    vertices[0] = { x: x,     y: y }
+    vertices[1] = { x: x + w, y: y }
+    vertices[2] = { x: x + w, y: y + h }
+    vertices[3] = { x: x,     y: y + h }
+    vertices
 
   scale: (val) ->
     val / 30.0

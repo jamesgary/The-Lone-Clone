@@ -1,12 +1,8 @@
 define ['lib/physics/physics'], (Physics) ->
   class Circle
     constructor: (circleData) ->
-      trimmedData =
-        x: circleData.x
-        y: circleData.y
-        r: circleData.r
       func = if circleData.isStatic then 'addStaticCircle' else 'addCircle'
-      @physicalCircle = Physics[func](trimmedData)
+      @physicalCircle = Physics[func](circleData)
       @physicalCircle.userdata = this
     x: (newX) ->
       if newX
@@ -30,4 +26,3 @@ define ['lib/physics/physics'], (Physics) ->
         @physicalCircle.GetFixtureList().GetShape().GetRadius()
     freeze: ->
       Physics.freeze(@physicalCircle)
-
