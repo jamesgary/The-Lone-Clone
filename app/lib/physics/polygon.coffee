@@ -3,15 +3,19 @@ define ['lib/physics/physics'], (Physics) ->
     constructor: (polygonData) ->
       @physicalPolygon = Physics.addStaticPolygon(polygonData)
       @physicalPolygon.userdata = this
-    x: (newX) ->
-      if newX
-        @physicalPolygon.SetPosition({ x: newX, y: @y()})
-      else
-        @physicalPolygon.GetPosition().x
-    y: (newY) ->
-      if newY
-        @physicalPolygon.SetPosition({ y: newY, x: @x() })
-      else
-        @physicalPolygon.GetPosition().y
+    transform: (shift) ->
+      t = @physicalPolygon.GetTransform()
+      t.position.x += shift.x if shift.x
+      t.position.y += shift.y if shift.y
+      @physicalPolygon.SetTransform(t)
     vertices: ->
-      @physicalPolygon.GetFixtureList().GetShape().GetVertices()
+      pos = @physicalPolygon.GetTransform().position
+      for vert in @physicalPolygon.GetFixtureList().GetShape().GetVertices()
+        x: vert.x + pos.x
+        y: vert.y + pos.y
+
+    # NOTE: generally the top/left
+    x: ->
+      @vertices()[0].x
+    y: ->
+      @vertices()[0].y

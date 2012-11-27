@@ -8,6 +8,7 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 
     @player.update()
     clone.update() for clone in @player.clones
     ghost.update() for ghost in @ghosts
+    mover.update() for mover in @movers
   drawables: ->
     {
       platforms: @platforms
