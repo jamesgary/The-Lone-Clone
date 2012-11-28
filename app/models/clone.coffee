@@ -11,6 +11,8 @@ define ['lib/physics/circle'], (Circle) ->
     spike: ->
       @spiked = @dead = true
       @freeze()
+    melt: ->
+      @melted = @dead = true
 
     update: ->
       unless @dead

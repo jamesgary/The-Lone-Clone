@@ -13,12 +13,13 @@ define ->
   paint: ->
     @time++
     @ctx.clearRect(0, 0, @canvas.width, @canvas.height)
+    # order matters!
     @paintSpikes(@drawables.spikes)
-    @paintLavas(@drawables.lavas)
-    @paintPlatforms(@drawables.platforms)
     @paintMovers(@drawables.movers)
     @paintClones(@drawables.clones)
     @paintPlayer(@drawables.player)
+    @paintLavas(@drawables.lavas)
+    @paintPlatforms(@drawables.platforms)
     @paintGoal(@drawables.goal)
     @paintGhosts(@drawables.ghosts)
 

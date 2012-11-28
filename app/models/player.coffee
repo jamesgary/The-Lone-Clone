@@ -13,6 +13,8 @@ define ['lib/physics/circle', 'models/clone'], (Circle, Clone) ->
       @freeze()
     spook: ->
       @spooked = @dead = true
+    melt: ->
+      @melted = @dead = true
 
     update: ->
       unless @dead
