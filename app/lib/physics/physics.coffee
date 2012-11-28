@@ -7,8 +7,8 @@ define ['box2d'], (Box2D) ->
   b2FixtureDef   = Box2D.Dynamics.b2FixtureDef
   b2Fixture      = Box2D.Dynamics.b2Fixture
   b2World        = Box2D.Dynamics.b2World
-  b2MassData     = Box2D.Collision.Shapes.b2MassData
   b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
+  b2EdgeShape    = Box2D.Collision.Shapes.b2EdgeShape
   b2CircleShape  = Box2D.Collision.Shapes.b2CircleShape
   b2DebugDraw    = Box2D.Dynamics.b2DebugDraw
   {
@@ -30,6 +30,19 @@ define ['box2d'], (Box2D) ->
         vec.Set(vertice.x, vertice.y)
         vec
       @fixDef.shape.SetAsArray(vecs, vecs.length)
+      @bodyDef.position.x = 0
+      @bodyDef.position.y = 0
+      b = @world.CreateBody(@bodyDef)
+      b.CreateFixture(@fixDef)
+      b
+
+    addStaticLine: (vertices) ->
+      @bodyDef.type = b2Body.b2_staticBody
+      vecs = for vertice in vertices
+        vec = new b2Vec2
+        vec.Set(vertice.x, vertice.y)
+        vec
+      @fixDef.shape = new b2EdgeShape(vecs[0], vecs[1])
       @bodyDef.position.x = 0
       @bodyDef.position.y = 0
       b = @world.CreateBody(@bodyDef)

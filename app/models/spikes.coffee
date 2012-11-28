@@ -5,5 +5,5 @@ define ['lib/physics/physics'], (Physics) ->
       @y1 = lineData[0].y
       @x2 = lineData[1].x
       @y2 = lineData[1].y
-      @physicalLine = Physics.addStaticPolygon(lineData)
+      @physicalLine = Physics.addStaticLine(lineData)
       @physicalLine.userdata = this

@@ -56,7 +56,6 @@ define ->
     spikeLength = 4
     space = 5
     for spikes in allSpikes
-
       x = @scale(spikes.x1)
       y = @scale(spikes.y1)
       endX = @scale(spikes.x2)
@@ -64,15 +63,19 @@ define ->
 
       dx = endX - x
       dy = endY - y
+      length = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2))
+      numSpikes = 1 + (length / space)
 
       @ctx.beginPath()
-      # assuming it's left to right
-      while(x <= endX && y <= endY)
+      xSpace = dx / numSpikes
+      ySpace = dy / numSpikes
+      for i in [0...numSpikes]
+        x += xSpace
+        y += ySpace
         @ctx.moveTo(x - spikeLength, y + spikeLength)
         @ctx.lineTo(x + spikeLength, y - spikeLength)
         @ctx.moveTo(x - spikeLength, y - spikeLength)
         @ctx.lineTo(x + spikeLength, y + spikeLength)
-        x += space
       @ctx.closePath()
       @ctx.stroke()
 
