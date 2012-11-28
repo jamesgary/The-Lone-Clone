@@ -20,6 +20,7 @@ define files, (levels...) ->
     level.ghosts    = @findGhosts()
     level.movers    = @findMovers()
     level.platforms = @findPlatforms().concat(@findRectifiedPaths())
+    level.lavas     = @findLavas()
     level
 
   ###########
@@ -43,13 +44,19 @@ define files, (levels...) ->
   findPlatforms: ->
     polygons = []
     for rect in @svg.getElementsByTagName('rect')
-      unless rect.id.indexOf('mover') == 0
+      if @isPlatform(rect)
         polygons.push(@verticesFromRect(rect))
     polygons
   findMovers: ->
     polygons = []
     for rect in @svg.getElementsByTagName('rect')
-      if rect.id.indexOf('mover') == 0
+      if @isMover(rect)
+        polygons.push(@verticesFromRect(rect))
+    polygons
+  findLavas: ->
+    polygons = []
+    for rect in @svg.getElementsByTagName('rect')
+      if @isLava(rect)
         polygons.push(@verticesFromRect(rect))
     polygons
   findRectifiedPaths: ->
@@ -135,6 +142,13 @@ define files, (levels...) ->
     vertices[2] = { x: x + w, y: y + h }
     vertices[3] = { x: x,     y: y + h }
     vertices
+
+  isPlatform: (rect) ->
+    !@isLava(rect) && !@isMover(rect)
+  isMover: (rect) ->
+    !@isLava(rect) && rect.id.indexOf('mover') == 0
+  isLava: (rect) ->
+    rect.style.fill == '#ff0000'
 
   scale: (val) ->
     val / 30.0

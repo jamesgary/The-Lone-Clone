@@ -13,8 +13,8 @@ define ->
   paint: ->
     @time++
     @ctx.clearRect(0, 0, @canvas.width, @canvas.height)
-    @ctx.fillStyle = "rgb(10, 200, 10)"
     @paintSpikes(@drawables.spikes)
+    @paintLavas(@drawables.lavas)
     @paintPlatforms(@drawables.platforms)
     @paintMovers(@drawables.movers)
     @paintClones(@drawables.clones)
@@ -27,25 +27,27 @@ define ->
   ###########
 
   paintPlatforms: (platforms) ->
-    for platform in platforms
-      firstVertex = platform.vertices()[0]
+    @ctx.fillStyle = "rgb(10, 200, 10)"
+    @paintPolygons(platforms)
+
+  paintLavas: (lavas) ->
+    @ctx.fillStyle = "rgb(255, 0, 0)"
+    @paintPolygons(lavas)
+
+  paintMovers: (movers) ->
+    @ctx.fillStyle = "rgb(200, 200, 200)"
+    @paintPolygons(movers)
+
+  paintPolygons: (polygons) ->
+    for polygon in polygons
+      firstVertex = polygon.vertices()[0]
       @ctx.beginPath()
       @ctx.moveTo(@scale(firstVertex.x), @scale(firstVertex.y))
-      for vertex in platform.vertices()
+      for vertex in polygon.vertices()
         @ctx.lineTo(@scale(vertex.x), @scale(vertex.y))
       @ctx.closePath()
       @ctx.fill()
 
-  paintMovers: (movers) ->
-    @ctx.fillStyle = "rgb(200, 200, 200)"
-    for mover in movers
-      firstVertex = mover.vertices()[0]
-      @ctx.beginPath()
-      @ctx.moveTo(@scale(firstVertex.x), @scale(firstVertex.y))
-      for vertex in mover.vertices()
-        @ctx.lineTo(@scale(vertex.x), @scale(vertex.y))
-      @ctx.closePath()
-      @ctx.fill()
 
   paintSpikes: (allSpikes) ->
     @ctx.lineWidth = 1
