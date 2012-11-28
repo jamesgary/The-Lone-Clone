@@ -36,19 +36,6 @@ define ['box2d'], (Box2D) ->
       b.CreateFixture(@fixDef)
       b
 
-    addStaticLine: (vertices) ->
-      @bodyDef.type = b2Body.b2_staticBody
-      vecs = for vertice in vertices
-        vec = new b2Vec2
-        vec.Set(vertice.x, vertice.y)
-        vec
-      @fixDef.shape = new b2EdgeShape(vecs[0], vecs[1])
-      @bodyDef.position.x = 0
-      @bodyDef.position.y = 0
-      b = @world.CreateBody(@bodyDef)
-      b.CreateFixture(@fixDef)
-      b
-
     addCircle: (circle) ->
       @createCircle(circle, b2Body.b2_dynamicBody)
 
@@ -101,4 +88,27 @@ define ['box2d'], (Box2D) ->
         debugDraw.SetLineThickness 1.0
         debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit)
         @world.SetDebugDraw debugDraw
+    # for some crazy reason, Contact is made when two boxes collide (not just the polygon edges)
+    #addStaticLine: (vertices) ->
+    #  # b2EdgeShape isn't supported in Box2d: https://code.google.com/p/box2dweb/issues/detail?id=31
+    #  # So fudge it with a third point to make a flat triangle
+    #  @bodyDef.type = b2Body.b2_staticBody
+    #  @fixDef.shape = new b2PolygonShape
+    #  vecs = for vertice in vertices
+    #    vec = new b2Vec2
+    #    vec.Set(vertice.x, vertice.y)
+    #    vec
+    #  fudge = -1.01
+    #  fudgedVec = new b2Vec2
+    #  fudgedVec.Set(
+    #    vecs[1].x + fudge
+    #    vecs[1].y + fudge
+    #  )
+    #  vecs.push(fudgedVec)
+    #  @fixDef.shape.SetAsArray(vecs, vecs.length)
+    #  @bodyDef.position.x = 0
+    #  @bodyDef.position.y = 0
+    #  b = @world.CreateBody(@bodyDef)
+    #  b.CreateFixture(@fixDef)
+    #  b
   }
