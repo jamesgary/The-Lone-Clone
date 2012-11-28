@@ -47,7 +47,7 @@ define ['box2d'], (Box2D) ->
 
     addListener: (func) ->
       listener = new Box2D.Dynamics.b2ContactListener
-      listener.PreSolve = (contact) ->
+      listener.PostSolve = (contact) ->
         a = contact.GetFixtureA().GetBody().userdata
         b = contact.GetFixtureB().GetBody().userdata
         unless func(a, b)

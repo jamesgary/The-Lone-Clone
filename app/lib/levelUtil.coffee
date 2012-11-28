@@ -19,7 +19,7 @@ define files, (levels...) ->
     level.spikes    = @findSpikes()
     level.ghosts    = @findGhosts()
     level.movers    = @findMovers()
-    level.platforms = @findPlatforms().concat(@findRectifiedPaths())
+    level.platforms = @findPlatforms().concat(@findRectifiedPaths()).concat(@findPolygons())
     level.lavas     = @findLavas()
     level
 
@@ -82,6 +82,12 @@ define files, (levels...) ->
             { x: c2.x + xS, y: c2.y - yS }
             { x: c2.x - xS, y: c2.y + yS }
           ]
+    polygons
+  findPolygons: ->
+    polygons = []
+    for path in @svg.getElementsByTagName('path')
+      if path.style.fill == '#00ff00'
+        polygons.push(@getCoordinatesForPath(path))
     polygons
   findSpikes: ->
     spikes = []

@@ -53,8 +53,8 @@ define ->
   paintSpikes: (allSpikes) ->
     @ctx.lineWidth = 1
     @ctx.strokeStyle = 'white'
-    spikeLength = 4
-    space = 5
+    spikeLength = 10
+    space = 20
     for spikes in allSpikes
       x = @scale(spikes.x1)
       y = @scale(spikes.y1)
