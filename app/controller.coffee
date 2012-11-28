@@ -1,10 +1,10 @@
-define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop'], ($, Playground, CanvasPainter, GameLoop) ->
+define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'views/trippyBackground'], ($, Playground, CanvasPainter, GameLoop, TrippyBackground) ->
   playing = won = lost = false
 
   setUpGame = -> # do this once
     level = parseInt(location.href.split('level=')[1]) || 1
     Playground.startLevel(level)
-    CanvasPainter.init(document.getElementById("my-canvas"))
+    CanvasPainter.init(document.getElementById("foreground"))
     setUpLevel()
   setUpLevel = -> # do this for each level
     CanvasPainter.represent(Playground.drawables())
@@ -79,4 +79,4 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop'], (
       $(".level-complete").hide()
       $(".level-fail").hide()
       #showDiv('level-complete') # for testing
-
+      TrippyBackground.setup(document.getElementById('background'))

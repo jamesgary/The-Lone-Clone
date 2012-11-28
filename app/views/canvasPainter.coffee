@@ -8,6 +8,11 @@ define ->
     @spikedPlayerImg.src= 'assets/images/spiked_player.png'
     @cloneImg = new Image()
     @cloneImg.src= 'assets/images/clone.png'
+    @platformImg = new Image()
+    self = this
+    @platformImg.onload = ->
+      self.platformPattern = self.ctx.createPattern(this, 'repeat')
+    @platformImg.src= 'assets/images/platform2.png'
     @time = 0
   represent: (@drawables) ->
   paint: ->
@@ -28,7 +33,9 @@ define ->
   ###########
 
   paintPlatforms: (platforms) ->
-    @ctx.fillStyle = "rgb(10, 200, 10)"
+    @ctx.lineWidth = 0
+    @ctx.strokeStyle = 'rgba(100, 100, 100, 0)'
+    @ctx.fillStyle = @platformPattern || 'rgb(50,50,50)'
     @paintPolygons(platforms)
 
   paintLavas: (lavas) ->
@@ -47,6 +54,7 @@ define ->
       for vertex in polygon.vertices()
         @ctx.lineTo(@scale(vertex.x), @scale(vertex.y))
       @ctx.closePath()
+      @ctx.stroke()
       @ctx.fill()
 
 
