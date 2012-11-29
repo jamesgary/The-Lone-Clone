@@ -1,8 +1,10 @@
-define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 'models/ghost', 'models/mover', 'models/platform', 'models/lava', 'lib/levelUtil'], (Physics, Player, Goal, Spikes, Ghost, Mover, Platform, Lava, LevelUtil) ->
+define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 'models/ghost', 'models/mover', 'models/platform', 'models/lava', 'lib/levelUtil', 'data/levelConfigs'], (Physics, Player, Goal, Spikes, Ghost, Mover, Platform, Lava, LevelUtil, LevelConfigs) ->
   startLevel: (@levelNumber) ->
     Physics.createWorld()
     @levelWinCallbacks = []
     @loadLevel()
+    levelConfig = LevelConfigs.configFor(@levelNumber)
+    levelConfig.tweak(this) if levelConfig.tweak
   update: ->
     Physics.update()
     @player.update()
