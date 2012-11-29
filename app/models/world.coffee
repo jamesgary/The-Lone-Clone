@@ -20,8 +20,8 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 
       ghosts:    @ghosts
       lavas:     @lavas
     }
-  addListener: (f) ->
-    Physics.addListener(f)
+  setListeners: (preCollision, postCollision) ->
+    Physics.setListeners(preCollision, postCollision)
 
   ###########
   # private #

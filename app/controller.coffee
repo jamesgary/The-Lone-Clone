@@ -98,6 +98,6 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
       setUpGame()
       setUpInput()
       startGame()
-      showLevelSelect()
+      #showLevelSelect()
       #showDiv('level-select') # for testing
-      #showDiv('playground') # for testing
+      showDiv('playground') # for testing

@@ -3,7 +3,7 @@ define ['models/world', 'models/interactions'], (World, Interactions) ->
     @levelWinCallbacks = []
     @levelLoseCallbacks = []
     World.startLevel(levelNumber)
-    World.addListener(Interactions.contactInteractions(this))
+    World.setListeners(Interactions.preCollision(this), Interactions.postCollision(this))
   update: ->
     World.update()
   onLevelWin: (f) -> # to be set in the controller

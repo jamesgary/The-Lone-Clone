@@ -1,24 +1,24 @@
 define ->
   listener = {}
   self = {}
-  contactInteractions: (l) ->
+  preCollision: ->
+    self = this
+    (a, b) ->
+      self.playerTouchesGoal(a, b)
+      self.lavaMeltsPlayer(a, b)
+      self.lavaMeltsClone(a, b)
+      self.ghostsSpookPlayer(a, b)
+      return self.isSolid(a, b)
+  postCollision: (l) ->
     self = this
     listener = l
-    @allInteractions
+    (a, b) ->
+      self.playerTouchesSpikes(a, b)
+      self.cloneTouchesSpikes(a, b)
 
   ###########
   # private #
   ###########
-
-  allInteractions: (a, b) ->
-    self.playerTouchesGoal(a, b)
-    self.playerTouchesSpikes(a, b)
-    self.cloneTouchesSpikes(a, b)
-    self.ghostsSpookPlayer(a, b)
-    self.lavaMeltsPlayer(a, b)
-    self.lavaMeltsClone(a, b)
-
-    return self.isSolid(a, b)
 
   playerTouchesGoal: (a, b) ->
     [player, goal] = self.checkContact(a, b, 'Goal', 'Player')
@@ -49,10 +49,12 @@ define ->
   lavaMeltsClone: (a, b) ->
     [lava, clone] = self.checkContact(a, b, 'Lava', 'Clone')
     if lava && clone
+      console.log 'i melt!'
       clone.melt()
 
   isSolid: (a, b) ->
     !(
+      self.isGoal(a, b) ||
       self.isGhost(a, b) ||
       self.isLava(a, b) ||
       self.isMelted(a, b)
@@ -66,6 +68,11 @@ define ->
     (
       (a && a.constructor.name == 'Lava') ||
       (b && b.constructor.name == 'Lava')
+    )
+  isGoal: (a, b) ->
+    (
+      (a && a.constructor.name == 'Goal') ||
+      (b && b.constructor.name == 'Goal')
     )
   isMelted: (a, b) ->
     (
