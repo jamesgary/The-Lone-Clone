@@ -15,7 +15,8 @@ html, body {
   font: normal 12px/1.5em "Lucida Grande", "Verdana", sans-serif;
   margin: 0;
   padding: 0;
-  background: #549E39;
+  //background: #549E39;
+  background: #afa;
 }
 .container {
   border: 2px solid black;
@@ -64,16 +65,22 @@ html, body {
       border-collapse: collapse;
       height: 100%;
       width: 100%;
-      td {
-        background: #00ff00;
+      td.level {
+        background: #ff0000;
         border: 1px solid #004400;
         cursor: pointer;
         display: table-cell;
         padding: 0;
         vertical-align: middle;
         width: 10%;
-        &:hover {
-          background: #00bb00;
+        &.available {
+          background: #33ff00;
+          &.done {
+            background: #22cc77;
+          }
+          &:hover {
+            background: #00bb00;
+          }
         }
       }
     }
