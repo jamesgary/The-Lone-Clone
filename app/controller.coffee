@@ -59,6 +59,8 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
       levelNumber = $(this).data().level
       Playground.startLevel(levelNumber)
       showDiv('playground')
+    $('a.credits').click ->
+      showDiv('credits')
 
   startGame = ->
     GameLoop.loop ->

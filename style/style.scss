@@ -53,6 +53,9 @@ html, body {
       text-align: center;
     }
   }
+  .credits {
+    display: none;
+  }
   .level-select {
     display: none;
     text-align: center;
@@ -103,7 +106,7 @@ html, body {
       position: absolute;
       background: none;
       &#foreground {
-        background: url('images/dotted_bg.png') repeat;
+        background: url('images/dotted_bg2.png') repeat;
         background-color: rgba(0, 0, 0, 0.5);
       }
     }
