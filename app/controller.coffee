@@ -1,12 +1,13 @@
 define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'views/trippyBackground'], ($, Playground, CanvasPainter, GameLoop, TrippyBackground) ->
   playing = won = lost = false
+  currentLevel = 1
 
   setUpGame = -> # do this once
-    level = parseInt(location.href.split('level=')[1]) || 1
-    Playground.startLevel(level)
+    currentLevel = parseInt(location.href.split('level=')[1]) || 1
     CanvasPainter.init(document.getElementById("foreground"))
-    setUpLevel()
-  setUpLevel = -> # do this for each level
+    startLevel()
+  startLevel = () -> # do this for each level
+    Playground.startLevel(currentLevel)
     CanvasPainter.represent(Playground.drawables())
     playing = true
     won = lost = false
@@ -42,13 +43,12 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
       else
         if key == ' '
           if won
-            Playground.startNextLevel()
-            setUpLevel()
+            currentLevel += 1
+            startLevel()
             $(".level-complete").hide()
             playing = true
           else if lost
-            Playground.restart()
-            setUpLevel()
+            startLevel()
             $(".level-fail").hide()
             playing = true
       e.stopPropagation()
@@ -56,8 +56,8 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
     $('a.start').click ->
       showDiv('level-select')
     $('.level').click ->
-      levelNumber = $(this).data().level
-      Playground.startLevel(levelNumber)
+      currentLevel = $(this).data().level
+      startLevel()
       showDiv('playground')
     $('a.credits').click ->
       showDiv('credits')
@@ -73,12 +73,9 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
 
   setup: ->
     $('document').ready ->
+      TrippyBackground.setup(document.getElementById('background'))
       setUpGame()
       setUpInput()
       startGame()
       #showDiv('level-select') # for testing
-      showDiv('playground') # for testing
-      $(".level-complete").hide()
-      $(".level-fail").hide()
-      #showDiv('level-complete') # for testing
-      TrippyBackground.setup(document.getElementById('background'))
+      #showDiv('playground') # for testing

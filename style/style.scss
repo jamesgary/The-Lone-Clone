@@ -83,6 +83,7 @@ html, body {
     position: relative;
     .level-complete, .level-fail {
       background: rgba(50, 50, 50, 0.5);
+      display: none;
       height: 100%;
       margin: 0;
       position: absolute;
