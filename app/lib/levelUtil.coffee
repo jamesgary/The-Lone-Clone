@@ -1,6 +1,6 @@
 HIGHEST_LEVEL = 7
 files = for i in [1..HIGHEST_LEVEL]
-  "text!data/levels/#{i}.svg"
+  "text!data/levelMaps/#{i}.svg"
 
 define files, (levels...) ->
   # return {rects: [...], polygons: [...], circles: [...], start, goal}
