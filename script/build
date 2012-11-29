@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -o errexit
+
+# clear out prod
+rm -rf public/prod
+mkdir public/prod
+
+# copy markup
+cp public/dev/index.html public/prod/
+
+# copy styles
+cp -r public/dev/css public/prod/
+
+# copy assets
+cp -r public/dev/assets public/prod/
+
+# build javascript
+mkdir public/prod/js
+mkdir public/prod/js/vendor
+cp public/dev/js/vendor/require.js public/prod/js/vendor/
+node script/r.js -o script/cloney_build.js out=public/prod/js/bootstrap.js
+zip -r public/theLoneClone.zip public/prod
