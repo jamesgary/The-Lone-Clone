@@ -46,6 +46,7 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
           when 'a' then Playground.cloningLeft()
           when 's' then Playground.cloningDown()
           when 'd' then Playground.cloningRight()
+          when 'r' then startLevel()
           when 'p' then togglePause()
         if e.keycode == 27 # esc
           togglePause()
