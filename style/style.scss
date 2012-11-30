@@ -15,14 +15,22 @@ html, body {
   font: normal 12px/1.5em "Lucida Grande", "Verdana", sans-serif;
   margin: 0;
   padding: 0;
-  //background: #549E39;
-  background: #afa;
+}
+body {
+  background: #222 url('images/striped_bg.png') repeat;
 }
 .container {
-  border: 2px solid black;
-  margin: 20px auto;
-  width: 600px;
+  background: #bbb url('images/noise.png') repeat;
+  border: 3px solid #444;
+  border-top: 0;
+  margin: 0 auto;
+  padding: 20px 0 0;
+  width: 800px;
+}
+.gameContainer {
   height: 400px;
+  margin: 0 auto 100px;
+  width: 600px;
   & > div {
     display: inline-block;
     height: 100%;
@@ -126,7 +134,44 @@ html, body {
       }
     }
   }
+  .audioManager {
+    @include background-image(linear-gradient(top, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%));
+    @include border-radius(0 0 10px 10px);
+    background-color: white;
+    display: none;
+    height: auto;
+    padding: 0;
+    position: relative;
+    .controls {
+      @include text-shadow(0 1px rgba(255, 255, 255, 0.75));
+      color: #444;
+      display: block;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px;
+      position: relative;
+      a {
+        cursor: pointer;
+        &.playing {
+          color: gray;
+          text-decoration: line-through;
+        }
+      }
+      .songInfo {
+        display: none;
+      }
+    }
+  }
 }
+
+.gameContainer + hr {
+  margin: 0;
+}
+.other {
+  background: #ddd;
+  padding: 100px 100px;
+}
+
 .compass_test {
   @include box-shadow(2px 2px 15px black);
   @include border-radius(30px);

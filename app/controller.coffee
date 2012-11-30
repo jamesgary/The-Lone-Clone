@@ -1,4 +1,4 @@
-define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'views/trippyBackground', 'lib/persistence'], ($, Playground, CanvasPainter, GameLoop, TrippyBackground, Persistence) ->
+define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'views/trippyBackground', 'lib/persistence', 'lib/sound'], ($, Playground, CanvasPainter, GameLoop, TrippyBackground, Persistence, Sound) ->
   playing = won = lost = false
   currentLevel = 1
 
@@ -74,7 +74,7 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
 
   showDiv = (div) ->
     $(".#{div}").show()
-    $(".container > div:not(.#{div})").hide()
+    $(".gameContainer > div:not(.#{div})").hide()
 
   showLevelSelect = ->
     completedLevels = Persistence.get('levelsCompleted') || []
@@ -98,6 +98,7 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
   setup: ->
     $('document').ready ->
       TrippyBackground.setup(document.getElementById('trippyBackground'))
+      Sound.start()
       setUpGame()
       setUpInput()
       startGame()
