@@ -22,6 +22,7 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 
       goal:      @goal
       ghosts:    @ghosts
       lavas:     @lavas
+      texts:     @texts
     }
   setListeners: (preCollision, postCollision) ->
     Physics.setListeners(preCollision, postCollision)
@@ -45,3 +46,4 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 
       new Mover(mover)
     @lavas = for lava in levelData.lavas
       new Lava(lava)
+    @texts = levelData.texts

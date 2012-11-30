@@ -1,6 +1,7 @@
 define ->
   scale = 30
   init: (@bgCanvas, @fgCanvas) ->
+    self = this
     @bg = @bgCanvas.getContext('2d')
     @fg = @fgCanvas.getContext('2d')
     @playerImg = new Image()
@@ -10,21 +11,32 @@ define ->
     @cloneImg = new Image()
     @cloneImg.src= 'assets/images/clone.png'
     @platformImg = new Image()
-    self = this
-    @platformImg.onload = ->
-      self.platformPattern = self.bg.createPattern(this, 'repeat')
     @platformImg.src= 'assets/images/platform2.png'
     @time = 0
+    @imagesToLoad = [
+      @playerImg
+      @spikedPlayerImg
+      @cloneImg
+      @platformImg
+    ]
+    @totalImagesLoaded = 0
+    for image in @imagesToLoad
+      orig = image.onload
+      image.onload = ->
+        self.totalImagesLoaded++
+        if this.src.indexOf('assets/images/platform2.png') >= 0
+          self.platformPattern = self.bg.createPattern(this, 'repeat')
   represent: (@drawables) ->
-    @ctx = @bg
-    # draw static items once
-    @bg.clearRect(0, 0, @bgCanvas.width, @bgCanvas.height)
-    @paintSpikes(@drawables.spikes)
-    @paintPlatforms(@drawables.platforms)
-    console.log 'asdf'
-    @ctx = @fg
-  paint: ->
     if @drawables
+      @ctx = @bg
+      # draw static items once
+      @bg.clearRect(0, 0, @bgCanvas.width, @bgCanvas.height)
+      @paintSpikes(@drawables.spikes)
+      @paintPlatforms(@drawables.platforms)
+      @paintTexts(@drawables.texts)
+      @ctx = @fg
+  paint: ->
+    if @drawables && @foregroundPainted
       @time++
       @ctx.clearRect(0, 0, @bgCanvas.width, @bgCanvas.height)
       @paintMovers(@drawables.movers) if @drawables.movers
@@ -33,6 +45,10 @@ define ->
       @paintLavas(@drawables.lavas) if @drawables.lavas # shit.
       @paintGoal(@drawables.goal)
       @paintGhosts(@drawables.ghosts) if @drawables.ghosts
+    else
+      if @totalImagesLoaded == @imagesToLoad.length
+        @foregroundPainted = true
+      @represent(@drawables) # just to make sure
 
   ###########
   # private #
@@ -128,7 +144,15 @@ define ->
       @ctx.beginPath()
       @ctx.arc(x, y, r, 0, 2 * Math.PI, false)
       @ctx.fill()
-
+  paintTexts: (texts) ->
+    @ctx.fillStyle = "rgba(255, 255, 255, 1.0)"
+    @ctx.font = '24px sans-serif'
+    for text in texts
+      textLines = text.text.split('\n')
+      yShift = 0
+      for textLine in textLines
+        @ctx.fillText(textLine, @scale(text.x), @scale(text.y) + yShift)
+        yShift += 30
 
   paintObject: (object, image) ->
     @ctx.save()

@@ -27,6 +27,7 @@ define [
     level.movers    = @findMovers()
     level.platforms = @findPlatforms().concat(@findRectifiedPaths()).concat(@findPolygons())
     level.lavas     = @findLavas()
+    level.texts     = @findTexts()
     level
 
   ###########
@@ -102,6 +103,15 @@ define [
          @isGreen(path.style.stroke)
         spikes.push(@getCoordinatesForPath(path))
     spikes
+  findTexts: ->
+    for text in @svg.getElementsByTagName('text')
+      spans = for span in text.getElementsByTagName('tspan')
+        span.textContent
+      {
+        x: @scale(text.x.baseVal.getItem(0).value)
+        y: @scale(text.y.baseVal.getItem(0).value)
+        text: spans.join('\n')
+      }
 
   locateCircle: (circle) ->
     # gotta transform *grumble grumble*

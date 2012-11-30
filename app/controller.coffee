@@ -8,7 +8,7 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
       document.getElementById("background")
       document.getElementById("foreground")
     )
-  startLevel = () -> # do this for each level
+  startLevel = -> # do this for each level
     Playground.startLevel(currentLevel)
     CanvasPainter.represent(Playground.drawables())
     playing = true
@@ -75,7 +75,7 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
 
   showDiv = (div) ->
     $(".#{div}").show()
-    $(".gameContainer > div:not(.#{div})").hide()
+    $(".gameContainer > div:not(.#{div}):not(.audioManager)").hide()
 
   showLevelSelect = ->
     completedLevels = Persistence.get('levelsCompleted') || []
@@ -108,4 +108,5 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
       #
       #showLevelSelect()
       #showDiv('level-select') # for testing
-      #showDiv('playground') # for testing
+      showDiv('playground') # for testing
+      startLevel()
