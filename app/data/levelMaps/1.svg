@@ -17,11 +17,11 @@
   <rect id="rect3226" style="stroke-linejoin:miter;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-width:0.31657991px;fill:#0000ff;" clip-path="none" mask="none" height="10" width="600" y="0" x="0"/>
   <rect id="rect3003" style="stroke:#424100;stroke-miterlimit:4;stroke-dasharray:none;stroke-width:1;fill:#333333;" height="300" width="210" y="5" x="5"/>
   <rect id="rect3005" style="stroke:#424100;stroke-miterlimit:4;stroke-dasharray:none;stroke-width:1;fill:#333333;" height="155" width="250" y="238" x="340"/>
-  <rect id="rect3013" style="stroke:#424100;stroke-miterlimit:4;stroke-dasharray:none;stroke-width:1;fill:#333333;" height="97" width="260.5" y="63" x="339.5"/>
+  <rect id="rect3013" style="stroke:#424100;stroke-miterlimit:4;stroke-dasharray:none;stroke-width:1.42601335;fill:#333333;" height="197.57" width="260.07" y="63.213" x="339.71"/>
   <circle id="circle3036" style="fill:#00ff00;" clip-path="none" mask="none" transform="translate(44.223744,320.5)" cy="0" cx="0" x="30" r="15"/>
   <circle id="circle3095" style="fill:#00ffff;" clip-path="none" cx="0" cy="0" mask="none" transform="translate(560.22374,37.15829)" x="30" r="15"/>
   <text id="text3065" style="font-size:24px;font-family:Sans;letter-spacing:0px;line-height:125%;word-spacing:0px;font-weight:normal;font-style:normal;fill:#c8b7b7;" xml:space="preserve" y="82" x="47"><tspan id="tspan3067" x="47" y="82">You have</tspan><tspan id="tspan3069" x="47" y="112">no limbs...</tspan></text>
-  <text id="text3071" style="font-size:24px;font-family:Sans;letter-spacing:0px;line-height:125%;word-spacing:0px;font-weight:normal;font-style:normal;fill:#ac9393;" xml:space="preserve" y="191" x="28.223743"><tspan id="tspan3073" x="28.223743" y="191">but you need</tspan><tspan id="tspan3075" x="28.223743" y="221">not be alone.</tspan></text>
-  <text id="text3077" style="font-size:24px;font-family:Sans;letter-spacing:0px;line-height:125%;word-spacing:0px;font-weight:normal;font-style:normal;fill:#ac9393;" xml:space="preserve" y="306.91016" x="365.58398"><tspan id="tspan3079" x="365.58398" y="306.91016">WASD or arrows,</tspan><tspan id="tspan3081" x="365.58398" y="336.91016">it&apos;s up to you.</tspan></text>
+  <text id="text3071" style="font-size:24px;font-family:Sans;letter-spacing:0px;line-height:125%;word-spacing:0px;font-weight:normal;font-style:normal;fill:#ac9393;" xml:space="preserve" y="199" x="34.223743"><tspan id="tspan3073" x="34.223743" y="199">but you need</tspan><tspan id="tspan3075" x="34.223743" y="229">not be alone.</tspan></text>
+  <text id="text3077" style="font-size:24px;font-family:Sans;letter-spacing:0px;line-height:125%;word-spacing:0px;font-weight:normal;font-style:normal;fill:#ac9393;" xml:space="preserve" y="306.91016" x="379.58398"><tspan id="tspan3079" x="379.58398" y="306.91016">WASD or arrows,</tspan><tspan id="tspan3081" x="379.58398" y="336.91016">it&apos;s up to you.</tspan></text>
  </g>
 </svg>

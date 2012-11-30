@@ -1,5 +1,9 @@
 define ->
   scale = 30
+  widthPad = 20
+  heightPad = 5
+  textSize = 24
+  lineHeight = 30
   init: (@bgCanvas, @fgCanvas) ->
     self = this
     @bg = @bgCanvas.getContext('2d')
@@ -145,14 +149,31 @@ define ->
       @ctx.arc(x, y, r, 0, 2 * Math.PI, false)
       @ctx.fill()
   paintTexts: (texts) ->
-    @ctx.fillStyle = "rgba(255, 255, 255, 1.0)"
-    @ctx.font = '24px sans-serif'
+    @ctx.font = "#{ textSize }px sans-serif"
     for text in texts
+      x = @scale(text.x)
+      y = @scale(text.y)
       textLines = text.text.split('\n')
+
+      # draw containing box, find width
+      maxWidth = 0
+      for textLine in textLines
+        width = @ctx.measureText(textLine)
+        maxWidth = width.width if width.width > maxWidth
+      @ctx.fillStyle = "rgba(0, 0, 0, .7)"
+      @ctx.fillRect(
+        x - widthPad,
+        y - lineHeight - heightPad,
+        maxWidth + (widthPad * 2),
+        (30 * (textLines.length - 1)) + (lineHeight * 1.5) + (heightPad * 2)
+      )
+
+      # draw actual text
       yShift = 0
+      @ctx.fillStyle = "rgba(255, 255, 255, 1.0)"
       for textLine in textLines
         @ctx.fillText(textLine, @scale(text.x), @scale(text.y) + yShift)
-        yShift += 30
+        yShift += lineHeight
 
   paintObject: (object, image) ->
     @ctx.save()
