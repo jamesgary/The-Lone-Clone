@@ -1,7 +1,8 @@
 define ->
   scale = 30
-  init: (@canvas) ->
-    @ctx = @canvas.getContext('2d')
+  init: (@bgCanvas, @fgCanvas) ->
+    @bg = @bgCanvas.getContext('2d')
+    @fg = @fgCanvas.getContext('2d')
     @playerImg = new Image()
     @playerImg.src= 'assets/images/player.png'
     @spikedPlayerImg = new Image()
@@ -11,22 +12,27 @@ define ->
     @platformImg = new Image()
     self = this
     @platformImg.onload = ->
-      self.platformPattern = self.ctx.createPattern(this, 'repeat')
+      self.platformPattern = self.bg.createPattern(this, 'repeat')
     @platformImg.src= 'assets/images/platform2.png'
     @time = 0
   represent: (@drawables) ->
-  paint: ->
-    @time++
-    @ctx.clearRect(0, 0, @canvas.width, @canvas.height)
-    # order matters!
+    @ctx = @bg
+    # draw static items once
+    @bg.clearRect(0, 0, @bgCanvas.width, @bgCanvas.height)
     @paintSpikes(@drawables.spikes)
-    @paintMovers(@drawables.movers)
-    @paintClones(@drawables.clones)
-    @paintPlayer(@drawables.player)
-    @paintLavas(@drawables.lavas)
     @paintPlatforms(@drawables.platforms)
-    @paintGoal(@drawables.goal)
-    @paintGhosts(@drawables.ghosts)
+    console.log 'asdf'
+    @ctx = @fg
+  paint: ->
+    if @drawables
+      @time++
+      @ctx.clearRect(0, 0, @bgCanvas.width, @bgCanvas.height)
+      @paintMovers(@drawables.movers) if @drawables.movers
+      @paintClones(@drawables.clones)
+      @paintPlayer(@drawables.player)
+      @paintLavas(@drawables.lavas) if @drawables.lavas # shit.
+      @paintGoal(@drawables.goal)
+      @paintGhosts(@drawables.ghosts) if @drawables.ghosts
 
   ###########
   # private #

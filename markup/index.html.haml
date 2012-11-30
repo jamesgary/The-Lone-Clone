@@ -12,21 +12,23 @@
         %a.credits Credits
       .credits
         %b Music
-          Pietnastka (Piotr Kurek) -
-          %a{:href => 'http://www.piotrkurek.com/'}Website
-          \-
-          %a{:href => 'http://freemusicarchive.org/music/Pietnastka/'}FreeMusicArchive.org
+        Pietnastka (Piotr Kurek) -
+        %a{:href => 'http://www.piotrkurek.com/'}Website
+        \-
+        %a{:href => 'http://freemusicarchive.org/music/Pietnastka/'}FreeMusicArchive.org
+
         %b Textures
-          %a{:href => 'http://opengameart.org/users/bart'}Bart
-          from
-          %a{:href => 'http://opengameart.org'} OpenGameArt.org
-          \-
-          %a{:href => 'http://opengameart.org/content/19-high-res-stone-and-concrete-texture-photos'}Texture Pack
+        %a{:href => 'http://opengameart.org/users/bart'}Bart
+        from
+        %a{:href => 'http://opengameart.org'} OpenGameArt.org
+        \-
+        %a{:href => 'http://opengameart.org/content/19-high-res-stone-and-concrete-texture-photos'}Texture Pack
+
         %b Physics
-          %a{:href => 'http://code.google.com/p/box2dweb/'}box2dweb
+        %a{:href => 'http://code.google.com/p/box2dweb/'}box2dweb
         .ego
           %b Everything else
-            %a{:href => 'http://twitter.com/james_gary'}James Gary
+          %a{:href => 'http://twitter.com/james_gary'}James Gary
       .level-select
         %table.levels
           - (0..9).each do |i|
@@ -46,6 +48,7 @@
             %h2 Huzzah!
             %h3 You are one step closer to enlightenment.
             %h4 Press SPACE to ascend to the next level
+        %canvas#trippyBackground{:width => 600, :height => 400}
         %canvas#background{:width => 600, :height => 400}
         %canvas#foreground{:width => 600, :height => 400}
         //%canvas#canvas{:width => 600, :height => 400}

@@ -6,11 +6,12 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 
     levelConfig = LevelConfigs.configFor(@levelNumber)
     levelConfig.tweak(this) if levelConfig.tweak
   update: ->
-    Physics.update()
-    @player.update()
-    clone.update() for clone in @player.clones
-    ghost.update() for ghost in @ghosts
-    mover.update() for mover in @movers
+    if @levelNumber
+      Physics.update()
+      @player.update()
+      clone.update() for clone in @player.clones
+      ghost.update() for ghost in @ghosts
+      mover.update() for mover in @movers
   drawables: ->
     {
       platforms: @platforms

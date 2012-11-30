@@ -1,8 +1,14 @@
-HIGHEST_LEVEL = 7
-files = for i in [1..HIGHEST_LEVEL]
-  "text!data/levelMaps/#{i}.svg"
-
-define files, (levels...) ->
+# explicitly list levels due to limitations in the r.js optimizer's static analysis
+# see http://requirejs.org/docs/optimization.html for more info
+define [
+  "text!data/levelMaps/1.svg"
+  "text!data/levelMaps/2.svg"
+  "text!data/levelMaps/3.svg"
+  "text!data/levelMaps/4.svg"
+  "text!data/levelMaps/5.svg"
+  "text!data/levelMaps/6.svg"
+  "text!data/levelMaps/7.svg"
+], (levels...) ->
   # return {rects: [...], polygons: [...], circles: [...], start, goal}
   load: (levelNum) ->
     level = {
@@ -29,16 +35,16 @@ define files, (levels...) ->
 
   findStart: ->
     for circle in @svg.getElementsByTagName('circle')
-      if circle.style.fill == '#00ff00' # green is player
+      if @isGreen(circle.style.fill)
         return @locateCircle(circle)
   findGoal: ->
     for circle in @svg.getElementsByTagName('circle')
-      if circle.style.fill == '#00ffff' # light blue is goal
+      if @isLightBlue(circle.style.fill)
         return @locateCircle(circle)
   findGhosts: ->
     ghosts = []
     for circle in @svg.getElementsByTagName('circle')
-      if circle.style.fill == '#ff0000' # red is ghost
+      if @isRed(circle.style.fill)
         ghosts.push(@locateCircle(circle))
     ghosts
   findPlatforms: ->
@@ -63,7 +69,7 @@ define files, (levels...) ->
     thickness = .1
     polygons = []
     for path in @svg.getElementsByTagName('path')
-      if path.style.stroke == '#0000ff'
+      if @isBlue(path.style.stroke)
         coordinates = @getCoordinatesForPath(path)
         polygons = for i in [0...coordinates.length - 1]
           c1 = coordinates[i]
@@ -86,16 +92,14 @@ define files, (levels...) ->
   findPolygons: ->
     polygons = []
     for path in @svg.getElementsByTagName('path')
-      if path.style.fill == '#00ff00'
+      if @isGreen(path.style.fill)
         polygons.push(@getCoordinatesForPath(path))
     polygons
   findSpikes: ->
     spikes = []
     for path in @svg.getElementsByTagName('path')
-      if (
-        path.style.color  == '#ff00ff' ||
-        path.style.stroke == '#ff00ff'
-      )
+      if @isGreen(path.style.color) ||
+         @isGreen(path.style.stroke)
         spikes.push(@getCoordinatesForPath(path))
     spikes
 
@@ -127,7 +131,7 @@ define files, (levels...) ->
   isMover: (rect) ->
     !@isLava(rect) && rect.id.indexOf('mover') == 0
   isLava: (rect) ->
-    rect.style.fill == '#ff0000'
+    @isRed(rect.style.fill)
 
   getCoordinatesForPath: (path) ->
     d = path.getAttribute('d')
@@ -152,3 +156,8 @@ define files, (levels...) ->
 
   scale: (val) ->
     val / 30.0
+
+  isGreen:     (color) -> color == 'rgb(0, 255, 0)'   || color == '#00ff00'
+  isLightBlue: (color) -> color == 'rgb(0, 255, 255)' || color == '#00ffff'
+  isRed:       (color) -> color == 'rgb(255, 0, 0)'   || color == '#ff0000'
+  isBlue:      (color) -> color == 'rgb(0, 0, 255)'   || color == '#0000ff'

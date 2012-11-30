@@ -4,19 +4,22 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
 
   setUpGame = -> # do this once
     currentLevel = parseInt(location.href.split('level=')[1]) || 1
-    CanvasPainter.init(document.getElementById("foreground"))
-    startLevel()
+    CanvasPainter.init(
+      document.getElementById("background")
+      document.getElementById("foreground")
+    )
   startLevel = () -> # do this for each level
     Playground.startLevel(currentLevel)
     CanvasPainter.represent(Playground.drawables())
     playing = true
     won = lost = false
     Playground.onLevelWin(->
-      newLevelsCompleted = (Persistence.get('levelsCompleted') || []).concat(currentLevel)
-      Persistence.set('levelsCompleted', newLevelsCompleted)
-      $(".level-complete").show()
-      playing = false
-      won = true
+      unless won # unless you already won
+        newLevelsCompleted = (Persistence.get('levelsCompleted') || []).concat(currentLevel)
+        Persistence.set('levelsCompleted', newLevelsCompleted)
+        $(".level-complete").show()
+        playing = false
+        won = true
     )
     Playground.onLevelLose(->
       $(".level-fail").show()
@@ -56,7 +59,7 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
       e.stopPropagation()
     )
     $('a.start').click ->
-      showDiv('level-select')
+      showLevelSelect()
     $('.level').click ->
       currentLevel = $(this).data().level
       startLevel()
@@ -90,14 +93,17 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
         $(".level[data-level=#{levelNum + 10}]").addClass('available')
         $(".level[data-level=#{levelNum - 10}]").addClass('available')
     $(".level[data-level=1]").addClass('available') # 1st level always available
-    showDiv('level-select') # for testing
+    showDiv('level-select')
 
   setup: ->
     $('document').ready ->
-      TrippyBackground.setup(document.getElementById('background'))
+      TrippyBackground.setup(document.getElementById('trippyBackground'))
       setUpGame()
       setUpInput()
       startGame()
+
+      # these are just for testing
+      #
       #showLevelSelect()
       #showDiv('level-select') # for testing
-      showDiv('playground') # for testing
+      #showDiv('playground') # for testing

@@ -66,14 +66,16 @@ html, body {
       height: 100%;
       width: 100%;
       td.level {
-        background: #ff0000;
+        background: #990000;
         border: 1px solid #004400;
+        color: black;
         cursor: pointer;
         display: table-cell;
         padding: 0;
         vertical-align: middle;
         width: 10%;
         &.available {
+          color: black;
           background: #33ff00;
           &.done {
             background: #22cc77;
@@ -95,7 +97,7 @@ html, body {
       margin: 0;
       position: absolute;
       width: 100%;
-      z-index: 5;
+      z-index: 100;
       .message {
         @include box-shadow(
           0 0 15px black,
@@ -111,11 +113,16 @@ html, body {
       }
     }
     canvas {
-      position: absolute;
       background: none;
-      &#foreground {
+      display: block;
+      position: absolute;
+      &#background {
         background: url('images/dotted_bg2.png') repeat;
         background-color: rgba(0, 0, 0, 0.5);
+        z-index: 5;
+      }
+      &#foreground {
+        z-index: 10;
       }
     }
   }
