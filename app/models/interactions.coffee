@@ -49,7 +49,6 @@ define ->
   lavaMeltsClone: (a, b) ->
     [lava, clone] = self.checkContact(a, b, 'Lava', 'Clone')
     if lava && clone
-      console.log 'i melt!'
       clone.melt()
 
   isSolid: (a, b) ->

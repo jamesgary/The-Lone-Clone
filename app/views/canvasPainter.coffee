@@ -46,8 +46,8 @@ define ->
     # - players, clones
     # - movers
     # - goal
+    # - lava
     # 3
-    # - LAVA
     # - PLATFORMS
     # - TEXT
     # 4
@@ -60,9 +60,24 @@ define ->
 
       @ctx = @ctx3
       @ctx.clearRect(0, 0, @canvasWidth, @canvasHeight)
-      @paintLavas(@drawables.lavas) if @drawables.lavas
       @paintPlatforms(@drawables.platforms)
       @paintTexts(@drawables.texts)
+
+      # cache lava coordinates
+      for lava in @drawables.lavas
+        lava.minX = lava.minY = 9000 # nothing is over 9000!
+        lava.maxX = lava.maxY = 0
+        for vertex in lava.vertices()
+          lava.maxX = vertex.x if vertex.x > lava.maxX
+          lava.minX = vertex.x if vertex.x < lava.minX
+          lava.maxY = vertex.y if vertex.y > lava.maxY
+          lava.minY = vertex.y if vertex.y < lava.minY
+        lava.minX = @scale(lava.minX)
+        lava.minY = @scale(lava.minY)
+        lava.maxX = @scale(lava.maxX)
+        lava.maxY = @scale(lava.maxY)
+        lava.drawingWidth = lava.maxX - lava.minX
+        lava.drawingHeight = lava.maxY - lava.minY
   paint: ->
     if @drawables && @staticsPainted
       @time++
@@ -73,6 +88,7 @@ define ->
       @paintClones(@drawables.clones)
       @paintMovers(@drawables.movers) if @drawables.movers
       @paintGoal(@drawables.goal)
+      @paintLavas(@drawables.lavas) if @drawables.lavas
 
       @ctx = @ctx4
       @ctx.clearRect(0, 0, @canvasWidth, @canvasHeight)
@@ -93,8 +109,23 @@ define ->
     @paintPolygons(platforms)
 
   paintLavas: (lavas) ->
-    @ctx.fillStyle = "rgb(255, 0, 0)"
-    @paintPolygons(lavas)
+    #@paintPolygons(lavas)
+    for lava in lavas
+      grd = @ctx.createLinearGradient(0,lava.minY,0,lava.maxY)
+      grd.addColorStop(0.0, 'rgba(255, 0, 0, 0.0)')
+      grd.addColorStop(0.3, 'rgba(255, 0, 0, 1.0)')
+      @ctx.fillStyle = grd
+      @ctx.fillRect(lava.minX, lava.minY, lava.drawingWidth, lava.drawingHeight)
+
+      for i in [1..50]
+        g = parseInt(255 * Math.random())
+        a = Math.sqrt(Math.random())
+        @ctx.fillStyle = "rgba(255, #{ g }, 0, #{ a })"
+        randWidth  = (100 + lava.drawingWidth * Math.random()) / 10
+        randHeight = lava.drawingHeight * Math.random()
+        randX  = lava.minX + (lava.drawingWidth  * Math.random()) - (.5 * randWidth)
+        randY  = lava.minY + (lava.drawingHeight * Math.random()) - (.5 * randHeight)
+        @ctx.fillRect(randX, randY, randWidth, randHeight)
 
   paintMovers: (movers) ->
     @ctx.fillStyle = "rgb(200, 200, 200)"
