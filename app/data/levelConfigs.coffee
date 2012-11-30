@@ -1,7 +1,7 @@
 define ->
   configFor: (levelNum) ->
     switch(levelNum)
-      when 6
+      when 7
         {
           tweak: (world) ->
             for m in world.movers

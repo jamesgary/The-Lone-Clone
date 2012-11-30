@@ -14,7 +14,7 @@
    id="svg2989"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="6.svg">
+   sodipodi:docname="5.svg">
   <defs
      id="defs2991" />
   <sodipodi:namedview
@@ -25,15 +25,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="332.44719"
+     inkscape:cx="269.44719"
      inkscape:cy="231.03784"
      inkscape:current-layer="layer3"
      inkscape:document-units="px"
      showgrid="false"
      inkscape:window-width="1172"
      inkscape:window-height="690"
-     inkscape:window-x="43"
-     inkscape:window-y="45"
+     inkscape:window-x="20"
+     inkscape:window-y="20"
      inkscape:window-maximized="0"
      inkscape:snap-global="true"
      inkscape:snap-bbox="false"
@@ -46,7 +46,12 @@
      inkscape:snap-object-midpoints="true"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:snap-nodes="false" />
+     inkscape:snap-nodes="false">
+    <sodipodi:guide
+       orientation="0,1"
+       position="186,187"
+       id="guide3947" />
+  </sodipodi:namedview>
   <metadata
      id="metadata2994">
     <rdf:RDF>
@@ -55,7 +60,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -118,9 +123,9 @@
        style="fill:#00ff00"
        mask="none"
        clip-path="none"
-       transform="translate(26.22374,26.5)" />
+       transform="translate(26.22374,354.5)" />
     <circle
-       transform="translate(541.22374,282.5)"
+       transform="translate(548.22374,363.5)"
        clip-path="none"
        mask="none"
        style="fill:#00ffff"
@@ -133,41 +138,19 @@
        cx="0"
        x="30"
        id="circle3095" />
-    <path
-       style="fill:#ff00ff;stroke:#ff00ff;stroke-width:1.05216634px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 589.17809,408.12615 0,-416.252305"
-       id="path3953"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:#00ff00;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 7,46 79,346 -94,5 z"
-       id="path5089"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:#00ff00;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 21,129 163,395 37,399 z"
-       id="path5599"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:#00ff00;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 63,216 264,395 82,398 z"
-       id="path5601"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:#00ff00;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 141,291 328,101 -303,2 z"
-       id="path5603"
-       inkscape:connector-curvature="0" />
-    <text
-       xml:space="preserve"
-       style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="354"
-       y="70"
-       id="text3921"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         x="354"
-         y="70"
-         id="tspan3925">Think fast!</tspan></text>
+    <circle
+       id="circle4759"
+       x="30"
+       cx="0"
+       cy="0"
+       r="15"
+       sodipodi:cx="0"
+       sodipodi:cy="0"
+       sodipodi:rx="15"
+       sodipodi:ry="15"
+       style="fill:#ff0000"
+       mask="none"
+       clip-path="none"
+       transform="translate(503.22374,362.5)" />
   </g>
 </svg>

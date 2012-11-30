@@ -4,23 +4,30 @@ define ->
   heightPad = 5
   textSize = 24
   lineHeight = 30
-  init: (@bgCanvas, @fgCanvas) ->
+  init: (canvas1, canvas2, canvas3, canvas4) ->
     self = this
-    @bg = @bgCanvas.getContext('2d')
-    @fg = @fgCanvas.getContext('2d')
+    @canvasWidth  = canvas1.width
+    @canvasHeight = canvas1.height
+    @ctx1 = canvas1.getContext('2d')
+    @ctx2 = canvas2.getContext('2d')
+    @ctx3 = canvas3.getContext('2d')
+    @ctx4 = canvas4.getContext('2d')
     @playerImg = new Image()
     @playerImg.src= 'assets/images/player.png'
-    @spikedPlayerImg = new Image()
-    @spikedPlayerImg.src= 'assets/images/spiked_player.png'
     @cloneImg = new Image()
     @cloneImg.src= 'assets/images/clone.png'
+    @spikedPlayerImg = new Image()
+    @spikedPlayerImg.src= 'assets/images/spiked_player.png'
+    @spikedCloneImg = new Image()
+    @spikedCloneImg.src= 'assets/images/spiked_clone.png'
     @platformImg = new Image()
     @platformImg.src= 'assets/images/platform2.png'
     @time = 0
     @imagesToLoad = [
       @playerImg
-      @spikedPlayerImg
       @cloneImg
+      @spikedPlayerImg
+      @spikedCloneImg
       @platformImg
     ]
     @totalImagesLoaded = 0
@@ -29,29 +36,50 @@ define ->
       image.onload = ->
         self.totalImagesLoaded++
         if this.src.indexOf('assets/images/platform2.png') >= 0
-          self.platformPattern = self.bg.createPattern(this, 'repeat')
+          self.platformPattern = self.ctx3.createPattern(this, 'repeat')
   represent: (@drawables) ->
+    # reverse hierarchy (STATIC IS CAPS)
+    #
+    # 1
+    # - SPIKES
+    # 2
+    # - players, clones
+    # - movers
+    # - goal
+    # 3
+    # - LAVA
+    # - PLATFORMS
+    # - TEXT
+    # 4
+    # - ghosts
     if @drawables
-      @ctx = @bg
       # draw static items once
-      @bg.clearRect(0, 0, @bgCanvas.width, @bgCanvas.height)
+      @ctx = @ctx1
+      @ctx.clearRect(0, 0, @canvasWidth, @canvasHeight)
       @paintSpikes(@drawables.spikes)
+
+      @ctx = @ctx3
+      @ctx.clearRect(0, 0, @canvasWidth, @canvasHeight)
+      @paintLavas(@drawables.lavas) if @drawables.lavas
       @paintPlatforms(@drawables.platforms)
       @paintTexts(@drawables.texts)
-      @ctx = @fg
   paint: ->
-    if @drawables && @foregroundPainted
+    if @drawables && @staticsPainted
       @time++
-      @ctx.clearRect(0, 0, @bgCanvas.width, @bgCanvas.height)
-      @paintMovers(@drawables.movers) if @drawables.movers
-      @paintClones(@drawables.clones)
+
+      @ctx = @ctx2
+      @ctx.clearRect(0, 0, @canvasWidth, @canvasHeight)
       @paintPlayer(@drawables.player)
-      @paintLavas(@drawables.lavas) if @drawables.lavas # shit.
+      @paintClones(@drawables.clones)
+      @paintMovers(@drawables.movers) if @drawables.movers
       @paintGoal(@drawables.goal)
+
+      @ctx = @ctx4
+      @ctx.clearRect(0, 0, @canvasWidth, @canvasHeight)
       @paintGhosts(@drawables.ghosts) if @drawables.ghosts
     else
       if @totalImagesLoaded == @imagesToLoad.length
-        @foregroundPainted = true
+        @staticsPainted = true
       @represent(@drawables) # just to make sure
 
   ###########
@@ -116,7 +144,11 @@ define ->
         @ctx.stroke()
 
   paintClones: (clones) ->
-    @paintObject(clone, @cloneImg) for clone in clones
+    for clone in clones
+      if clone.dead
+        @paintObject(clone, @spikedCloneImg)
+      else
+        @paintObject(clone, @cloneImg)
 
   paintPlayer: (player) ->
     if player.dead

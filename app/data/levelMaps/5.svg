@@ -9,49 +9,34 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="600"
-   height="400"
    id="svg2989"
+   height="400"
+   width="600"
    version="1.1"
    inkscape:version="0.48.2 r9819"
    sodipodi:docname="5.svg">
   <defs
-     id="defs2991" />
+     id="defs3008" />
   <sodipodi:namedview
-     id="base"
      pagecolor="#ffffff"
      bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="269.44719"
-     inkscape:cy="231.03784"
-     inkscape:current-layer="layer3"
-     inkscape:document-units="px"
+     inkscape:window-width="1420"
+     inkscape:window-height="784"
+     id="namedview3006"
      showgrid="false"
-     inkscape:window-width="1172"
-     inkscape:window-height="690"
-     inkscape:window-x="20"
-     inkscape:window-y="20"
+     inkscape:zoom="0.9375"
+     inkscape:cx="324.53333"
+     inkscape:cy="200"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:snap-global="true"
-     inkscape:snap-bbox="false"
-     inkscape:snap-bbox-midpoints="true"
-     inkscape:bbox-paths="true"
-     inkscape:bbox-nodes="true"
-     inkscape:snap-page="true"
-     inkscape:snap-bbox-edge-midpoints="true"
-     inkscape:snap-center="true"
-     inkscape:snap-object-midpoints="true"
-     showguides="true"
-     inkscape:guide-bbox="true"
-     inkscape:snap-nodes="false">
-    <sodipodi:guide
-       orientation="0,1"
-       position="186,187"
-       id="guide3947" />
-  </sodipodi:namedview>
+     inkscape:current-layer="svg2989" />
   <metadata
      id="metadata2994">
     <rdf:RDF>
@@ -60,97 +45,130 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     id="layer1"
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     sodipodi:insensitive="true">
+     id="layer1">
     <rect
-       style="fill:#0000ff;fill-rule:evenodd;stroke:#000000;stroke-width:0.44748709px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        id="rect2997"
-       width="10"
-       height="400"
-       x="0"
-       y="0"
+       style="stroke-linejoin:miter;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-width:0.44748709px;fill:#0000ff;"
        clip-path="none"
-       mask="none" />
+       mask="none"
+       height="400"
+       width="10"
+       y="0"
+       x="0" />
     <rect
-       style="fill:#0000ff;fill-rule:evenodd;stroke:#000000;stroke-width:0.31657982px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        id="rect3056"
-       width="600"
-       height="10"
-       x="0"
-       y="390"
+       style="stroke-linejoin:miter;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-width:0.31657982px;fill:#0000ff;"
        clip-path="none"
-       mask="none" />
+       mask="none"
+       height="10"
+       width="600"
+       y="390"
+       x="0" />
     <rect
-       y="0"
-       x="590"
+       id="rect3224"
+       style="stroke-linejoin:miter;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-width:0.44748709px;fill:#0000ff;"
+       clip-path="none"
+       mask="none"
        height="400"
        width="10"
-       id="rect3224"
-       style="fill:#0000ff;fill-rule:evenodd;stroke:#000000;stroke-width:0.44748709px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       clip-path="none"
-       mask="none" />
-    <rect
        y="0"
-       x="0"
+       x="590" />
+    <rect
+       id="rect3226"
+       style="stroke-linejoin:miter;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-width:0.31657991px;fill:#0000ff;"
+       clip-path="none"
+       mask="none"
        height="10"
        width="600"
-       id="rect3226"
-       style="fill:#0000ff;fill-rule:evenodd;stroke:#000000;stroke-width:0.31657991px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       clip-path="none"
-       mask="none" />
+       y="0"
+       x="0" />
   </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer3"
-     inkscape:label="vars">
-    <circle
-       id="circle3036"
-       x="30"
-       cx="0"
-       cy="0"
-       r="15"
-       sodipodi:cx="0"
-       sodipodi:cy="0"
-       sodipodi:rx="15"
-       sodipodi:ry="15"
-       style="fill:#00ff00"
-       mask="none"
-       clip-path="none"
-       transform="translate(26.22374,354.5)" />
-    <circle
-       transform="translate(548.22374,363.5)"
-       clip-path="none"
-       mask="none"
-       style="fill:#00ffff"
-       sodipodi:ry="15"
-       sodipodi:rx="15"
-       sodipodi:cy="0"
-       sodipodi:cx="0"
-       r="15"
-       cy="0"
-       cx="0"
-       x="30"
-       id="circle3095" />
-    <circle
-       id="circle4759"
-       x="30"
-       cx="0"
-       cy="0"
-       r="15"
-       sodipodi:cx="0"
-       sodipodi:cy="0"
-       sodipodi:rx="15"
-       sodipodi:ry="15"
-       style="fill:#ff0000"
-       mask="none"
-       clip-path="none"
-       transform="translate(503.22374,362.5)" />
-  </g>
+  <circle
+     sodipodi:ry="15"
+     sodipodi:rx="15"
+     sodipodi:cy="0"
+     sodipodi:cx="0"
+     d="M 15,0 C 15,8.2842712 8.2842712,15 0,15 -8.2842712,15 -15,8.2842712 -15,0 c 0,-8.2842712 6.7157288,-15 15,-15 8.2842712,0 15,6.7157288 15,15 z"
+     r="15"
+     x="30"
+     cx="0"
+     cy="0"
+     transform="translate(282.2904,41.366667)"
+     mask="none"
+     clip-path="none"
+     style="fill:#00ff00"
+     id="circle3036" />
+  <circle
+     sodipodi:ry="15"
+     sodipodi:rx="15"
+     sodipodi:cy="0"
+     sodipodi:cx="0"
+     d="M 15,0 C 15,8.2842712 8.2842712,15 0,15 -8.2842712,15 -15,8.2842712 -15,0 c 0,-8.2842712 6.7157288,-15 15,-15 8.2842712,0 15,6.7157288 15,15 z"
+     r="15"
+     x="30"
+     transform="translate(294.22374,240.76666)"
+     mask="none"
+     cy="0"
+     cx="0"
+     clip-path="none"
+     style="fill:#00ffff"
+     id="circle3095" />
+  <rect
+     x="6.0666685"
+     y="281.20001"
+     width="586.20001"
+     height="112.66666"
+     style="opacity:0.98999999;fill:#666666"
+     id="rect3175" />
+  <path
+     inkscape:connector-curvature="0"
+     d="m 88.585333,279.53333 416.249997,0"
+     style="fill:#ff00ff;stroke:#ff00ff;stroke-width:1.05216634px;stroke-linecap:butt;stroke-linejoin:miter"
+     id="path3953" />
+  <rect
+     style="opacity:0.98999999;fill:#999999;fill-opacity:1;stroke:none"
+     id="rect3061"
+     width="24.533333"
+     height="72.533333"
+     x="225.06667"
+     y="60.800003" />
+  <rect
+     y="58.666668"
+     x="315.73334"
+     height="72.533333"
+     width="24.533333"
+     id="rect3831"
+     style="opacity:0.98999999;fill:#999999;fill-opacity:1;stroke:none" />
+  <rect
+     style="opacity:0.98999999;fill:#999999;fill-opacity:1;stroke:none"
+     id="rect3833"
+     width="113.06667"
+     height="33.066666"
+     x="226.13333"
+     y="100.26667" />
+  <path
+     id="path3835"
+     style="fill:#ff00ff;stroke:#ff00ff;stroke-width:1.05216634px;stroke-linecap:butt;stroke-linejoin:miter"
+     d="m 89.652,201.66666 416.25,0"
+     inkscape:connector-curvature="0" />
+  <text
+     xml:space="preserve"
+     style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="47.200001"
+     y="333.60001"
+     id="text3837"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan3839"
+       x="47.200001"
+       y="333.60001">Wow, you're willing to sacrifice a lot for shinies.</tspan><tspan
+       sodipodi:role="line"
+       x="47.200001"
+       y="363.60001"
+       id="tspan3841">That's... um... admirable... I guess...</tspan></text>
 </svg>

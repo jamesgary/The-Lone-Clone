@@ -23,8 +23,8 @@
             .message.bounceInDown
               %h2 Bejabbers!
               %h3 You became dead.
-              %h4 Hit 'r' or 'esc' or click 'Resume'. I'll pretend it never happened.
-              %a.button.resume Resume
+              %h4 Hit 'r' or 'esc' or click 'Restart'. I'll pretend it never happened.
+              %a.button.restart Restart
               %a.button.level-select Level Select
           .level-complete.popup
             .message.bounceInDown
@@ -38,8 +38,10 @@
               %a.button.resume Resume
               %a.button.level-select Level Select
           %canvas#trippyBackground{:width => 600, :height => 400}
-          %canvas#background{:width => 600, :height => 400}
-          %canvas#foreground{:width => 600, :height => 400}
+          %canvas#canvas1{:width => 600, :height => 400}
+          %canvas#canvas2{:width => 600, :height => 400}
+          %canvas#canvas3{:width => 600, :height => 400}
+          %canvas#canvas4{:width => 600, :height => 400}
           //%canvas#canvas{:width => 600, :height => 400}
         .audioManager
           .musicPlayer

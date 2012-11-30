@@ -140,13 +140,10 @@ body {
       background: none;
       display: block;
       position: absolute;
-      &#background {
+      z-index: 5;
+      &#canvas1 {
         background: url('images/dotted_bg2.png') repeat;
         background-color: rgba(0, 0, 0, 0.5);
-        z-index: 5;
-      }
-      &#foreground {
-        z-index: 10;
       }
     }
   }

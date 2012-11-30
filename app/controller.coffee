@@ -5,8 +5,10 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
   setUpGame = -> # do this once
     currentLevel = parseInt(location.href.split('level=')[1]) || 1
     CanvasPainter.init(
-      document.getElementById("background")
-      document.getElementById("foreground")
+      document.getElementById("canvas1")
+      document.getElementById("canvas2")
+      document.getElementById("canvas3")
+      document.getElementById("canvas4")
     )
   startLevel = -> # do this for each level
     Playground.startLevel(currentLevel)
@@ -74,6 +76,8 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
       showDiv('credits')
     $('a.resume').click ->
       togglePause()
+    $('a.restart').click ->
+      startLevel()
     $('a.level-select').click ->
       showLevelSelect()
 
