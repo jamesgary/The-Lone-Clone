@@ -57,6 +57,7 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
             $(".level-fail").hide()
             playing = true
       e.stopPropagation()
+      e.preventDefault() if key == ' '
     )
     $('a.start').click ->
       showLevelSelect()

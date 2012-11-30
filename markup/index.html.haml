@@ -10,26 +10,6 @@
         .main-menu
           %h1 The Lone Clone
           %a.start Commence!
-          %a.credits Credits
-        .credits
-          %b Music
-          Pietnastka (Piotr Kurek) -
-          %a{:href => 'http://www.piotrkurek.com/'}Website
-          \-
-          %a{:href => 'http://freemusicarchive.org/music/Pietnastka/'}FreeMusicArchive.org
-
-          %b Textures
-          %a{:href => 'http://opengameart.org/users/bart'}Bart
-          from
-          %a{:href => 'http://opengameart.org'} OpenGameArt.org
-          \-
-          %a{:href => 'http://opengameart.org/content/19-high-res-stone-and-concrete-texture-photos'}Texture Pack
-
-          %b Physics
-          %a{:href => 'http://code.google.com/p/box2dweb/'}box2dweb
-          .ego
-            %b Everything else
-            %a{:href => 'http://twitter.com/james_gary'}James Gary
         .level-select
           %table.levels
             - (0..9).each do |i|
@@ -64,16 +44,22 @@
               by
               %a.artistName{:href => 'http://freemusicarchive.org/music/Pietnastka/', :target => '_blank'} Pietnastka
       %hr
-      .other
-        yak yak yak
-        %br
-        yak yak yak
-        %br
-        yak yak yak
-        %br
-        yak yak yak
-        %br
-        yak yak yak
-        %br
-        yak yak yak
-        %br
+      .credits
+        %h2 Music
+        Pietnastka (Piotr Kurek) -
+        %a{:href => 'http://www.piotrkurek.com/'}Website
+        \-
+        %a{:href => 'http://freemusicarchive.org/music/Pietnastka/'}FreeMusicArchive.org
+
+        %h2 Textures
+        %a{:href => 'http://opengameart.org/users/bart'}Bart
+        from
+        %a{:href => 'http://opengameart.org'} OpenGameArt.org
+        \-
+        %a{:href => 'http://opengameart.org/content/19-high-res-stone-and-concrete-texture-photos'}Texture Pack
+
+        %h2 Physics
+        %a{:href => 'http://code.google.com/p/box2dweb/'}box2dweb
+
+        %h2 Everything else
+        %a{:href => 'http://twitter.com/james_gary'}James Gary
