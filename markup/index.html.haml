@@ -20,17 +20,19 @@
                     = level_count
         .playground
           .level-fail.popup
-            .message
+            .message.bounceInDown
               %h2 Bejabbers!
               %h3 You became dead.
-              %h4 Press SPACE and I'll pretend it never happened.
+              %h4 Hit 'r' or 'esc' or click 'Resume'. I'll pretend it never happened.
+              %a.button.resume Resume
+              %a.button.level-select Level Select
           .level-complete.popup
-            .message
+            .message.bounceInDown
               %h2 Huzzah!
               %h3 You are one step closer to enlightenment.
               %h4 Press SPACE to ascend to the next level
           .paused.popup
-            .message
+            .message.bounceInDown.quick
               %h2 PAUSED
               %h3 Please take this time to reflect on the inevitable heat death of the universe.
               %a.button.resume Resume

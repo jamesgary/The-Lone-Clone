@@ -99,8 +99,8 @@ define [
   findSpikes: ->
     spikes = []
     for path in @svg.getElementsByTagName('path')
-      if @isGreen(path.style.color) ||
-         @isGreen(path.style.stroke)
+      if @isPink(path.style.color) ||
+         @isPink(path.style.stroke)
         spikes.push(@getCoordinatesForPath(path))
     spikes
   findTexts: ->
@@ -167,7 +167,9 @@ define [
   scale: (val) ->
     val / 30.0
 
+  # this sucks, but i'm up against a deadline
   isGreen:     (color) -> color == 'rgb(0, 255, 0)'   || color == '#00ff00'
   isLightBlue: (color) -> color == 'rgb(0, 255, 255)' || color == '#00ffff'
   isRed:       (color) -> color == 'rgb(255, 0, 0)'   || color == '#ff0000'
   isBlue:      (color) -> color == 'rgb(0, 0, 255)'   || color == '#0000ff'
+  isPink:      (color) -> color == 'rgb(255, 0, 255)' || color == '#ff00ff'

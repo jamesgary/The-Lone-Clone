@@ -13,7 +13,7 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
     CanvasPainter.represent(Playground.drawables())
     playing = true
     won = lost = false
-    $('.popup').hide()
+    $('.popup').fadeOut(200)
     Playground.onLevelWin(->
       unless won # unless you already won
         newLevelsCompleted = (Persistence.get('levelsCompleted') || []).concat(currentLevel)
@@ -23,7 +23,7 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
         won = true
     )
     Playground.onLevelLose(->
-      $(".level-fail").show()
+      $(".level-fail").fadeIn(1000)
       playing = false
       lost = true
     )
@@ -51,15 +51,15 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
         if e.keycode == 27 # esc
           togglePause()
       else
-        if key == ' '
-          if won
-            currentLevel += 1
+        if won && key == ' '
+          currentLevel += 1
+          startLevel()
+          $(".level-complete").fadeOut(200)
+          playing = true
+        else if lost
+          if key == ' ' || key == 'r'
             startLevel()
-            $(".level-complete").hide()
-            playing = true
-          else if lost
-            startLevel()
-            $(".level-fail").hide()
+            $(".level-fail").fadeOut(200)
             playing = true
       e.stopPropagation()
       e.preventDefault() if key == ' '
@@ -83,8 +83,8 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
       CanvasPainter.paint()
 
   showDiv = (div) ->
-    $(".#{div}").show()
-    $(".gameContainer > div:not(.#{div}):not(.audioManager)").hide()
+    $(".#{div}").fadeIn(200)
+    $(".gameContainer > div:not(.#{div}):not(.audioManager)").fadeOut(200)
 
   showLevelSelect = ->
     completedLevels = Persistence.get('levelsCompleted') || []
@@ -108,9 +108,9 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
   togglePause = ->
     Playground.togglePause()
     if Playground.paused
-      $('.popup.paused').show()
+      $('.popup.paused').fadeIn(200)
     else
-      $('.popup.paused').hide()
+      $('.popup.paused').fadeOut(200)
 
   setup: ->
     $('document').ready ->

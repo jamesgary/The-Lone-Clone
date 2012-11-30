@@ -86,7 +86,8 @@ define ->
 
   paintSpikes: (allSpikes) ->
     @ctx.lineWidth = 1
-    @ctx.strokeStyle = 'white'
+    @ctx.strokeStyle = 'gray'
+    @ctx.fillStyle = 'white'
     spikeLength = 10
     space = 20
     for spikes in allSpikes
@@ -100,18 +101,19 @@ define ->
       length = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2))
       numSpikes = 1 + (length / space)
 
-      @ctx.beginPath()
       xSpace = dx / numSpikes
       ySpace = dy / numSpikes
       for i in [0...numSpikes]
         x += xSpace
         y += ySpace
-        @ctx.moveTo(x - spikeLength, y + spikeLength)
-        @ctx.lineTo(x + spikeLength, y - spikeLength)
-        @ctx.moveTo(x - spikeLength, y - spikeLength)
-        @ctx.lineTo(x + spikeLength, y + spikeLength)
-      @ctx.closePath()
-      @ctx.stroke()
+        @ctx.beginPath()
+        @ctx.lineTo(x, y + spikeLength)
+        @ctx.lineTo(x + spikeLength, y)
+        @ctx.lineTo(x, y - spikeLength)
+        @ctx.lineTo(x - spikeLength, y)
+        @ctx.closePath()
+        @ctx.fill()
+        @ctx.stroke()
 
   paintClones: (clones) ->
     @paintObject(clone, @cloneImg) for clone in clones
