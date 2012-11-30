@@ -9,7 +9,7 @@
       .gameContainer
         .main-menu
           %h1 The Lone Clone
-          %a.start Commence!
+          %a.start.button Commence!
         .level-select
           %table.levels
             - (0..9).each do |i|
@@ -19,16 +19,22 @@
                   %td.level{:data => {:level => level_count}}
                     = level_count
         .playground
-          .level-fail
+          .level-fail.popup
             .message
               %h2 Bejabbers!
               %h3 You became dead.
               %h4 Press SPACE and I'll pretend it never happened.
-          .level-complete
+          .level-complete.popup
             .message
               %h2 Huzzah!
               %h3 You are one step closer to enlightenment.
               %h4 Press SPACE to ascend to the next level
+          .paused.popup
+            .message
+              %h2 PAUSED
+              %h3 Please take this time to reflect on the inevitable heat death of the universe.
+              %a.button.resume Resume
+              %a.button.level-select Level Select
           %canvas#trippyBackground{:width => 600, :height => 400}
           %canvas#background{:width => 600, :height => 400}
           %canvas#foreground{:width => 600, :height => 400}

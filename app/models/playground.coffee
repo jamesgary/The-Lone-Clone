@@ -1,11 +1,13 @@
 define ['models/world', 'models/interactions'], (World, Interactions) ->
   startLevel: (levelNumber) ->
+    @paused = false
     @levelWinCallbacks = []
     @levelLoseCallbacks = []
     World.startLevel(levelNumber)
     World.setListeners(Interactions.preCollision(this), Interactions.postCollision(this))
   update: ->
-    World.update()
+    unless @paused
+      World.update()
   onLevelWin: (f) -> # to be set in the controller
     @levelWinCallbacks.push(f)
   onLevelLose: (f) -> # to be set in the controller
@@ -16,6 +18,8 @@ define ['models/world', 'models/interactions'], (World, Interactions) ->
     f() for f in @levelLoseCallbacks
   drawables: ->
     World.drawables()
+  togglePause: ->
+    @paused = !@paused
 
   cloningUp       : -> World.player.cloningUp    = true
   cloningLeft     : -> World.player.cloningLeft  = true

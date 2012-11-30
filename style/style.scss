@@ -36,6 +36,24 @@ body {
     height: 100%;
     width: 100%;
   }
+  a.button {
+    @include box-shadow(2px 2px 3px black);
+    @include border-radius(15px);
+    //@include background-image(linear-gradient(top, #7af, #59e));
+    @include background-image(linear-gradient(top, #7af, #48c));
+    @include text-shadow(1px 1px 2px black);
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    margin: 20px;
+    padding: 12px 16px;
+    position: relative;
+    text-align: center;
+    &:hover {
+      @include background-image(linear-gradient(top, darken(#7af, 10%) 15px, darken(#48c, 10%) 40px));
+    }
+  }
   .main-menu {
     background: #003B06;
     text-align: center;
@@ -47,19 +65,14 @@ body {
       margin: 64px 0;
       text-align: center;
     }
-    a.start {
+    a.button {
       @include box-shadow(2px 2px 15px black);
       @include border-radius(30px);
-      @include background-image(linear-gradient(top left, #7af 15px, #59e 40px));
       @include text-shadow(1px 1px 3px black);
-      color: white;
-      cursor: pointer;
       display: inline-block;
       font-size: 24px;
       margin: 32px;
       padding: 36px 48px;
-      position: relative;
-      text-align: center;
     }
   }
   .credits {
@@ -98,7 +111,7 @@ body {
   .playground {
     display: none;
     position: relative;
-    .level-complete, .level-fail {
+    .popup {
       background: rgba(50, 50, 50, 0.5);
       display: none;
       height: 100%;
@@ -118,6 +131,9 @@ body {
         margin: 12% 20%; // why height-margin is doubling, I'll never know why...
         text-align: center;
         width: 60%;
+        h3 {
+          margin: 10px 40px;
+        }
       }
     }
     canvas {

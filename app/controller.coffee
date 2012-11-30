@@ -13,6 +13,7 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
     CanvasPainter.represent(Playground.drawables())
     playing = true
     won = lost = false
+    $('.popup').hide()
     Playground.onLevelWin(->
       unless won # unless you already won
         newLevelsCompleted = (Persistence.get('levelsCompleted') || []).concat(currentLevel)
@@ -45,6 +46,9 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
           when 'a' then Playground.cloningLeft()
           when 's' then Playground.cloningDown()
           when 'd' then Playground.cloningRight()
+          when 'p' then togglePause()
+        if e.keycode == 27 # esc
+          togglePause()
       else
         if key == ' '
           if won
@@ -67,6 +71,10 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
       showDiv('playground')
     $('a.credits').click ->
       showDiv('credits')
+    $('a.resume').click ->
+      togglePause()
+    $('a.level-select').click ->
+      showLevelSelect()
 
   startGame = ->
     GameLoop.loop ->
@@ -96,6 +104,13 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
     $(".level[data-level=1]").addClass('available') # 1st level always available
     showDiv('level-select')
 
+  togglePause = ->
+    Playground.togglePause()
+    if Playground.paused
+      $('.popup.paused').show()
+    else
+      $('.popup.paused').hide()
+
   setup: ->
     $('document').ready ->
       TrippyBackground.setup(document.getElementById('trippyBackground'))
@@ -108,5 +123,6 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
       #
       #showLevelSelect()
       #showDiv('level-select') # for testing
+
       showDiv('playground') # for testing
       startLevel()
