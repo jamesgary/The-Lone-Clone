@@ -15,9 +15,7 @@ define ['lib/physics/circle', 'models/clone', 'jquery'], (Circle, Clone, $) ->
       @spooked = @dead = true
     melt: ->
       @melted = @dead = true
-
     update: ->
-      @displayClonesLeft()
       unless @dead
         @stamina++
         if (
@@ -30,6 +28,12 @@ define ['lib/physics/circle', 'models/clone', 'jquery'], (Circle, Clone, $) ->
           @cloningUp
         )
           @makeClone()
+    displayClonesLeftInit: ->
+      if @clonesLeft?
+        $('.clonesLeft').show()
+        @displayClonesLeft()
+      else
+        $('.clonesLeft').hide()
 
     ###########
     # private #
