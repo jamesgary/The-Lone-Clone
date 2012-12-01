@@ -15,6 +15,7 @@ define ['lib/physics/circle'], (Circle) ->
       @melted = @dead = true
 
     update: ->
+      super()
       unless @dead
         @grow()
 

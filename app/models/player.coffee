@@ -16,6 +16,7 @@ define ['lib/physics/circle', 'models/clone', 'jquery'], (Circle, Clone, $) ->
     melt: ->
       @melted = @dead = true
     update: ->
+      super()
       unless @dead
         @stamina++
         if (

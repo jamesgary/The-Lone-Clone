@@ -26,3 +26,8 @@ define ['lib/physics/physics'], (Physics) ->
         @physicalCircle.GetFixtureList().GetShape().GetRadius()
     freeze: ->
       Physics.freeze(@physicalCircle)
+    update: ->
+      if @melted # melted things go down
+        velocity = @physicalCircle.GetLinearVelocityFromWorldPoint({x: @x(), y: @y()})
+        velocity.x *= .99
+        @physicalCircle.SetLinearVelocity(velocity)
