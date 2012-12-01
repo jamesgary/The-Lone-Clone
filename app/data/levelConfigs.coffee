@@ -24,5 +24,11 @@ define ->
         numClones: 3
       when 17
         numClones: 15
+      when 18
+        numClones: 1
+      when 19
+        tweak: (world) ->
+          for g in world.ghosts
+            g.gigafy()
       else
         {}

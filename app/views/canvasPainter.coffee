@@ -114,23 +114,26 @@ define ->
     @paintPolygons(platforms)
 
   paintLavas: (lavas) ->
-    #@paintPolygons(lavas)
-    for lava in lavas
-      grd = @ctx.createLinearGradient(0,lava.minY,0,lava.maxY)
-      grd.addColorStop(0.0, 'rgba(255, 0, 0, 0.0)')
-      grd.addColorStop(0.3, 'rgba(255, 0, 0, 1.0)')
-      @ctx.fillStyle = grd
-      @ctx.fillRect(lava.minX, lava.minY, lava.drawingWidth, lava.drawingHeight)
+    if false # if shitty quality
+      @ctx.fillStyle = '#ff0000'
+      @paintPolygons(lavas)
+    else
+      for lava in lavas
+        grd = @ctx.createLinearGradient(0,lava.minY,0,lava.maxY)
+        grd.addColorStop(0.0, 'rgba(255, 0, 0, 0.0)')
+        grd.addColorStop(0.3, 'rgba(255, 0, 0, 1.0)')
+        @ctx.fillStyle = grd
+        @ctx.fillRect(lava.minX, lava.minY, lava.drawingWidth, lava.drawingHeight)
 
-      for i in [1..50]
-        g = parseInt(255 * Math.random())
-        a = Math.sqrt(Math.random())
-        @ctx.fillStyle = "rgba(255, #{ g }, 0, #{ a })"
-        randWidth  = (100 + lava.drawingWidth * Math.random()) / 10
-        randHeight = lava.drawingHeight * Math.random()
-        randX  = lava.minX + (lava.drawingWidth  * Math.random()) - (.5 * randWidth)
-        randY  = lava.minY + (lava.drawingHeight * Math.random()) - (.5 * randHeight)
-        @ctx.fillRect(randX, randY, randWidth, randHeight)
+        for i in [1..50]
+          g = parseInt(255 * Math.random())
+          a = Math.sqrt(Math.random())
+          @ctx.fillStyle = "rgba(255, #{ g }, 0, #{ a })"
+          randWidth  = (100 + lava.drawingWidth * Math.random()) / 10
+          randHeight = lava.drawingHeight * Math.random()
+          randX  = lava.minX + (lava.drawingWidth  * Math.random()) - (.5 * randWidth)
+          randY  = lava.minY + (lava.drawingHeight * Math.random()) - (.5 * randHeight)
+          @ctx.fillRect(randX, randY, randWidth, randHeight)
 
   paintMovers: (movers) ->
     @ctx.fillStyle = "rgb(200, 200, 200)"
