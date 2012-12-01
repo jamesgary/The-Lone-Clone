@@ -23,7 +23,7 @@ define ['box2d'], (Box2D) ->
       @bodyDef = new b2BodyDef
 
     addStaticPolygon: (vertices) ->
-      @bodyDef.type = b2Body.b2_staticBody
+      @bodyDef.type = b2Body.b2_kinematicBody
       @fixDef.shape = new b2PolygonShape
       vecs = for vertice in vertices
         vec = new b2Vec2
@@ -38,9 +38,6 @@ define ['box2d'], (Box2D) ->
 
     addCircle: (circle) ->
       @createCircle(circle, b2Body.b2_dynamicBody)
-
-    addStaticCircle: (circle) ->
-      @createCircle(circle, b2Body.b2_staticBody)
 
     addStaticCircle: (circle) ->
       @createCircle(circle, b2Body.b2_staticBody)

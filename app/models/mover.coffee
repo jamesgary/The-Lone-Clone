@@ -1,5 +1,5 @@
 define ['lib/physics/polygon'], (Platform) ->
-  SPEED = .05
+  SPEED = 3
 
   class Mover extends Platform
     update: ->
