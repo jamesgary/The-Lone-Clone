@@ -177,7 +177,7 @@ define ->
         @ctx.lineTo(x - spikeLength, y)
         @ctx.closePath()
         @ctx.fill()
-        @ctx.stroke()
+        #@ctx.stroke()
 
   paintClones: (clones) ->
     for clone in clones

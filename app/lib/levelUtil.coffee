@@ -15,6 +15,8 @@ define [
   "text!data/levelMaps/12.svg"
   "text!data/levelMaps/13.svg"
   "text!data/levelMaps/14.svg"
+  "text!data/levelMaps/15.svg"
+  "text!data/levelMaps/16.svg"
 ], (levels...) ->
   # return {rects: [...], polygons: [...], circles: [...], start, goal}
   load: (levelNum) ->

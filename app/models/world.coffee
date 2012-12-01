@@ -5,7 +5,7 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 
     @loadLevel()
     levelConfig = LevelConfigs.configFor(@levelNumber)
     levelConfig.tweak(this) if levelConfig.tweak
-    @player.clonesLeft = levelConfig.numClones
+    @player.clonesLeft = levelConfig.numClones if levelConfig.numClones
     @player.displayClonesLeftInit()
   update: ->
     if @levelNumber

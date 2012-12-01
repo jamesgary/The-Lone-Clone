@@ -8,6 +8,7 @@ define ['lib/physics/circle', 'models/clone', 'jquery'], (Circle, Clone, $) ->
       super(circleData)
       @stamina = 0
       @clones = []
+      @clonesLeft = undefined
     spike: ->
       @spiked = @dead = true
       @freeze()
@@ -31,10 +32,10 @@ define ['lib/physics/circle', 'models/clone', 'jquery'], (Circle, Clone, $) ->
           @makeClone()
     displayClonesLeftInit: ->
       if @clonesLeft?
-        $('.clonesLeft').show()
+        $('.clonesLeftContainer').show()
         @displayClonesLeft()
       else
-        $('.clonesLeft').hide()
+        $('.clonesLeftContainer').hide()
 
     ###########
     # private #
@@ -43,7 +44,7 @@ define ['lib/physics/circle', 'models/clone', 'jquery'], (Circle, Clone, $) ->
     displayClonesLeft: ->
       $('.clonesLeft').text(@clonesLeft) # TODO I'm lazy
     makeClone: ->
-      @clonesLeft--
+      @clonesLeft-- if @clonesLeft?
       @stamina = 0
       x = @x()
       y = @y()
