@@ -192,7 +192,7 @@ define ->
 
     x = @scale(goal.x())
     y = @scale(goal.y())
-    r = @scale(goal.r())
+    r = @scale(0.1)
 
     glow = (Math.abs(Math.sin(@time / 15)) * 3) + 1
     grd = @ctx.createRadialGradient(x, y, r, x, y, r + (r * glow))

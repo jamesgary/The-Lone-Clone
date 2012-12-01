@@ -8,6 +8,9 @@ define [
   "text!data/levelMaps/5.svg"
   "text!data/levelMaps/6.svg"
   "text!data/levelMaps/7.svg"
+  "text!data/levelMaps/8.svg"
+  "text!data/levelMaps/9.svg"
+  "text!data/levelMaps/10.svg"
 ], (levels...) ->
   # return {rects: [...], polygons: [...], circles: [...], start, goal}
   load: (levelNum) ->

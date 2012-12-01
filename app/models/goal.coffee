@@ -1,5 +1,5 @@
 define ['lib/physics/circle'], (Circle) ->
-  GOAL_RAD = .1
+  GOAL_RAD = .01
 
   class Goal extends Circle
     constructor: (circleData) ->
