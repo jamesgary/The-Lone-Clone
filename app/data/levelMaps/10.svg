@@ -14,7 +14,7 @@
    width="600"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="9.svg">
+   sodipodi:docname="10.svg">
   <defs
      id="defs3008" />
   <sodipodi:namedview
@@ -30,9 +30,9 @@
      inkscape:window-height="784"
      id="namedview3006"
      showgrid="false"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="359.12893"
-     inkscape:cy="163.43413"
+     inkscape:zoom="0.93"
+     inkscape:cx="247.69389"
+     inkscape:cy="162.2627"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -45,49 +45,46 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <g
-     id="layer1">
-    <rect
-       id="rect2997"
-       style="stroke-linejoin:miter;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-width:0.44748709px;fill:#0000ff;"
-       clip-path="none"
-       mask="none"
-       height="400"
-       width="10"
-       y="0"
-       x="0" />
-    <rect
-       id="rect3056"
-       style="stroke-linejoin:miter;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-width:0.31657982px;fill:#0000ff;"
-       clip-path="none"
-       mask="none"
-       height="10"
-       width="600"
-       y="390"
-       x="0" />
-    <rect
-       id="rect3224"
-       style="stroke-linejoin:miter;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-width:0.44748709px;fill:#0000ff;"
-       clip-path="none"
-       mask="none"
-       height="400"
-       width="10"
-       y="0"
-       x="590" />
-    <rect
-       id="rect3226"
-       style="stroke-linejoin:miter;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-width:0.31657991px;fill:#0000ff;"
-       clip-path="none"
-       mask="none"
-       height="10"
-       width="600"
-       y="0"
-       x="0" />
-  </g>
+  <rect
+     x="0"
+     y="0"
+     width="10"
+     height="400"
+     mask="none"
+     clip-path="none"
+     style="fill:#0000ff;fill-rule:evenodd;stroke:#000000;stroke-width:0.44748709px;stroke-linecap:butt;stroke-linejoin:miter"
+     id="rect2997" />
+  <rect
+     x="48.003448"
+     y="390"
+     width="551.99652"
+     height="10"
+     mask="none"
+     clip-path="none"
+     style="fill:#0000ff;fill-rule:evenodd;stroke:#000000;stroke-width:0.30365175px;stroke-linecap:butt;stroke-linejoin:miter"
+     id="rect3056" />
+  <rect
+     x="590"
+     y="0"
+     width="10"
+     height="400"
+     mask="none"
+     clip-path="none"
+     style="fill:#0000ff;fill-rule:evenodd;stroke:#000000;stroke-width:0.44748709px;stroke-linecap:butt;stroke-linejoin:miter"
+     id="rect3224" />
+  <rect
+     x="0"
+     y="0"
+     width="600"
+     height="10"
+     mask="none"
+     clip-path="none"
+     style="fill:#0000ff;fill-rule:evenodd;stroke:#000000;stroke-width:0.31657991px;stroke-linecap:butt;stroke-linejoin:miter"
+     id="rect3226" />
   <circle
      sodipodi:ry="15"
      sodipodi:rx="15"
@@ -98,7 +95,7 @@
      x="30"
      cx="0"
      cy="0"
-     transform="translate(109.75634,290.26825)"
+     transform="translate(100.58759,372.20474)"
      mask="none"
      clip-path="none"
      style="fill:#00ff00"
@@ -111,7 +108,7 @@
      d="M 15,0 C 15,8.2842712 8.2842712,15 0,15 -8.2842712,15 -15,8.2842712 -15,0 c 0,-8.2842712 6.7157288,-15 15,-15 8.2842712,0 15,6.7157288 15,15 z"
      r="15"
      x="30"
-     transform="translate(109.66887,42.776766)"
+     transform="translate(559.38878,37.119912)"
      mask="none"
      cy="0"
      cx="0"
@@ -119,55 +116,118 @@
      style="fill:#00ffff;stroke:none"
      id="circle3095" />
   <rect
-     x="48.493076"
-     y="309.65247"
-     width="114.73335"
-     height="82.799988"
+     id="rect5042"
      style="opacity:0.98999999;fill:#666666"
-     id="rect3175" />
+     height="132.29745"
+     width="476.77203"
+     y="60.650383"
+     x="123.44639" />
   <rect
      style="opacity:0.98999999;fill:#ff0000;fill-opacity:1;stroke:none"
-     id="rect4126"
-     width="589.93707"
-     height="31.149574"
-     x="6.3295827"
-     y="363.51712" />
+     id="rect5101"
+     width="59.396973"
+     height="19.798994"
+     x="-2.8700562"
+     y="397.1716" />
   <text
      xml:space="preserve"
      style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-     x="186.67618"
-     y="65.538498"
-     id="text4175"
+     x="42.325901"
+     y="299.83347"
+     id="text5107"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
-       x="186.67618"
-       y="65.538498"
-       id="tspan4183">Aren't you ever scared...</tspan><tspan
-       sodipodi:role="line"
-       x="186.67618"
-       y="95.538498"
-       id="tspan4199" /><tspan
-       sodipodi:role="line"
-       x="186.67618"
-       y="125.5385"
-       id="tspan4187">that the clones you sacrificed...</tspan><tspan
-       sodipodi:role="line"
-       x="186.67618"
-       y="155.5385"
-       id="tspan4201" /><tspan
-       sodipodi:role="line"
-       x="186.67618"
-       y="185.5385"
-       id="tspan4189">would come back to haunt you?</tspan></text>
+       id="tspan5109"
+       x="42.325901"
+       y="299.83347">RUN RUN RUN RUN RUN RUN RUN</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-     x="207.1823"
-     y="297.46954"
-     id="text4191"
+     x="171.11984"
+     y="133.50043"
+     id="text5111"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
-       id="tspan4193"
-       x="207.1823"
-       y="297.46954">No, I guess that'd be silly...</tspan></text>
+       id="tspan5113"
+       x="171.11984"
+       y="133.50043">AAAAAAAAAAAAAAAAAAAAAAHHHHHHHHH</tspan></text>
+  <rect
+     id="rect5115"
+     style="opacity:0.98999999;fill:#666666"
+     height="160.58174"
+     width="35.537399"
+     y="234.356"
+     x="515.18359" />
+  <rect
+     x="546.29626"
+     y="262.64029"
+     width="118.976"
+     height="133.71169"
+     style="opacity:0.98999999;fill:#666666"
+     id="rect5117" />
+  <rect
+     y="235.95125"
+     x="545.84479"
+     height="46.669048"
+     width="59.396973"
+     id="rect5130"
+     style="opacity:0.98999999;fill:#ff0000;fill-opacity:1;stroke:none" />
+  <rect
+     x="53.729687"
+     y="59.537678"
+     width="35.537399"
+     height="178.80602"
+     style="opacity:0.98999999;fill:#666666"
+     id="rect5132" />
+  <rect
+     id="rect5134"
+     style="opacity:0.98999999;fill:#666666"
+     height="148.88651"
+     width="49.679535"
+     y="91.031921"
+     x="6.8423538" />
+  <rect
+     style="opacity:0.98999999;fill:#ff0000;fill-opacity:1;stroke:none"
+     id="rect5136"
+     width="59.396973"
+     height="51.965477"
+     x="-5.6091232"
+     y="61.313965" />
+  <circle
+     id="circle5138"
+     style="fill:#ff0000"
+     clip-path="none"
+     mask="none"
+     transform="translate(16.112473,344.99015)"
+     cy="0"
+     cx="0"
+     x="30"
+     r="15"
+     d="M 15,0 C 15,8.2842712 8.2842712,15 0,15 -8.2842712,15 -15,8.2842712 -15,0 c 0,-8.2842712 6.7157288,-15 15,-15 8.2842712,0 15,6.7157288 15,15 z"
+     sodipodi:cx="0"
+     sodipodi:cy="0"
+     sodipodi:rx="15"
+     sodipodi:ry="15" />
+  <circle
+     sodipodi:ry="15"
+     sodipodi:rx="15"
+     sodipodi:cy="0"
+     sodipodi:cx="0"
+     d="M 15,0 C 15,8.2842712 8.2842712,15 0,15 -8.2842712,15 -15,8.2842712 -15,0 c 0,-8.2842712 6.7157288,-15 15,-15 8.2842712,0 15,6.7157288 15,15 z"
+     r="15"
+     x="30"
+     cx="0"
+     cy="0"
+     transform="translate(361.70297,31.718207)"
+     mask="none"
+     clip-path="none"
+     style="fill:#ff0000"
+     id="circle5140" />
+  <rect
+     x="1.6399367"
+     y="236.37082"
+     width="476.77203"
+     height="119.39422"
+     style="opacity:0.98999999;fill:#666666"
+     id="rect3021" />
 </svg>

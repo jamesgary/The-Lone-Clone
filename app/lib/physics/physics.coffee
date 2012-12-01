@@ -68,7 +68,7 @@ define ['box2d'], (Box2D) ->
         10 # position iterations
       )
       @world.DrawDebugData() if debugDrawing
-      @world.ClearForces()
+      #@world.ClearForces()
 
     ###########
     # private #

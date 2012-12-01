@@ -14,7 +14,7 @@
    id="svg2989"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="5.svg">
+   sodipodi:docname="9.svg">
   <defs
      id="defs2991" />
   <sodipodi:namedview
@@ -46,12 +46,7 @@
      inkscape:snap-object-midpoints="true"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:snap-nodes="false">
-    <sodipodi:guide
-       orientation="0,1"
-       position="186,187"
-       id="guide3947" />
-  </sodipodi:namedview>
+     inkscape:snap-nodes="false" />
   <metadata
      id="metadata2994">
     <rdf:RDF>
@@ -60,7 +55,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -152,5 +147,50 @@
        mask="none"
        clip-path="none"
        transform="translate(503.22374,362.5)" />
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="171"
+       y="43"
+       id="text5020"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5022"
+         x="171"
+         y="43">IT'S THE GHOST OF CLONES PAST!</tspan><tspan
+         sodipodi:role="line"
+         x="171"
+         y="73"
+         id="tspan5026">AND IT THIRSTS FOR VENGEANCE!</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="236"
+       y="132"
+       id="text5030"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5032"
+         x="236"
+         y="132">... I mean, I'm just assuming.</tspan><tspan
+         sodipodi:role="line"
+         x="236"
+         y="162"
+         id="tspan5034">Maybe it just wants a hug?</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="216"
+       y="221"
+       id="text5036"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5038"
+         x="216"
+         y="221">Oh right, you have no limbs.</tspan><tspan
+         sodipodi:role="line"
+         x="216"
+         y="251"
+         id="tspan5040">It's likely trying to kill you, then.</tspan></text>
   </g>
 </svg>

@@ -1,6 +1,6 @@
 define ['lib/physics/circle'], (Circle) ->
-  GHOST_RAD = .5
-  SPEED = .05
+  GHOST_RAD = .2 # a little smaller than player since it collides early
+  SPEED = .04
 
   class Ghost extends Circle
     constructor: (circleData, @target) ->

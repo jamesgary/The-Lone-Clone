@@ -6,12 +6,14 @@ define ->
   lineHeight = 30
   init: (canvas1, canvas2, canvas3, canvas4) ->
     self = this
+    @time = 0
     @canvasWidth  = canvas1.width
     @canvasHeight = canvas1.height
     @ctx1 = canvas1.getContext('2d')
     @ctx2 = canvas2.getContext('2d')
     @ctx3 = canvas3.getContext('2d')
     @ctx4 = canvas4.getContext('2d')
+
     @playerImg = new Image()
     @playerImg.src= 'assets/images/player.png'
     @cloneImg = new Image()
@@ -22,13 +24,16 @@ define ->
     @spikedCloneImg.src= 'assets/images/spiked_clone.png'
     @platformImg = new Image()
     @platformImg.src= 'assets/images/platform2.png'
-    @time = 0
+    @ghostImage = new Image()
+    @ghostImage.src= 'assets/images/ghost.png'
+
     @imagesToLoad = [
       @playerImg
       @cloneImg
       @spikedPlayerImg
       @spikedCloneImg
       @platformImg
+      @ghostImage
     ]
     @totalImagesLoaded = 0
     for image in @imagesToLoad
@@ -205,14 +210,14 @@ define ->
     @ctx.fillStyle = grd
     @ctx.fill()
   paintGhosts: (ghosts) ->
-    @ctx.fillStyle = "rgba(255, 50, 50, 0.5)"
+    @ctx.globalAlpha = 0.7
     for ghost in ghosts
-      x = @scale(ghost.x())
-      y = @scale(ghost.y())
-      r = @scale(ghost.r())
-      @ctx.beginPath()
-      @ctx.arc(x, y, r, 0, 2 * Math.PI, false)
-      @ctx.fill()
+      w = @scale(ghost.r() * 7) + (3 * Math.sin(@time/10))
+      h = @scale(ghost.r() * 7) + (3 * Math.cos(@time/10))
+      x = @scale(ghost.x()) - (.5 * w)
+      y = @scale(ghost.y()) - (.5 * h)
+      @ctx.drawImage(@ghostImage, x, y, w, h)
+    @ctx.globalAlpha = 1.0
   paintTexts: (texts) ->
     @ctx.font = "#{ textSize }px sans-serif"
     for text in texts
