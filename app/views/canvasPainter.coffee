@@ -167,9 +167,13 @@ define ->
 
       xSpace = dx / numSpikes
       ySpace = dy / numSpikes
-      for i in [0...numSpikes]
+      for i in [0...numSpikes - 1]
         x += xSpace
         y += ySpace
+        if x > endX
+          x = endX
+        if y > endY
+          y = endY
         @ctx.beginPath()
         @ctx.lineTo(x, y + spikeLength)
         @ctx.lineTo(x + spikeLength, y)

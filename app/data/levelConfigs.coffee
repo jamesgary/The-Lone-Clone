@@ -22,5 +22,7 @@ define ->
         numClones: 40
       when 16
         numClones: 3
+      when 17
+        numClones: 15
       else
         {}
