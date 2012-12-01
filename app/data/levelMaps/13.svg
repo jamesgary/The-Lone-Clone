@@ -141,7 +141,7 @@
     <path
        inkscape:connector-curvature="0"
        id="path4707"
-       d="M 480.01739,393.20768 217.84034,392.92922 348.18002,176.33878 z"
+       d="M 480.01739,399.20768 217.84034,398.92922 348.18002,182.33878 z"
        style="fill:#00ff00;stroke:#000000;stroke-width:0.2498053px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        sodipodi:nodetypes="cccc" />
     <path
@@ -156,11 +156,41 @@
        width="72.234238"
        height="66.991783"
        x="258.36295"
-       y="194.50713" />
+       y="202.50713" />
     <path
        style="fill:#00ff00;stroke:#000000;stroke-width:0.64867175px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 621.23934,254.79709 -282.50685,-59.81013 9.654,-17.72833 282.50682,59.81009 z"
+       d="m 621.23934,258.79709 -282.50685,-59.81013 9.654,-17.72833 282.50682,59.81009 z"
        id="path4713"
        inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="280"
+       y="41"
+       id="text4717"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4719"
+         x="280"
+         y="41">Well, at least your clones</tspan><tspan
+         sodipodi:role="line"
+         x="280"
+         y="71"
+         id="tspan4727">seem to be content.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="108"
+       y="326"
+       id="text4721"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4723"
+         x="108"
+         y="326">They aren't vegetables or anything.</tspan><tspan
+         sodipodi:role="line"
+         x="108"
+         y="356"
+         id="tspan4725">I think they're just content, is all.</tspan></text>
   </g>
 </svg>
