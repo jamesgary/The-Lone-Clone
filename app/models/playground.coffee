@@ -5,6 +5,7 @@ define ['models/world', 'models/interactions'], (World, Interactions) ->
     @levelLoseCallbacks = []
     World.startLevel(levelNumber)
     World.setListeners(Interactions.preCollision(this), Interactions.postCollision(this))
+    @player = World.player # TODO i'm lazy
   update: ->
     unless @paused
       World.update()

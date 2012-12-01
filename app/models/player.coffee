@@ -1,4 +1,4 @@
-define ['lib/physics/circle', 'models/clone'], (Circle, Clone) ->
+define ['lib/physics/circle', 'models/clone', 'jquery'], (Circle, Clone, $) ->
   PLAYER_RAD = .5
   COOLDOWN_REQUIRED = 10
 
@@ -17,10 +17,12 @@ define ['lib/physics/circle', 'models/clone'], (Circle, Clone) ->
       @melted = @dead = true
 
     update: ->
+      @displayClonesLeft()
       unless @dead
         @stamina++
         if (
-          @stamina >= COOLDOWN_REQUIRED
+          @stamina >= COOLDOWN_REQUIRED &&
+          (!@clonesLeft? || @clonesLeft > 0)
         ) && (
           @cloningRight ||
           @cloningLeft  ||
@@ -33,7 +35,10 @@ define ['lib/physics/circle', 'models/clone'], (Circle, Clone) ->
     # private #
     ###########
 
+    displayClonesLeft: ->
+      $('.clonesLeft').text(@clonesLeft) # TODO I'm lazy
     makeClone: ->
+      @clonesLeft--
       @stamina = 0
       x = @x()
       y = @y()
@@ -42,3 +47,4 @@ define ['lib/physics/circle', 'models/clone'], (Circle, Clone) ->
       y += PLAYER_RAD if @cloningDown
       y -= PLAYER_RAD if @cloningUp
       @clones.push(new Clone({ x: x, y: y }, this))
+      @displayClonesLeft()

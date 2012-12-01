@@ -13,6 +13,8 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
   startLevel = -> # do this for each level
     Playground.startLevel(currentLevel)
     CanvasPainter.represent(Playground.drawables())
+    if Playground.player.clonesLeft?
+      $('.clonesLeftContainer').show()
     playing = true
     won = lost = false
     $('.popup').fadeOut(200)
