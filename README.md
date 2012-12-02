@@ -4,7 +4,7 @@
 
 Make your way through 20 puzzlicious levels using only your power of cloning.
 
-Play it [here](https://s3.amazonaws.com/james_gary/theLoneClone/index.html)! It's played best on Chrome, but is a little slow on Firefox.
+**Play it [here](https://s3.amazonaws.com/james_gary/theLoneClone/index.html)!** It's played best on Chrome, but is slow/mute on Firefox. Also, if you're not hearing the music or if anything looks missing, try refreshing a few times (sorry!). Also, if you clone yourself a bunch of times in a small space and things get too cramped, it may freeze (sorry again!). If that happens, close the tab/window and try again.
 
 **Note for judges:** I'll keep updating this game at the above url, so in fairness, here is the original version of the game as submitted midnight for GGO: [Original](https://s3.amazonaws.com/james_gary/github-gameoff/theLoneClone/index.html)
 
