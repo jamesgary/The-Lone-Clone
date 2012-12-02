@@ -5,3 +5,5 @@
 Play it [here](https://s3.amazonaws.com/james_gary/theLoneClone/index.html)!
 
 ![Splash page](http://i.imgur.com/1ahvg.png)
+
+![Gameplay](http://i.imgur.com/eDknv.png)
