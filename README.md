@@ -12,7 +12,7 @@ Play it [here](https://s3.amazonaws.com/james_gary/theLoneClone/index.html)! It'
 
 ![Gameplay](http://i.imgur.com/eDknv.png)
 
-### Credits
+## Credits
 
 #### Music
 Pietnastka (Piotr Kurek) - [Website](http://www.piotrkurek.com/) - [FreeMusicArchive.org] (http://freemusicarchive.org/music/Pietnastka/)
@@ -26,10 +26,50 @@ Pietnastka (Piotr Kurek) - [Website](http://www.piotrkurek.com/) - [FreeMusicArc
 
 [requirejs](http://requirejs.org/) for code organization
 
-[coffeescript](http://coffeescript.org/) for programmer happiness
-
-[jQuery](http://jquery.com/) for DOM help
+[jQuery](http://jquery.com/) for convenient DOM manipulation
 
 [jPlayer](http://www.jplayer.org/) for playing music
 
 [Inkscape](http://inkscape.org/) as a handy level editor
+
+[Guard](https://github.com/guard/guard) as an automated build tool
+
+[coffeescript](http://coffeescript.org/) for programmer happiness
+
+[Haml](http://haml.info/) for programmer happiness
+
+[Sass](http://sass-lang.com/) for programmer happiness
+
+[Rack](http://rack.github.com/) as a minimalist webserver
+
+## How to build Locally
+
+You'll need Ruby to use Guard, and node if you want to minify/uglify the javascript.
+
+```
+git clone git@github.com:jamesgary/The-Lone-Clone.git
+cd The-Lone-Clone
+bundle install
+```
+
+I like to have 2 tiny console windows up, one for Guard and the other for rack. So in one console:
+
+```
+bundle exec guard
+```
+
+and in another
+
+```
+rackup
+```
+
+Now go to [localhost:9292/public/dev/index.html](http://localhost:9292/public/dev/index.html) to see the game!
+
+To minify and build for production, run the following:
+
+```
+./script/build
+```
+
+This will use `r.js` to concatenate and uglify your javascript files. You can then open [localhost:9292/public/prod/index.html](http://localhost:9292/public/prod/index.html) to make sure it all still works.
