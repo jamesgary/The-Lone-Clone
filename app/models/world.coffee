@@ -25,6 +25,7 @@ define ['lib/physics/physics', 'models/player', 'models/goal', 'models/spikes', 
       ghosts:    @ghosts
       lavas:     @lavas
       texts:     @texts
+      levelNumber: @levelNumber
     }
   setListeners: (preCollision, postCollision) ->
     Physics.setListeners(preCollision, postCollision)

@@ -30,5 +30,7 @@ define ->
         tweak: (world) ->
           for g in world.ghosts
             g.gigafy()
+      when 20
+        numClones: -1
       else
         {}
