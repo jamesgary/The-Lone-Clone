@@ -2,4 +2,6 @@
 
 ### A clone-themed game for the [Github Game-Off 2012](https://github.com/github/game-off-2012)
 
+Play it [here](http://theloneclone.staticloud.com/)!
+
 ![Splash page](http://i.imgur.com/1ahvg.png)
