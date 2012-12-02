@@ -27,7 +27,7 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
     won = lost = false
     $('.popup').fadeOut(200)
     Playground.onLevelWin(->
-      unless won # unless you already won
+      unless won || lost # unless you already won or lost
         newLevelsCompleted = (Persistence.get('levelsCompleted') || []).concat(currentLevel)
         Persistence.set('levelsCompleted', newLevelsCompleted)
         $(".level-complete").show()
@@ -35,9 +35,10 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
         won = true
     )
     Playground.onLevelLose(->
-      $(".level-fail").fadeIn(1000)
-      playing = false
-      lost = true
+      unless won || lost # unless you already won or lost
+        $(".level-fail").fadeIn(1000)
+        playing = false
+        lost = true
     )
 
   setUpInput = ->
