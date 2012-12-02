@@ -8,14 +8,18 @@
     .container
       .gameContainer
         .main-menu
+          %img.player{'src' => 'assets/images/player.svg'}
+          %img.clone{'src' => 'assets/images/clone.svg'}
           %h1 The Lone Clone
+          %h2
+            %em e unum pluribus
           %a.start.button Commence!
         .level-select
           %table.levels
-            - (0..9).each do |i|
+            - (0...4).each do |i|
               %tr
-                - (1..10).each do |ii|
-                  - level_count = (10 * i) + ii
+                - (1..5).each do |ii|
+                  - level_count = (5 * i) + ii
                   %td.level{:data => {:level => level_count}}
                     = level_count
         .playground
@@ -23,7 +27,8 @@
             .message.bounceInDown
               %h2 Bejabbers!
               %h3 You became dead.
-              %h4 Hit 'r' or 'esc' or click 'Restart'. I'll pretend it never happened.
+              %h4 Hit 'r' or 'esc' or click 'Restart'.
+              %h4 I'll pretend it never happened.
               %a.button.restart Restart
               %a.button.level-select Level Select
           .level-complete.popup

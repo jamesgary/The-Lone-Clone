@@ -1,18 +1,16 @@
-# Album ID: 12779
-#   http://freemusicarchive.org/api/get/albums.xml?album_title=Dalia&artist_handle=Pietnastka
 define ['jquery', 'jplayer', 'lib/persistence'], ($, jPlayer_unused, Persistence) ->
   PLAYLIST = [
-    #{ downloadId: '8a28decd088d2c4f5c137f9dec27c681009861cf', title: 'Dalia' }
-    #{ downloadId: '4880b2a7edfb912da28f36cffb2ea3079371f84c', title: 'School Boy' }
-    #{ downloadId: 'a0e77805a538a4b75b47f1bf122ac1cdd629d6f2', title: 'Dice' }
-    #{ downloadId: '7c94fde6b8b4bed429fa0d4d7d244c08338f75b6', title: 'Pietnastka' }
-    #{ downloadId: 'a3c031436146d2beb6c0b71b88fb370bdeb0c473', title: 'Salto' }
-    #{ downloadId: '9d80cc91f222143eb8f56181574ff7017e1a642c', title: 'Czterdziesci Cztery' }
-    { downloadId: 'd7ab5e5bbd99a63bcb5a1e5772235bdad33d5cb1', title: 'Noakowski' }
-    { downloadId: '176a10763ed04d45c5c5cfcaf285b4646e0bdca5', title: 'Podchody' }
-    { downloadId: '63641d806456a06e74791eb12a4854b407838e7a', title: 'Keymonica' }
-    { downloadId: 'e62ecdc6b3cd78aac79e2e10bff2d2238d3c3205', title: 'Superator' }
-    { downloadId: 'a629096dcdd16dca737a6f1aedfa2ee54f5b724c', title: 'Tape Eater' }
+    { downloadUrl: 'https://s3.amazonaws.com/james_gary/Pietnastka_-_01_-_Dalia.mp3',              title: 'Dalia' }
+    { downloadUrl: 'https://s3.amazonaws.com/james_gary/Pietnastka_-_02_-_School_Boy.mp3',         title: 'School Boy' }
+    { downloadUrl: 'https://s3.amazonaws.com/james_gary/Pietnastka_-_03_-_Dice.mp3',               title: 'Dice' }
+    { downloadUrl: 'https://s3.amazonaws.com/james_gary/Pietnastka_-_04_-_Pitnastka.mp3',          title: 'Pietnastka' }
+    { downloadUrl: 'https://s3.amazonaws.com/james_gary/Pietnastka_-_05_-_Salto.mp3',              title: 'Salto' }
+    { downloadUrl: 'https://s3.amazonaws.com/james_gary/Pietnastka_-_06_-_Czterdzieci_cztery.mp3', title: 'Czterdziesci Cztery' }
+    { downloadUrl: 'https://s3.amazonaws.com/james_gary/Pietnastka_-_07_-_Noakowski.mp3',          title: 'Noakowski' }
+    { downloadUrl: 'https://s3.amazonaws.com/james_gary/Pietnastka_-_08_-_Podchody.mp3',           title: 'Podchody' }
+    { downloadUrl: 'https://s3.amazonaws.com/james_gary/Pietnastka_-_09_-_Keymonica.mp3',          title: 'Keymonica' }
+    { downloadUrl: 'https://s3.amazonaws.com/james_gary/Pietnastka_-_10_-_Superator.mp3',          title: 'Superator' }
+    { downloadUrl: 'https://s3.amazonaws.com/james_gary/Pietnastka_-_11_-_Tape_Eater.mp3',         title: 'Tape Eater' }
   ]
 
   start: ->
@@ -63,7 +61,7 @@ define ['jquery', 'jplayer', 'lib/persistence'], ($, jPlayer_unused, Persistence
   currentTitle: ->
     @currentSong().title
   currentDownloadUrl: ->
-    "http://freemusicarchive.org/music/download/#{ @currentSong().downloadId }"
+    @currentSong().downloadUrl
   currentSong: ->
     PLAYLIST[@currentIndex]
   advanceTrack: ->

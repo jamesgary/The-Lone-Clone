@@ -30,9 +30,11 @@ body {
 .gameContainer {
   height: 400px;
   margin: 0 auto 100px;
+  position: relative;
   width: 600px;
   & > div {
     display: inline-block;
+    position: absolute;
     height: 100%;
     width: 100%;
   }
@@ -55,28 +57,49 @@ body {
     }
   }
   .main-menu {
-    background: #003B06;
+    @include background-image(linear-gradient(top, #4FC4A8, #000));
     text-align: center;
-    h1 {
-      $orange: #ff8a00;
-      @include outline(4px, rgba(200, 100, 100, 0.3));
-      color: $orange;
+    overflow: hidden;
+    position: absolute;
+    h1, h2 {
+      @include text-shadow(2px 2px 2px #772);
+      color: rgb(223, 195, 83);
       font-size: 48px;
-      margin: 64px 0;
+      margin: 34px 0 0;
+      position: relative;
       text-align: center;
+    }
+    h2 {
+      font-size: 24px;
+      margin: 24px 0 0;
     }
     a.button {
       @include box-shadow(2px 2px 15px black);
       @include border-radius(30px);
       @include text-shadow(1px 1px 3px black);
+      @include background-image(linear-gradient(top, lighten(#7af, 1%), darken(#48c, 10%)));
       display: inline-block;
       font-size: 24px;
-      margin: 32px;
+      margin: 160px 32px 0;
       padding: 36px 48px;
+      &:hover {
+        @include background-image(linear-gradient(top, lighten(#7af, 4%), darken(#48c, 0%)));
+      }
+      &:active {
+        @include background-image(linear-gradient(top, darken(#7af, 5%), darken(#48c, 20%)));
+      }
     }
-  }
-  .credits {
-    display: none;
+    img {
+      height: 400px;
+      position: absolute;
+      opacity: .2;
+      &.clone {
+        left: 280px;
+      }
+      &.player {
+        left: -80px;;
+      }
+    }
   }
   .level-select {
     display: none;
@@ -180,7 +203,7 @@ body {
     display: none;
     height: auto;
     padding: 0;
-    position: relative;
+    top: 400px;
     .controls {
       @include text-shadow(0 1px rgba(255, 255, 255, 0.75));
       color: #444;

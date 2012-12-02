@@ -55,7 +55,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -165,13 +165,13 @@
        style="fill:#00ff00;stroke:#000000;stroke-width:0.19123925px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        style="fill:none;stroke:#ff00ff;stroke-width:1.11997485px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 449,126 449,18.126437"
+       d="M 449,18.126437 449,126"
        id="path4152"
        inkscape:connector-curvature="0" />
     <path
        inkscape:connector-curvature="0"
        id="path4662"
-       d="m 273.06322,388.06322 29.27945,0"
+       d="m 302.34267,388.06322 -29.27945,0"
        style="fill:none;stroke:#ff00ff;stroke-width:0.58348835px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        style="fill:#00ff00;stroke:#000000;stroke-width:0.33491629px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -181,7 +181,7 @@
     <path
        inkscape:connector-curvature="0"
        id="path4666"
-       d="M 12,224 12,116.12644"
+       d="M 12,116.12644 12,224"
        style="fill:none;stroke:#ff00ff;stroke-width:1.11997485px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        inkscape:connector-curvature="0"

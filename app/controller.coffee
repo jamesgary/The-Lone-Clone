@@ -8,6 +8,7 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
   restartKeyCodes  = [82] # R
   pauseKeyCodes    = [80, 27] # P, esc
   continueKeyCodes = [32, 82] # spacebar, R
+  escapedKeyCodes  = [32, 37, 38, 39, 40] # disable spacing and arrows when moving page
 
   setUpGame = -> # do this once
     currentLevel = parseInt(location.href.split('level=')[1]) || 1
@@ -42,11 +43,13 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
   setUpInput = ->
     $('body').keyup((e) ->
       key = e.keyCode
-      Playground.stopCloningUp()    if    upKeyCodes.indexOf(key) != -1
-      Playground.stopCloningLeft()  if  leftKeyCodes.indexOf(key) != -1
-      Playground.stopCloningDown()  if  downKeyCodes.indexOf(key) != -1
-      Playground.stopCloningRight() if rightKeyCodes.indexOf(key) != -1
-      e.stopPropagation()
+      try
+        Playground.stopCloningUp()    if    upKeyCodes.indexOf(key) != -1
+        Playground.stopCloningLeft()  if  leftKeyCodes.indexOf(key) != -1
+        Playground.stopCloningDown()  if  downKeyCodes.indexOf(key) != -1
+        Playground.stopCloningRight() if rightKeyCodes.indexOf(key) != -1
+      catch error
+        console.log "Possible error: #{ error }"
     )
     $('body').keydown((e) ->
       key = e.keyCode
@@ -64,12 +67,13 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
           $(".level-complete").fadeOut(200)
           playing = true
         else if lost
-          if continueKeyCodes.indexOf(key) !=0
+          if continueKeyCodes.indexOf(key) != -1
             startLevel()
             $(".level-fail").fadeOut(200)
             playing = true
-      e.stopPropagation()
-      e.preventDefault()
+      if escapedKeyCodes.indexOf(key) != -1
+        e.preventDefault()
+      true
     )
     $('a.start').click ->
       showLevelSelect()
@@ -107,10 +111,11 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
       if completedLevels.indexOf(levelNum) != -1
         $levelDiv.addClass('done')
         $levelDiv.addClass('available')
-        $(".level[data-level=#{levelNum - 1}]").addClass('available')
         $(".level[data-level=#{levelNum + 1}]").addClass('available')
-        $(".level[data-level=#{levelNum + 10}]").addClass('available')
-        $(".level[data-level=#{levelNum - 10}]").addClass('available')
+        # i was gonna be fancy, but... meh.
+        #$(".level[data-level=#{levelNum - 1}]").addClass('available')
+        #$(".level[data-level=#{levelNum + 5}]").addClass('available')
+        #$(".level[data-level=#{levelNum - 5}]").addClass('available')
     $(".level[data-level=1]").addClass('available') # 1st level always available
     showDiv('level-select')
 
@@ -134,5 +139,5 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
       #showLevelSelect()
       #showDiv('level-select') # for testing
 
-      showDiv('playground') # for testing
-      startLevel()
+      #showDiv('playground') # for testing
+      #startLevel()
