@@ -30,9 +30,13 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
       unless won || lost # unless you already won or lost
         newLevelsCompleted = (Persistence.get('levelsCompleted') || []).concat(currentLevel)
         Persistence.set('levelsCompleted', newLevelsCompleted)
-        $(".level-complete").show()
         playing = false
         won = true
+
+        if currentLevel == 20
+          $(".game-complete").show()
+        else
+          $(".level-complete").show()
     )
     Playground.onLevelLose(->
       unless won || lost # unless you already won or lost
@@ -62,7 +66,7 @@ define ['jquery', 'models/playground', 'views/canvasPainter', 'lib/gameLoop', 'v
         startLevel()              if restartKeyCodes.indexOf(key) != -1
         togglePause()             if   pauseKeyCodes.indexOf(key) != -1
       else
-        if won && continueKeyCode.indexOf(key) != -1
+        if won && continueKeyCodes.indexOf(key) != -1
           currentLevel += 1
           startLevel()
           $(".level-complete").fadeOut(200)
